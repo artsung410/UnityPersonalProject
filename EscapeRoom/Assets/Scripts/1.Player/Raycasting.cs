@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 enum Item
 {
-    chair,
-    table,
-    box,
-    silver_key,
-    lench,
-    password_paper,
+    Chair,
+    Table,
+    Box,
+    Silver_key,
+    Lench,
+    Password_paper,
     Anigma_gear,
     Anigma_keyBord,
     Anigma_box,
-    driver
+    Driver
 }
 
 
@@ -24,13 +24,29 @@ public class Raycasting : MonoBehaviour
     private float rayDistance = 1f;
     public GameObject pickupUI;
 
-    // IMAGE 처리
-    public Image[] DeActiveToolsImages;
-    public Image[] ActiveToolsImages;
+    public RectTransform InventoryRect;
 
+    // IMAGE 처리
+    public GameObject[] items;
+    public Queue<Vector2> itemPositions;
+
+    private Dictionary<int, string> itemDic;
     void Awake()
     {
-        mainCamera = Camera.main; 
+        mainCamera = Camera.main;
+        itemPositions = new Queue<Vector2>();
+        CreateItmePos();
+    }
+
+    private void CreateItmePos()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                itemPositions.Enqueue(new Vector2(80 * j + 60, -70 * i - 50));
+            }
+        }
     }
 
     public void RayFromCamera()
@@ -63,40 +79,41 @@ public class Raycasting : MonoBehaviour
         {
             if (hit.transform.CompareTag("Chair"))
             {
-                ActiveToolsImages[0] = DeActiveToolsImages[(int)Item.chair];
-                ActiveToolsImages[0].gameObject.SetActive(true);
+                SetItemInventory((int)Item.Chair);
                 hit.transform.gameObject.SetActive(false);
             }
 
             if (hit.transform.CompareTag("Table"))
             {
-                ActiveToolsImages[1] = DeActiveToolsImages[(int)Item.table];
-                ActiveToolsImages[1].gameObject.SetActive(true);
+                SetItemInventory((int)Item.Table);
                 hit.transform.gameObject.SetActive(false);
             }
 
             if (hit.transform.CompareTag("Box"))
             {
-                ActiveToolsImages[2] = DeActiveToolsImages[(int)Item.box];
-                ActiveToolsImages[2].gameObject.SetActive(true);
+                SetItemInventory((int)Item.Box);
                 hit.transform.gameObject.SetActive(false);
             }
         }
     }
 
-    //private Image serchItem()
-    //{
+    private void SetItemInventory(int type)
+    {
+        GameObject image = Instantiate(items[type], GameObject.Find("InventoryImage").transform);
 
-    //    for (int i = 0; i < ActiveToolsImages.Length; i++)
-    //    {
-    //        if (!ActiveToolsImages[i])
-    //        {
-    //            Image blankImage = ActiveToolsImages[i];
-    //            return;
+        RectTransform itemRect = image.GetComponent<RectTransform>();
+        itemRect.sizeDelta = new Vector2(60, 35); // 사이즈 줄이고
+        itemRect.SetAnchor(AnchorPresets.TopLeft);
 
-    //        }
-    //    }
-    //}
-
-
+        if (itemPositions.Count != 0)
+        {
+            Vector2 imageDir = itemRect.anchoredPosition + itemPositions.Dequeue();
+            image.transform.position = imageDir;
+            image.SetActive(true);
+        }
+        else
+        {
+            return; 
+        }
+    }
 }

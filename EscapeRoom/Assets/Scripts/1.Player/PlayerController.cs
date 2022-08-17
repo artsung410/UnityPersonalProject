@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement PlayerMovement;
     private Raycasting Raycasting;
 
+
     [SerializeField] private GameObject InventoryUI;
     private Animator InventoryAnimator;
     public bool isActiveInventory;
+
 
     void Awake()
     {
@@ -18,10 +20,7 @@ public class PlayerController : MonoBehaviour
         PlayerMovement = GetComponent<PlayerMovement>();
         Raycasting = GetComponent<Raycasting>();
         InventoryAnimator = InventoryUI.GetComponentInChildren<Animator>();
-    }
 
-    void Start()
-    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -31,8 +30,12 @@ public class PlayerController : MonoBehaviour
         UpdateRotate();
         UpdateMove();
         UpdateZoom();
-        UpdateRaycasting();
         UpdateInventory();
+
+        if (InventoryAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            UpdateRaycasting();
+        }
     }
 
     void UpdateRotate()
