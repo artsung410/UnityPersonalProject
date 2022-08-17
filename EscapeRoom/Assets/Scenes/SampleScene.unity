@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -296,10 +296,10 @@ GameObject:
   - component: {fileID: 398016895}
   - component: {fileID: 398016901}
   - component: {fileID: 398016902}
+  - component: {fileID: 398016903}
   - component: {fileID: 398016900}
   - component: {fileID: 398016899}
   - component: {fileID: 398016898}
-  - component: {fileID: 398016903}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -460,17 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupUI: {fileID: 389504069}
   InventoryRect: {fileID: 2143223316}
-  items:
-  - {fileID: 6087945636079125726, guid: b273c61b88a09c54b998f91f87dd25a5, type: 3}
-  - {fileID: 7194670228245422224, guid: 19758f3c1d733714b92628e67231b7f1, type: 3}
-  - {fileID: 9157290863308434068, guid: 54f8e8b03adc3784caa37a13651d03b8, type: 3}
-  - {fileID: 9157290863308434068, guid: 54f8e8b03adc3784caa37a13651d03b8, type: 3}
-  - {fileID: 9157290863308434068, guid: 54f8e8b03adc3784caa37a13651d03b8, type: 3}
-  - {fileID: 9157290863308434068, guid: 54f8e8b03adc3784caa37a13651d03b8, type: 3}
-  - {fileID: 9157290863308434068, guid: 54f8e8b03adc3784caa37a13651d03b8, type: 3}
-  - {fileID: 9157290863308434068, guid: 54f8e8b03adc3784caa37a13651d03b8, type: 3}
-  - {fileID: 9157290863308434068, guid: 54f8e8b03adc3784caa37a13651d03b8, type: 3}
-  - {fileID: 9157290863308434068, guid: 54f8e8b03adc3784caa37a13651d03b8, type: 3}
+  items: []
 --- !u!1 &618813115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,15 +1158,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d6202805d279b14bbd6886b4f1e917a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.7640266
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d6202805d279b14bbd6886b4f1e917a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000047683716
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d6202805d279b14bbd6886b4f1e917a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9295621
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d6202805d279b14bbd6886b4f1e917a, type: 3}
       propertyPath: m_LocalRotation.w

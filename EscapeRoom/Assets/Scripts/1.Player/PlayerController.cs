@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private RotateToMouse RotateToMouse; // 마우스 이동으로 카메라 회전
     private PlayerMovement PlayerMovement;
-    private Raycasting Raycasting;
+    private Investigation Investigating;
 
 
     [SerializeField] private GameObject InventoryUI;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         RotateToMouse = GetComponent<RotateToMouse>();
         PlayerMovement = GetComponent<PlayerMovement>();
-        Raycasting = GetComponent<Raycasting>();
+        Investigating = GetComponent<Investigation>();
         InventoryAnimator = InventoryUI.GetComponentInChildren<Animator>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateRaycasting()
     {
-        Raycasting.RayFromCamera();
+        Investigating.RayFromCamera();
     }
 
     void UpdateInventory()
