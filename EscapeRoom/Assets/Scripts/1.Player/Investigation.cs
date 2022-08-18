@@ -9,12 +9,12 @@ enum Item
     Note,
     Silver_Key,
     Gold_key,
-    ScrewDriver,
     IronCross,
     Enigma_Battery,
     Enigma_Gear,
     Enigma_Keyboard,
     Enigma_Box,
+    Enigma_Full,
 }
 
 public class Investigation : MonoBehaviour
@@ -30,7 +30,7 @@ public class Investigation : MonoBehaviour
     public Queue<Vector2> itemPositions;
 
     // Item Ã³¸®
-    private string[] itemNames = { "Lench", "Note", "Silver_Key", "Gold_key", "ScrewDriver", "IronCross", "Enigma_Battery", "Enigma_Gear", "Enigma_Keyboard", "Enigma_Box"};
+    private string[] itemNames = { "Lench", "Note", "Silver_Key", "Gold_key", "IronCross", "Enigma_Battery", "Enigma_Gear", "Enigma_Keyboard", "Enigma_Box", "Enigma_Full" };
     private int maxItemNum = 10;
 
     void Awake()
