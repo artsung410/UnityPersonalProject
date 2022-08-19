@@ -17,23 +17,23 @@ public class RotateToMouse : MonoBehaviour
     {
         eulerAngleY += mouseX * rotCamYAxisSpeed;
         eulerAngleX -= mouseY * rotCamXAxisSpeed;
-        eulerAngleX = ClampAngle(eulerAngleX, limitMinX, limitMaxX);
+        //eulerAngleX = ClampAngle(eulerAngleX, limitMinX, limitMaxX);
         transform.rotation = Quaternion.Euler(eulerAngleX, eulerAngleY, 0);
     }
 
     // 카메라 x축 회전의 경우 회전 범위를 설정
-    private float ClampAngle(float angle, float min, float max)
-    {
-        if (angle < -360)
-        {
-            angle += 360;
-        }
+    //private float ClampAngle(float angle, float min, float max)
+    //{
+    //    if (angle < -360)
+    //    {
+    //        angle += 360;
+    //    }
 
-        if (angle > 360)
-        {
-            angle -= 360;
-        }
+    //    if (angle > 360)
+    //    {
+    //        angle -= 360;
+    //    }
 
-        return Mathf.Clamp(angle, min, max);
-    }
+    //    return Mathf.Clamp(angle, min, max);
+    //}
 }

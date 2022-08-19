@@ -5,9 +5,19 @@ TagManager:
   serializedVersion: 2
   tags:
   - Object
-  - Chair
-  - Table
-  - Box
+  - Object1
+  - Object2
+  - Item
+  - Lench
+  - Note
+  - Silver_Key
+  - Gold_Key
+  - Iron_Cross
+  - Enigma_Battery
+  - Enigma_Gear
+  - Enigma_Box
+  - Enigma_Full
+  - Enigma_Keyboard
   layers:
   - Default
   - TransparentFX
@@ -16,7 +26,7 @@ TagManager:
   - Water
   - UI
   - Object
-  - 
+  - Item
   - 
   - 
   - 

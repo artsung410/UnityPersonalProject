@@ -20,7 +20,7 @@ enum Item
 public class Investigation : MonoBehaviour
 {
     private Camera mainCamera;
-    private float rayDistance = 1f;
+    private float rayDistance = 2f;
     public GameObject pickupUI;
 
     public RectTransform InventoryRect;
@@ -30,7 +30,7 @@ public class Investigation : MonoBehaviour
     public Queue<Vector2> itemPositions;
 
     // Item 처리
-    private string[] itemNames = { "Lench", "Note", "Silver_Key", "Gold_key", "IronCross", "Enigma_Battery", "Enigma_Gear", "Enigma_Keyboard", "Enigma_Box", "Enigma_Full" };
+    private string[] itemNames = { "Lench", "Note", "Silver_Key", "Gold_Key", "Iron_Cross", "Enigma_Battery", "Enigma_Gear", "Enigma_Keyboard", "Enigma_Box", "Enigma_Full" };
     private int maxItemNum = 10;
 
     void Awake()
@@ -51,6 +51,8 @@ public class Investigation : MonoBehaviour
         }
     }
 
+    Outline currentOutline;
+
     public void RayFromCamera()
     {
         Ray ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f);
@@ -62,42 +64,65 @@ public class Investigation : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Object") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
             {
+                currentOutline = hit.transform.GetComponent<Outline>();
+                currentOutline.enabled = true;
                 pickupUI.SetActive(true);
             }
 
-            PickUpItem(hit); // 버튼 눌렀을때 아이템 변화주기
-            ChangeObject(hit); // 버튼 눌렀을 때 오브젝트에 변화주기
+            if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true && hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
+            {
+                PickUpItem(hit); // 버튼 눌렀을때 아이템 변화주기
+            }
+
+            if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true && hit.transform.CompareTag("Object1") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
+            {
+                ChangeObject(hit); // 버튼 눌렀을 때 오브젝트에 변화주기
+            }
         }
+
         else
         {
+            if (currentOutline != null)
+            {
+                currentOutline.enabled = false;
+            }
+
             pickupUI.SetActive(false);
         }
     }
 
     private void PickUpItem(RaycastHit hit)
     {
-        if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true)
+        Debug.Log("pickupItem() 호출");
+
+        for (int i = 0; i < maxItemNum; i++)
         {
-            for (int i = 0; i < maxItemNum; i++)
+            if (hit.transform.CompareTag(itemNames[i]))
             {
-                if (hit.transform.CompareTag(itemNames[i]))
-                {
-                    PutInItemInventory(i);
-                    hit.transform.gameObject.SetActive(false);
-                }
+                PutInItemInventory(i);
+                hit.transform.gameObject.SetActive(false);
             }
         }
     }
 
     private void ChangeObject(RaycastHit hit)
     {
+        Animator ObjAni = hit.transform.gameObject.GetComponent<Animator>();
+        ObjAni.SetBool("isActive", true);
+        StartCoroutine(ResetObject(ObjAni));
+    }
 
+    IEnumerator ResetObject(Animator ObjAni)
+    {
+        yield return new WaitForSeconds(5f);
+        ObjAni.SetBool("isActive", false);
     }
 
     private void PutInItemInventory(int type)
     {
+        Debug.Log("PutInInventory() 호출");
         GameObject image = Instantiate(items[type], GameObject.Find("InventoryImage").transform);
 
         RectTransform itemRect = image.GetComponent<RectTransform>();
