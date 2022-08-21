@@ -3,6 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+enum ItemTag
+{
+    Lench,
+    Note,
+    Silver_Key,
+    Gold_Key,
+    Iron_Cross,
+    Enigma_Battery,
+    Enigma_Gear,
+    Enimga_Keyboard,
+    Enigma_Box,
+}
+
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
