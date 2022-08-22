@@ -38,11 +38,13 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Image SelectImage;
     [SerializeField] private Transform DetailsTransform;
     public Camera DetailViewCamera;
+    public Vector3 prevCameraPos;
     [HideInInspector] public bool IsActiveDetailViewCamera = false;
     public GameObject CurrentDetailsViewItem;
 
     private void Awake()
     {
+        prevCameraPos = DetailViewCamera.gameObject.transform.position;
         Instance = this;
         mainCamera = Camera.main;
     }
@@ -84,7 +86,7 @@ public class InventoryManager : MonoBehaviour
                     Destroy(CurrentDetailsViewItem);
                 }
 
-                Transform hand = DetailViewCamera.transform;
+                Transform hand = DetailsTransform;
                 GameObject SelectItem = Instantiate(item.prefab, hand);
                 SelectItem.transform.position = DetailsTransform.position;
                 CurrentDetailsViewItem = SelectItem;
