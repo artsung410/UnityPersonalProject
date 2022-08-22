@@ -8,11 +8,8 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement PlayerMovement;
     private Investigation Investigating;
 
-    [SerializeField] private GameObject Inventory;
+
     [SerializeField] private PlayerHUD playerHUD;
-
-    public bool isActiveInventory;
-
 
     void Awake()
     {
@@ -24,17 +21,16 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void Start()
-    {
-        Slots.onButtonClickEvent.AddListener(DeActiveInventory);
-    }
 
     void Update()
     {
-        UpdateZoom();
-        UpdateInventory();
+        if (false == InventoryManager.Instance.IsActiveDetailViewCamera)
+        {
+            UpdateInventory();
+        }
+        UpdateSubInventory();
 
-        if (false == isActiveInventory)
+        if (false == playerHUD.isActiveInventory && false == InventoryManager.Instance.IsActiveDetailViewCamera)
         {
             UpdateRaycasting();
             UpdateRotate();
@@ -57,11 +53,6 @@ public class PlayerController : MonoBehaviour
         PlayerMovement.MoveTo(new Vector3(x, 0, z));
     }
 
-    void UpdateZoom()
-    {
-        float t_zoomDirection = Input.GetAxis("Mouse ScrollWheel");
-    }
-
     void UpdateRaycasting()
     {
         Investigating.RayFromCamera();
@@ -69,29 +60,35 @@ public class PlayerController : MonoBehaviour
 
     void UpdateInventory()
     {
+        // 인벤토리 UI 활성화
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isActiveInventory = !isActiveInventory;
-            Inventory.SetActive(isActiveInventory);
+            playerHUD.isActiveInventory = !playerHUD.isActiveInventory;
+            playerHUD.InventoryUI.SetActive(playerHUD.isActiveInventory);
             InventoryManager.Instance.ListItems();
         }
 
-        if (isActiveInventory)
+        if (playerHUD.isActiveInventory)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
         else
         {
-            playerHUD.CloseItemInfo();
+            playerHUD.DeActiveItemInfo();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
     }
 
-    public void DeActiveInventory()
+    void UpdateSubInventory()
     {
-        isActiveInventory = false;
-        Inventory.SetActive(isActiveInventory);
+        // 인벤토리 디테일뷰 비활성화
+        if (Input.GetKeyDown(KeyCode.Escape) && true == InventoryManager.Instance.IsActiveDetailViewCamera)
+        {
+            InventoryManager.Instance.mainCamera.gameObject.SetActive(true);
+            InventoryManager.Instance.DetailViewCamera.gameObject.SetActive(false);
+            InventoryManager.Instance.IsActiveDetailViewCamera = false;
+        }
     }
 }

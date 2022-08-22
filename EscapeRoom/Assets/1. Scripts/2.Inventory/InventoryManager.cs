@@ -31,11 +31,20 @@ public class InventoryManager : MonoBehaviour
 
     public bool IsGripItem = false;
     public GameObject CurrentGripItemPrefab; 
-    public Item CurrentGripItem; 
+    public Item CurrentGripItem;
+    [HideInInspector] public Camera mainCamera;
+
+    [Header("DetailViewInventoryMode")]
+    [SerializeField] private Image SelectImage;
+    [SerializeField] private Transform DetailsTransform;
+    public Camera DetailViewCamera;
+    [HideInInspector] public bool IsActiveDetailViewCamera = false;
+    public GameObject CurrentDetailsViewItem;
 
     private void Awake()
     {
         Instance = this;
+        mainCamera = Camera.main;
     }
 
     public void Add(Item item)
@@ -62,5 +71,28 @@ public class InventoryManager : MonoBehaviour
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
             itemIcon.sprite = item.icon;
         }
+    }
+
+    public void SwitchToDetailsView()
+    {
+        foreach (Item item in Items)
+        {
+            if (item.name == SelectImage.sprite.name)
+            {
+                if (CurrentDetailsViewItem != null)
+                {
+                    Destroy(CurrentDetailsViewItem);
+                }
+
+                Transform hand = DetailViewCamera.transform;
+                GameObject SelectItem = Instantiate(item.prefab, hand);
+                SelectItem.transform.position = DetailsTransform.position;
+                CurrentDetailsViewItem = SelectItem;
+            }
+        }
+
+        mainCamera.gameObject.SetActive(false);
+        DetailViewCamera.gameObject.SetActive(true);
+        IsActiveDetailViewCamera = true;
     }
 }

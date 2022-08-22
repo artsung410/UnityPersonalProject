@@ -15,10 +15,8 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public static OnCursorExitEvent onButtonClickEvent = new OnCursorExitEvent();
 
     private Image ItemIcon;
-
     private Camera mainCamera;
     private View cameraView;
-
 
     void Awake()
     {
@@ -27,18 +25,15 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         cameraView = mainCamera.gameObject.GetComponent<View>();
     }
 
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         Sprite ItemImage = ItemIcon.sprite;
         onCursorEnterEvent.Invoke(ItemImage);
-        //Debug.Log(ItemName);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         onCursorExitEvent.Invoke();
-        //Debug.Log(ItemName);
     }
 
     public void ButtonClicking()

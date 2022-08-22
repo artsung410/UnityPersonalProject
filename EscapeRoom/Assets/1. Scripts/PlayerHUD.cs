@@ -6,20 +6,26 @@ using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    [SerializeField] private GameObject ItemInfoPanel;
+    Item currnetItem;
+
+    [Header("Inventory")]
+    public GameObject InventoryUI;
+    public bool isActiveInventory;
+
+    [Header("ItemInfo")]
+    [SerializeField] private GameObject ItemInfoPanelUI;
     [SerializeField] private Image ItemInfoImage;
     [SerializeField] private TextMeshProUGUI ItemInfoTitleText;
 
-    Item currnetItem;
-
     void Start()
     {
-        Slots.onCursorEnterEvent.AddListener(ShowItemInfo);
-        Slots.onCursorExitEvent.AddListener(CloseItemInfo);
-        Slots.onButtonClickEvent.AddListener(CloseItemInfo);
+        Slots.onButtonClickEvent.AddListener(DeActiveInventory);
+        Slots.onCursorEnterEvent.AddListener(ActiveItemInfo);
+        Slots.onButtonClickEvent.AddListener(DeActiveItemInfo);
     }
 
-    void ShowItemInfo(Sprite itemImage)
+    // ItemInfo
+    void ActiveItemInfo(Sprite itemImage)
     {
         // 아이템 사진
         foreach (Item item in InventoryManager.Instance.Items)
@@ -29,19 +35,25 @@ public class PlayerHUD : MonoBehaviour
                 currnetItem = item;
                 ItemInfoTitleText.text = item.name;
                 ItemInfoImage.sprite = item.icon;
-                ItemInfoPanel.SetActive(true);
+                ItemInfoPanelUI.SetActive(true);
                 break;
             }
         }
 
         // 아이템 타이틀
-
         // 아이템 설명
     }
 
-    public void CloseItemInfo()
+    public void DeActiveItemInfo()
     {
-        ItemInfoPanel.gameObject.SetActive(false);
+        ItemInfoPanelUI.gameObject.SetActive(false);
+    }
 
+
+    // Inventory
+    public void DeActiveInventory()
+    {
+        isActiveInventory = false;
+        InventoryUI.SetActive(isActiveInventory);
     }
 }
