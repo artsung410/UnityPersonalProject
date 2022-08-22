@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Investigation Investigating;
 
     [SerializeField] private GameObject Inventory;
+    [SerializeField] private PlayerHUD playerHUD;
 
     public bool isActiveInventory;
 
@@ -21,6 +22,11 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    void Start()
+    {
+        Slots.onButtonClickEvent.AddListener(DeActiveInventory);
     }
 
     void Update()
@@ -77,6 +83,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            playerHUD.CloseItemInfo();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }

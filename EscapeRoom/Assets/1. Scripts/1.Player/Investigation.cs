@@ -24,7 +24,7 @@ public class Investigation : MonoBehaviour
 
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red);
 
-        //int layerMask = 1 << 6; // player layer
+        // int layerMask = 1 << 6; // player layer
 
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
@@ -33,7 +33,7 @@ public class Investigation : MonoBehaviour
                 pickupUI.SetActive(true);
             }
 
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Item") || hit.transform.CompareTag("Object2"))
             {
                 pickupUI.SetActive(true);
                 currentOutline = hit.transform.GetComponent<Outline>();
@@ -44,13 +44,19 @@ public class Investigation : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true && hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
             {
                 hit.transform.GetComponent<ItemPickup>().Pickup();
-
             }
 
-            // 오브젝트 애니메이션 활성화
+            // 오브젝트1 애니메이션 활성화
             if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true && hit.transform.CompareTag("Object1") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
                 ChangeObject(hit); // 버튼 눌렀을 때 오브젝트에 변화주기
+            }
+
+            // 오브젝트2 애니메이션 활성화
+
+            if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true && hit.transform.CompareTag("Object2") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
+            {
+                //ChangeObject(hit); // 버튼 눌렀을 때 오브젝트에 변화주기
             }
         }
 
@@ -62,6 +68,12 @@ public class Investigation : MonoBehaviour
             }
 
             pickupUI.SetActive(false);
+        }
+
+        // 오브젝트 활성화 안되었을 때, 다른곳 클릭시 현재 쥐고 있는 아이템이 제거되도록 설정
+        if (InventoryManager.Instance.CurrentGripItemPrefab != null && pickupUI.activeSelf == false && Input.GetMouseButtonDown(0))
+        {
+            Destroy(InventoryManager.Instance.CurrentGripItemPrefab);
         }
     }
 

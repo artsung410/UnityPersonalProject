@@ -9,5 +9,5 @@ public class Item : ScriptableObject
     public string itemName;
     public int value;
     public Sprite icon;
-    public Sprite itemInfo;
+    public GameObject prefab;
 }

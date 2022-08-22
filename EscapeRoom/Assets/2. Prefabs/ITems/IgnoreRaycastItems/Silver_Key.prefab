@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3420611478556616328}
   - component: {fileID: 7397582787733344856}
   - component: {fileID: 8320792938920881578}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Body3
   m_TagString: Silver_Key
   m_Icon: {fileID: 0}
@@ -93,11 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4577162231156574536}
   - component: {fileID: 3344492765530521474}
-  - component: {fileID: 4315972632516047457}
-  - component: {fileID: 7646521171106563608}
-  - component: {fileID: 8832220085076831020}
-  m_Layer: 7
-  m_Name: SiverKey
+  m_Layer: 2
+  m_Name: Silver_Key
   m_TagString: Silver_Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,47 +129,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.03
   m_Center: {x: 0, y: 0, z: -0.02}
---- !u!114 &4315972632516047457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3805128685264851954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0e3bef914e0f1146bc1695b40cbf3d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.88235295, g: 0.9019608, b: 0.5882353, a: 0.627451}
-  outlineWidth: 10
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &7646521171106563608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3805128685264851954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b312b1b7eca1914486924d62bba347c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: aeb1c1c69eef370478c4d6a06a657c97, type: 2}
---- !u!114 &8832220085076831020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3805128685264851954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71d2b1cf13ab8164b9a913cd76583a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: aeb1c1c69eef370478c4d6a06a657c97, type: 2}

@@ -29,6 +29,10 @@ public class InventoryManager : MonoBehaviour
 
     public InventoryItemController[] InventoryItems;
 
+    public bool IsGripItem = false;
+    public GameObject CurrentGripItemPrefab; 
+    public Item CurrentGripItem; 
+
     private void Awake()
     {
         Instance = this;
@@ -59,29 +63,4 @@ public class InventoryManager : MonoBehaviour
             itemIcon.sprite = item.icon;
         }
     }
-
-    //public void EnableItemsRemove()
-    //{
-    //    if (EnableRemove.isOn)
-    //    {
-    //        foreach (Transform item in ItemContent)
-    //        {
-    //            item.Find("RemoveButton").gameObject.SetActive(true);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        foreach (Transform item in ItemContent)
-    //        {
-    //            item.Find("RemoveButton").gameObject.SetActive(false);
-    //        }
-    //    }
-    //}
-
-    //public void SetInventoryItems()
-    //{
-    //    InventoryItems = ItemContent.GetComponentInChildren<InventoryItemController>();
-
-    //    for (int)
-    //}
 }

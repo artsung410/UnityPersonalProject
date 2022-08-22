@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4839841670194457803}
   - component: {fileID: 2590233945088885960}
   - component: {fileID: 6529279433555967407}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Body2
   m_TagString: Note
   m_Icon: {fileID: 0}
@@ -92,11 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5036429496615045173}
-  - component: {fileID: -756934353034610932}
-  - component: {fileID: -2020054145371147452}
-  - component: {fileID: 1704967072381871260}
   - component: {fileID: 3186390500257611904}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Note
   m_TagString: Note
   m_Icon: {fileID: 0}
@@ -119,50 +116,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-756934353034610932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5669800337376694927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0e3bef914e0f1146bc1695b40cbf3d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.88235295, g: 0.9019608, b: 0.5882353, a: 0.627451}
-  outlineWidth: 10
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &-2020054145371147452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5669800337376694927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b312b1b7eca1914486924d62bba347c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 893fc746551809441b034182f3fb75d3, type: 2}
---- !u!114 &1704967072381871260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5669800337376694927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71d2b1cf13ab8164b9a913cd76583a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 893fc746551809441b034182f3fb75d3, type: 2}
 --- !u!65 &3186390500257611904
 BoxCollider:
   m_ObjectHideFlags: 0

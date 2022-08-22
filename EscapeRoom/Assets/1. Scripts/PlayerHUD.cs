@@ -9,16 +9,14 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private GameObject ItemInfoPanel;
     [SerializeField] private Image ItemInfoImage;
     [SerializeField] private TextMeshProUGUI ItemInfoTitleText;
-    [SerializeField] private TextMeshProUGUI ItemInfoDescriptionText;
-
 
     Item currnetItem;
-
 
     void Start()
     {
         Slots.onCursorEnterEvent.AddListener(ShowItemInfo);
         Slots.onCursorExitEvent.AddListener(CloseItemInfo);
+        Slots.onButtonClickEvent.AddListener(CloseItemInfo);
     }
 
     void ShowItemInfo(Sprite itemImage)
@@ -41,11 +39,9 @@ public class PlayerHUD : MonoBehaviour
         // 아이템 설명
     }
 
-    void CloseItemInfo()
+    public void CloseItemInfo()
     {
-        if (currnetItem != null)
-        {
-            ItemInfoPanel.gameObject.SetActive(false);
-        }
+        ItemInfoPanel.gameObject.SetActive(false);
+
     }
 }

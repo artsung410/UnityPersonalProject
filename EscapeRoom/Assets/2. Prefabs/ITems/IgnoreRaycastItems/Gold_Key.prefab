@@ -10,11 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3349887720034918735}
   - component: {fileID: 4600360828974775981}
-  - component: {fileID: -4495736709921104008}
-  - component: {fileID: 3282686255518790896}
-  - component: {fileID: 8085818368875906927}
-  m_Layer: 7
-  m_Name: GoldKey
+  m_Layer: 2
+  m_Name: Gold_Key
   m_TagString: Gold_Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,50 +46,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.06
   m_Center: {x: 0, y: 0, z: -0.03}
---- !u!114 &-4495736709921104008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681578630776077301}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0e3bef914e0f1146bc1695b40cbf3d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.88235295, g: 0.9019608, b: 0.5882353, a: 0.627451}
-  outlineWidth: 10
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &3282686255518790896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681578630776077301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b312b1b7eca1914486924d62bba347c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: bf75faa8d980c214fa56cf7ade860aed, type: 2}
---- !u!114 &8085818368875906927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681578630776077301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71d2b1cf13ab8164b9a913cd76583a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: bf75faa8d980c214fa56cf7ade860aed, type: 2}
 --- !u!1 &8702622762806103754
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +57,7 @@ GameObject:
   - component: {fileID: 5150088252698166591}
   - component: {fileID: 5064052145100728025}
   - component: {fileID: 7172142157282812222}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Body1
   m_TagString: Gold_Key
   m_Icon: {fileID: 0}

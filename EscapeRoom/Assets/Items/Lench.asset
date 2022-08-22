@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Lench
   value: 10
   icon: {fileID: 21300000, guid: 15241a5c9376b0a44bf79202de60e3ae, type: 3}
+  prefab: {fileID: 5677931448870868539, guid: 8d0809926866b4645a5c3b15e76024e6, type: 3}
