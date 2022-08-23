@@ -17,7 +17,7 @@ public class LockController : MonoBehaviour
     private void Start()
     {
         result = new int[] { 3, 3, 3 };
-        correctCombination = new int[] { 3, 7, 9 };
+        correctCombination = new int[] { 8, 4, 2 };
         RotateLock.Rotated += CheckResults;
         isNumLockOpen = false;
         //Debug.Log($"자물쇠 시작");
