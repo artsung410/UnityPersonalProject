@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Investigation : MonoBehaviour
 {
     private Camera mainCamera;
-    private float rayDistance = 2f;
+    private float rayDistance = 4f;
     public GameObject pickupUI;
     public GameObject mouseClickUI;
 
@@ -70,12 +70,6 @@ public class Investigation : MonoBehaviour
                     interectObj.resetImmediately();
                 }
             }
-
-            //// 오브젝트2 애니메이션 활성화 (onMouseDown - 마우스를 직접 클릭해서 오브젝트를 변화시킴, 쉐이더 테두리 적용 X)
-            //if (pickupUI.activeSelf == true && hit.transform.CompareTag("Object2") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
-            //{
-
-            //}
         }
 
         else
@@ -90,9 +84,10 @@ public class Investigation : MonoBehaviour
         }
 
         // 오브젝트 활성화 안되었을 때, 다른곳 클릭시 현재 쥐고 있는 아이템이 제거되도록 설정
-        if (InventoryManager.Instance.CurrentGripItemPrefab != null && pickupUI.activeSelf == false && Input.GetMouseButtonDown(0))
+        if (InventoryManager.Instance.CurrentGripItemPrefab != null && pickupUI.activeSelf == false && Input.GetMouseButtonDown(0) || Input.GetKeyDown(Confirm))
         {
             Destroy(InventoryManager.Instance.CurrentGripItemPrefab);
+            InventoryManager.Instance.CurrentGripItem = null;
         }
     }
 }

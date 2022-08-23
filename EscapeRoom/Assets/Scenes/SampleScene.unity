@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44503093, g: 0.4888205, b: 0.5425021, a: 1}
+  m_IndirectSpecularColor: {r: 0.44503856, g: 0.48883426, b: 0.5425271, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6348,6 +6348,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6767969757714661395, guid: 440d9e69d5aceca4a89f47c4f96043ac, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767969757714661395, guid: 440d9e69d5aceca4a89f47c4f96043ac, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7346068651546673297, guid: 440d9e69d5aceca4a89f47c4f96043ac, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10983,9 +10991,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawer v2 Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4063715500213053249, guid: 410b1450519a35248933f528afe06edf, type: 3}
-    - {fileID: 9193619765960925718, guid: 410b1450519a35248933f528afe06edf, type: 3}
+    - target: {fileID: 7692900188875640759, guid: 410b1450519a35248933f528afe06edf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 410b1450519a35248933f528afe06edf, type: 3}
 --- !u!1 &836793715
 GameObject:
@@ -17972,20 +17982,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327177970}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &1359393216
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1332455614928486}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: c88929eac760e754c8e57b415de43534, type: 3}
 --- !u!1 &1362422712
 GameObject:
   m_ObjectHideFlags: 0
@@ -27559,11 +27555,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141455948}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1332455614928486 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1332455079170216, guid: 440d9e69d5aceca4a89f47c4f96043ac, type: 3}
-  m_PrefabInstance: {fileID: 540477134}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1349664639223331
 GameObject:
   m_ObjectHideFlags: 0
