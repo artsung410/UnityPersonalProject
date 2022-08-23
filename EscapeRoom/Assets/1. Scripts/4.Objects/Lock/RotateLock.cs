@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+
 public class RotateLock : MonoBehaviour
 {
     public static event Action<string, int> Rotated = delegate { };
@@ -16,7 +17,6 @@ public class RotateLock : MonoBehaviour
     private void OnMouseDown()
     {
         StartCoroutine("RotateWheel");
-
     }
 
     float angle;

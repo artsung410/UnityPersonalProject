@@ -5,9 +5,14 @@ using System;
 
 public class LockController : MonoBehaviour
 {
+    [Header("NumLock")]
     [SerializeField] private NumLock numLock;
+    [SerializeField] private ToolBox toolBox;
     private int[] result, correctCombination;
     public static bool isNumLockOpen;
+
+    [Header("NormalLock")]
+    public static bool isNormalLockOpen;
 
     private void Start()
     {
@@ -41,7 +46,7 @@ public class LockController : MonoBehaviour
             Debug.Log("Opened!");  
             isNumLockOpen = true;
             numLock.Operate();
-            Destroy(numLock.gameObject, 1.5f);
+            StartCoroutine(DestroyNumLock());
 
         }
     }
@@ -50,4 +55,16 @@ public class LockController : MonoBehaviour
     {
         RotateLock.Rotated -= CheckResults;
     }
+
+    IEnumerator DestroyNumLock()
+    {
+        Destroy(numLock.gameObject);
+        yield return new WaitForSeconds(1.5f);
+        toolBox.Operate();
+    }
+
+    //IEnumerator DestroyNormalLock()
+    //{
+    //    yield return null;
+    //}
 }
