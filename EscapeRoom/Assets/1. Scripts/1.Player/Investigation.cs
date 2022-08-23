@@ -9,6 +9,10 @@ public class Investigation : MonoBehaviour
     private Camera mainCamera;
     private float rayDistance = 2f;
     public GameObject pickupUI;
+    public GameObject mouseClickUI;
+
+    KeyCode Confirm = KeyCode.F;
+    KeyCode ESC = KeyCode.Escape;
 
     void Awake()
     {
@@ -33,7 +37,12 @@ public class Investigation : MonoBehaviour
                 pickupUI.SetActive(true);
             }
 
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Item") || hit.transform.CompareTag("Object2"))
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Object2"))
+            {
+                mouseClickUI.SetActive(true);
+            }
+
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
             {
                 pickupUI.SetActive(true);
                 currentOutline = hit.transform.GetComponent<Outline>();
@@ -41,23 +50,32 @@ public class Investigation : MonoBehaviour
             }
 
             // 아이템 줍줍
-            if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true && hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
+            if (Input.GetKeyDown(Confirm) && pickupUI.activeSelf == true && hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
             {
                 hit.transform.GetComponent<ItemPickup>().Pickup();
             }
 
-            // 오브젝트1 애니메이션 활성화
-            if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true && hit.transform.CompareTag("Object1") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
+
+            // 오브젝트1 애니메이션 활성화 (getKeyDown - F버튼을 눌러서 오브젝트를 변화시킴, 쉐이더 테두리 적용 o)
+            if (Input.GetKeyDown(Confirm) && pickupUI.activeSelf == true && hit.transform.CompareTag("Object1") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
-                ChangeObject(hit); // 버튼 눌렀을 때 오브젝트에 변화주기
+                InterectiveObject interectObj = hit.transform.gameObject.GetComponent<InterectiveObject>();
+
+                if (false == interectObj.isActive)
+                {
+                    interectObj.Operate();
+                }
+                else
+                {
+                    interectObj.resetImmediately();
+                }
             }
 
-            // 오브젝트2 애니메이션 활성화
+            //// 오브젝트2 애니메이션 활성화 (onMouseDown - 마우스를 직접 클릭해서 오브젝트를 변화시킴, 쉐이더 테두리 적용 X)
+            //if (pickupUI.activeSelf == true && hit.transform.CompareTag("Object2") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
+            //{
 
-            if (Input.GetKeyDown(KeyCode.F) && pickupUI.activeSelf == true && hit.transform.CompareTag("Object2") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
-            {
-                //ChangeObject(hit); // 버튼 눌렀을 때 오브젝트에 변화주기
-            }
+            //}
         }
 
         else
@@ -68,6 +86,7 @@ public class Investigation : MonoBehaviour
             }
 
             pickupUI.SetActive(false);
+            mouseClickUI.SetActive(false);
         }
 
         // 오브젝트 활성화 안되었을 때, 다른곳 클릭시 현재 쥐고 있는 아이템이 제거되도록 설정
@@ -75,18 +94,5 @@ public class Investigation : MonoBehaviour
         {
             Destroy(InventoryManager.Instance.CurrentGripItemPrefab);
         }
-    }
-
-    private void ChangeObject(RaycastHit hit)
-    {
-        Animator ObjAni = hit.transform.gameObject.GetComponent<Animator>();
-        ObjAni.SetBool("isActive", true);
-        StartCoroutine(ResetObject(ObjAni));
-    }
-
-    IEnumerator ResetObject(Animator ObjAni)
-    {
-        yield return new WaitForSeconds(5f);
-        ObjAni.SetBool("isActive", false);
     }
 }

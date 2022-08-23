@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private CameraController CameraController;
 
+    KeyCode Confirm = KeyCode.F;
+    KeyCode ESC = KeyCode.Escape;
+    KeyCode SpaceBar = KeyCode.Space;
+
     void Awake()
     {
         RotateToMouse = GetComponent<RotateToMouse>();
@@ -63,7 +67,7 @@ public class PlayerController : MonoBehaviour
     void UpdateInventory()
     {
         // 인벤토리 UI 활성화
-        if (Input.GetKeyDown(KeyCode.Space) || playerHUD.isActiveInventory && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(SpaceBar) || playerHUD.isActiveInventory && Input.GetKeyDown(ESC))
         {
             playerHUD.isActiveInventory = !playerHUD.isActiveInventory;
             playerHUD.InventoryUI.SetActive(playerHUD.isActiveInventory);
@@ -92,7 +96,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"mouseY : { MouseY}");
 
         // 인벤토리 디테일뷰 비활성화
-        if (Input.GetKeyDown(KeyCode.Escape) && true == InventoryManager.Instance.IsActiveDetailViewCamera)
+        if (Input.GetKeyDown(ESC) && true == InventoryManager.Instance.IsActiveDetailViewCamera)
         {
             ResetDetailsInventory();
         }
