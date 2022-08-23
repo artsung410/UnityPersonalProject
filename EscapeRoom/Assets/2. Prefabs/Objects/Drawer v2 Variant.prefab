@@ -520,6 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 5
+  NeedItemName: Silver_Key
   isActive: 0
 --- !u!1 &4506995216346989010 stripped
 GameObject:
@@ -591,6 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 4
+  NeedItemName: 
   isActive: 0
 --- !u!1 &6246326027766361650 stripped
 GameObject:
@@ -643,6 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 4
+  NeedItemName: 
   isActive: 0
 --- !u!4 &7210972091541416657 stripped
 Transform:

@@ -12,7 +12,6 @@ public class Investigation : MonoBehaviour
     public GameObject mouseClickUI;
 
     KeyCode Confirm = KeyCode.F;
-    KeyCode ESC = KeyCode.Escape;
 
     void Awake()
     {

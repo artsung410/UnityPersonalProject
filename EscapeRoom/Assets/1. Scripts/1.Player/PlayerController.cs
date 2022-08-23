@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private CameraController CameraController;
 
-    KeyCode Confirm = KeyCode.F;
     KeyCode ESC = KeyCode.Escape;
     KeyCode SpaceBar = KeyCode.Space;
 

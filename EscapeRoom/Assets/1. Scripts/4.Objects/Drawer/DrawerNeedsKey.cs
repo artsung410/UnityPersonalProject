@@ -13,7 +13,12 @@ public class DrawerNeedsKey : InterectiveObject
     {
         Item item = InventoryManager.Instance.CurrentGripItem;
 
-        if (item.itemName == "Silver_Key")
+        if (item == null)
+        {
+            return;
+        }
+
+        if (item.itemName == NeedItemName)
         {
             isActive = true;
             animator.SetBool("isActive", true);

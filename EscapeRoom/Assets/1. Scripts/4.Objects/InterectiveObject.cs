@@ -6,6 +6,7 @@ public abstract class InterectiveObject : MonoBehaviour
 {
     [Header("InterectiveObject")]
     public float activeTime;
+    public string NeedItemName;
 
     public bool isActive; 
     protected Animator animator;
