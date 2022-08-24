@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4786657237570303837}
   - component: {fileID: 4786657237570303834}
   - component: {fileID: 4786657237570303835}
-  m_Layer: 0
+  - component: {fileID: 4419528449562475431}
+  m_Layer: 6
   m_Name: ToolBox
-  m_TagString: Untagged
+  m_TagString: Object1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +69,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 5
+  NeedItemName: 
   isActive: 0
+  isOpened: 0
+  activeTime_AfterCompletion: 4
+--- !u!65 &4419528449562475431
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786657237570303836}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8057213, y: 1.4743805, z: 2.5455399}
+  m_Center: {x: -40.414925, y: 27.560638, z: 19.00568}
 --- !u!1 &4786657237830836524
 GameObject:
   m_ObjectHideFlags: 0

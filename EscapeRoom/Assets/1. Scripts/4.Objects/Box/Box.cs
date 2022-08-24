@@ -13,6 +13,6 @@ public class Box : InterectiveObject
     {
         isActive = true;
         animator.SetBool("isActive", true);
-        StartCoroutine(reset());
+        StartCoroutine(reset(activeTime));
     }
 }

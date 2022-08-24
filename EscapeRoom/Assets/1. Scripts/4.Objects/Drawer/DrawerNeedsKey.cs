@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DrawerNeedsKey : InterectiveObject
 {
+    [Header("DrawerNeedsKey")]
+    [SerializeField] private float activeTime_AfterCompletion;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -11,18 +14,29 @@ public class DrawerNeedsKey : InterectiveObject
 
     public override void Operate()
     {
-        Item item = InventoryManager.Instance.CurrentGripItem;
-
-        if (item == null)
-        {
-            return;
-        }
-
-        if (item.itemName == NeedItemName)
+        if (isOpened)
         {
             isActive = true;
             animator.SetBool("isActive", true);
-            StartCoroutine(reset());
+            StartCoroutine(reset(activeTime_AfterCompletion));
+        }
+
+        else
+        {
+            Item item = InventoryManager.Instance.CurrentGripItem;
+
+            if (item == null)
+            {
+                return;
+            }
+
+            if (item.itemName == NeedItemName)
+            {
+                isActive = true;
+                animator.SetBool("isActive", true);
+                StartCoroutine(reset(activeTime));
+                StartCoroutine(Completion(activeTime));
+            }
         }
     }
 }

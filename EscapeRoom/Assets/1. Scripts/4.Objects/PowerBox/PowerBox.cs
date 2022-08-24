@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PowerBox : InterectiveObject
 {
+    [Header("PowerBox")]
     [SerializeField] private GameObject Bolt;
-
+    [SerializeField] private float activeTime_AfterCompletion;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -13,20 +14,30 @@ public class PowerBox : InterectiveObject
 
     public override void Operate()
     {
-        Item item = InventoryManager.Instance.CurrentGripItem;
-
-        if (item == null)
-        {
-            return;
-        }
-
-        if (item.itemName == NeedItemName)
+        if (isOpened)
         {
             isActive = true;
             animator.SetBool("isActive", true);
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-            Destroy(Bolt, 6f);
-            StartCoroutine(reset());
+            StartCoroutine(reset(activeTime_AfterCompletion));
+        }
+
+        else
+        {
+            Item item = InventoryManager.Instance.CurrentGripItem;
+
+            if (item == null)
+            {
+                return;
+            }
+
+            if (item.itemName == NeedItemName)
+            {
+                isActive = true;
+                animator.SetBool("isActive", true);
+                Destroy(Bolt, 6f);
+                StartCoroutine(reset(activeTime));
+                StartCoroutine(Completion(activeTime));
+            }
         }
     }
 }

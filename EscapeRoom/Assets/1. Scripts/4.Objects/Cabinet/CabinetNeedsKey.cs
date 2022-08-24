@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class CabinetNeedsKey : InterectiveObject
 {
+    [Header("CabinetNeedsKey")]
     [SerializeField] private GameObject Lock;
+    [SerializeField] private float activeTime_AfterCompletion;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -12,20 +15,30 @@ public class CabinetNeedsKey : InterectiveObject
 
     public override void Operate()
     {
-        Item item = InventoryManager.Instance.CurrentGripItem;
-
-        if (item == null)
-        {
-            return;
-        }
-
-        if (item.itemName == NeedItemName)
+        if(isOpened)
         {
             isActive = true;
             animator.SetBool("isActive", true);
-            gameObject.GetComponent<MeshCollider>().enabled = false;
-            Destroy(Lock, 6f);
-            StartCoroutine(reset());
+            StartCoroutine(reset(activeTime_AfterCompletion));
+        }
+        else
+        {
+            Item item = InventoryManager.Instance.CurrentGripItem;
+
+            if (item == null)
+            {
+                return;
+            }
+
+            if (item.itemName == NeedItemName)
+            {
+                isActive = true;
+                animator.SetBool("isActive", true);
+                gameObject.GetComponent<MeshCollider>().enabled = false;
+                Destroy(Lock, 6f);
+                StartCoroutine(reset(activeTime));
+                StartCoroutine(Completion(activeTime));
+            }
         }
     }
 }

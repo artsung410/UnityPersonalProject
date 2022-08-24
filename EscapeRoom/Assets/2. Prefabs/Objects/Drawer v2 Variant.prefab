@@ -522,6 +522,8 @@ MonoBehaviour:
   activeTime: 5
   NeedItemName: Silver_Key
   isActive: 0
+  isOpened: 0
+  activeTime_AfterCompletion: 4
 --- !u!1 &4506995216346989010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8869534110621373253, guid: 6d6202805d279b14bbd6886b4f1e917a, type: 3}
@@ -594,6 +596,7 @@ MonoBehaviour:
   activeTime: 4
   NeedItemName: 
   isActive: 0
+  isOpened: 0
 --- !u!1 &6246326027766361650 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1384173467204140197, guid: 6d6202805d279b14bbd6886b4f1e917a, type: 3}
@@ -647,6 +650,7 @@ MonoBehaviour:
   activeTime: 4
   NeedItemName: 
   isActive: 0
+  isOpened: 0
 --- !u!4 &7210972091541416657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6807051285869119418, guid: 6d6202805d279b14bbd6886b4f1e917a, type: 3}

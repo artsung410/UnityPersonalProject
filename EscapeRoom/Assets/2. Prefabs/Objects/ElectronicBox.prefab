@@ -499,7 +499,9 @@ MonoBehaviour:
   activeTime: 8
   NeedItemName: Lench
   isActive: 0
+  isOpened: 0
   Bolt: {fileID: 1630850351807297832}
+  activeTime_AfterCompletion: 4
 --- !u!1 &316453724365848212
 GameObject:
   m_ObjectHideFlags: 0

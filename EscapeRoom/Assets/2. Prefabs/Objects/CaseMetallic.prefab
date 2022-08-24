@@ -607,6 +607,7 @@ MonoBehaviour:
   activeTime: 4
   NeedItemName: 
   isActive: 0
+  isOpened: 0
 --- !u!95 &6307389874281705357
 Animator:
   serializedVersion: 4
@@ -974,7 +975,9 @@ MonoBehaviour:
   activeTime: 8
   NeedItemName: Gold_Key
   isActive: 0
+  isOpened: 0
   Lock: {fileID: 7906924518070901502}
+  activeTime_AfterCompletion: 4
 --- !u!95 &1582514924762516711
 Animator:
   serializedVersion: 4

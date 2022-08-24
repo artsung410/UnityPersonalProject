@@ -59,8 +59,8 @@ public class LockController : MonoBehaviour
     IEnumerator DestroyNumLock()
     {
         Destroy(numLock.gameObject);
-        yield return new WaitForSeconds(1.5f);
-        toolBox.Operate();
+        yield return new WaitForSeconds(0.5f);
+        toolBox.GetComponent<BoxCollider>().enabled = true;
     }
 
     //IEnumerator DestroyNormalLock()
