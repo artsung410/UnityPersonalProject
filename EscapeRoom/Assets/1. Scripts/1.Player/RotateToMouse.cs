@@ -6,6 +6,7 @@ public class RotateToMouse : MonoBehaviour
 {
     [SerializeField] private float rotCamXAxisSpeed = 5f; // 카메라 x축 회전속도
     [SerializeField] private float rotCamYAxisSpeed = 3f; // 카메라 y축 회전속도
+    [SerializeField] private GameObject Camera;
 
     private float limitMinX = -100; // 카메라 x축 회전 범위 (최소)
     private float limitMaxX = 70; // 카메라 x축 회전 범위 (최대)
@@ -18,7 +19,8 @@ public class RotateToMouse : MonoBehaviour
         eulerAngleY += mouseX * rotCamYAxisSpeed;
         eulerAngleX -= mouseY * rotCamXAxisSpeed;
         eulerAngleX = Mathf.Clamp(eulerAngleX, limitMinX, limitMaxX);
-        transform.rotation = Quaternion.Euler(eulerAngleX, eulerAngleY, 0);
+        Camera.transform.rotation = Quaternion.Euler(eulerAngleX, eulerAngleY, 0);
+        transform.rotation = Quaternion.Euler(0, eulerAngleY, 0);
     }
 
     // 카메라 x축 회전의 경우 회전 범위를 설정
