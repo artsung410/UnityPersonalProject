@@ -7,6 +7,7 @@ public class PowerBox : InterectiveObject
     [Header("PowerBox")]
     [SerializeField] private GameObject Bolt;
     [SerializeField] private float activeTime_AfterCompletion;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
