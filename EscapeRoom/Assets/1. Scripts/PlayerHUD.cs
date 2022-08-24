@@ -8,14 +8,17 @@ public class PlayerHUD : MonoBehaviour
 {
     Item currnetItem;
 
-    [Header("Inventory")]
+    [Header("InventoryUI")]
     public GameObject InventoryUI;
     public bool isActiveInventory;
 
-    [Header("ItemInfo")]
+    [Header("ItemInfoUI")]
     [SerializeField] private GameObject ItemInfoPanelUI;
     [SerializeField] private Image ItemInfoImage;
     [SerializeField] private TextMeshProUGUI ItemInfoTitleText;
+
+    [Header("PickUpUI")]
+    public GameObject PickUpUI;
 
     void Start()
     {
@@ -49,11 +52,15 @@ public class PlayerHUD : MonoBehaviour
         ItemInfoPanelUI.gameObject.SetActive(false);
     }
 
-
     // Inventory
     public void DeActiveInventory()
     {
         isActiveInventory = false;
         InventoryUI.SetActive(isActiveInventory);
+    }
+
+    public void DeActivePickUpUI()
+    {
+        PickUpUI.SetActive(false);
     }
 }

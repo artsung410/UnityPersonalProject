@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IMouseController
 {
     private RotateToMouse RotateToMouse; // 마우스 이동으로 카메라 회전
     private PlayerMovement PlayerMovement;
@@ -14,28 +14,47 @@ public class PlayerController : MonoBehaviour
     KeyCode ESC = KeyCode.Escape;
     KeyCode SpaceBar = KeyCode.Space;
 
+    public Item enigmaItem;
+
     void Awake()
     {
         RotateToMouse = GetComponent<RotateToMouse>();
         PlayerMovement = GetComponent<PlayerMovement>();
         Investigating = GetComponent<Investigation>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        MouseCursorLock();
     }
 
     void Update()
     {
-        if (false == InventoryManager.Instance.IsActiveDetailViewCamera)
+        // 치트키 (임시)
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            InventoryManager.Instance.Add(enigmaItem);
+        }
+
+        // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
+        if (InventoryManager.Instance.IsActiveEnigmaViewCamera || InventoryManager.Instance.IsActiveDetailViewCamera)
+        {
+            if (playerHUD.PickUpUI.activeSelf == true)
+            {
+                playerHUD.DeActivePickUpUI();
+            }
+        }
+
+        if (false == InventoryManager.Instance.IsActiveDetailViewCamera && false == InventoryManager.Instance.IsActiveEnigmaViewCamera)
         {
             UpdateInventory();
         }
-        else
+
+        else if (false == InventoryManager.Instance.IsActiveEnigmaViewCamera)
         {
             UpdateSubInventory();
         }
 
-        if (false == playerHUD.isActiveInventory && false == InventoryManager.Instance.IsActiveDetailViewCamera)
+
+
+        if (false == playerHUD.isActiveInventory && false == InventoryManager.Instance.IsActiveDetailViewCamera && false == InventoryManager.Instance.IsActiveEnigmaViewCamera)
         {
             UpdateRaycasting();
             UpdateRotate();
@@ -43,6 +62,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // ###################### Section 1 ######################
     void UpdateRotate()
     {
         float mouseX = Input.GetAxis("Mouse X");
@@ -58,11 +78,13 @@ public class PlayerController : MonoBehaviour
         PlayerMovement.MoveTo(new Vector3(x, 0, z));
     }
 
+    // [Investigation.cs]
     void UpdateRaycasting()
     {
         Investigating.RayFromCamera();
     }
 
+    // [PlayerHUD.cs]
     void UpdateInventory()
     {
         // 인벤토리 UI 활성화
@@ -75,16 +97,17 @@ public class PlayerController : MonoBehaviour
 
         if (playerHUD.isActiveInventory)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            MouseCursorUnLock();
         }
         else
         {
             playerHUD.DeActiveItemInfo();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            MouseCursorLock();
         }
     }
+
+
+    // ###################### Section 2 ######################
 
     void UpdateSubInventory()
     {
@@ -116,7 +139,6 @@ public class PlayerController : MonoBehaviour
     }
 
     float speed = 3f;
-
     void RotateDetailsItem(float x, float y)
     {
         Transform ItemTransform = InventoryManager.Instance.CurrentDetailsViewItem.transform;
@@ -144,6 +166,20 @@ public class PlayerController : MonoBehaviour
         InventoryManager.Instance.DetailViewCamera.gameObject.SetActive(false);
         InventoryManager.Instance.IsActiveDetailViewCamera = false;
         playerHUD.isActiveInventory = true;
-        playerHUD.InventoryUI.SetActive(playerHUD.isActiveInventory);
+        playerHUD.InventoryUI.SetActive(true);
+    }
+
+    // ###################### [IMouseController] Mouse Control ######################
+
+    public void MouseCursorLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void MouseCursorUnLock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

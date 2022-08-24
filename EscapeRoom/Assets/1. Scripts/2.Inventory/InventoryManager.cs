@@ -17,7 +17,7 @@ enum ItemTag
     Enigma_Box,
 }
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IMouseController
 {
     public static InventoryManager Instance;
     public List<Item> Items = new List<Item>();
@@ -33,20 +33,19 @@ public class InventoryManager : MonoBehaviour
     public GameObject CurrentGripItemPrefab; 
     public Item CurrentGripItem;
     [HideInInspector] public Camera mainCamera;
+    [SerializeField] private Image SelectImage;
 
     [Header("DetailViewInventoryMode")]
-    [SerializeField] private Image SelectImage;
-    [SerializeField] private Transform DetailsTransform;
     public Camera DetailViewCamera;
+    [SerializeField] private Transform DetailsTransform;
     public Vector3 prevCameraPos;
     [HideInInspector] public bool IsActiveDetailViewCamera = false;
     public GameObject CurrentDetailsViewItem;
 
     [Header("EnigmaInfo")]
+    [HideInInspector] public bool IsActiveEnigmaViewCamera = false;
+    public Camera EnigmaViewCamera;
     public int EnigmaToolsCount;
-    [SerializeField] private GameObject Enigma;
-    [SerializeField] private Image EnigmaImage;
-
 
     private void Awake()
     {
@@ -95,6 +94,8 @@ public class InventoryManager : MonoBehaviour
         //            Items.Remove(item);
         //        }
         //    }
+
+        //    Add(EnigmaItem);
         //}
     }
 
@@ -104,6 +105,15 @@ public class InventoryManager : MonoBehaviour
         {
             if (item.name == SelectImage.sprite.name)
             {
+                if (SelectImage.sprite.name == "Enigma_Full")
+                {
+                    MouseCursorUnLock();
+                    mainCamera.gameObject.SetActive(false);
+                    EnigmaViewCamera.gameObject.SetActive(true);
+                    IsActiveEnigmaViewCamera = true;
+                    return;
+                }
+
                 if (CurrentDetailsViewItem != null)
                 {
                     Destroy(CurrentDetailsViewItem);
@@ -119,5 +129,17 @@ public class InventoryManager : MonoBehaviour
         mainCamera.gameObject.SetActive(false);
         DetailViewCamera.gameObject.SetActive(true);
         IsActiveDetailViewCamera = true;
+    }
+
+    public void MouseCursorLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void MouseCursorUnLock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
