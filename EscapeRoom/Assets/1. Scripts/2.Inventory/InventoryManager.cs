@@ -42,6 +42,12 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] public bool IsActiveDetailViewCamera = false;
     public GameObject CurrentDetailsViewItem;
 
+    [Header("EnigmaInfo")]
+    public int EnigmaToolsCount;
+    [SerializeField] private GameObject Enigma;
+    [SerializeField] private Image EnigmaImage;
+
+
     private void Awake()
     {
         prevCameraPos = DetailViewCamera.gameObject.transform.position;
@@ -62,6 +68,7 @@ public class InventoryManager : MonoBehaviour
     public void ListItems()
     {
         //Clean content before open.
+        EnigmaToolsCount = 0;
         foreach (Transform item in ItemContent)
         {
             Destroy(item.gameObject);
@@ -72,7 +79,23 @@ public class InventoryManager : MonoBehaviour
             GameObject obj = Instantiate(InventoryItem, ItemContent);
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
             itemIcon.sprite = item.icon;
+
+            if (item.id == 5 || item.id == 6 || item.id == 7 || item.id == 8)
+            {
+                ++EnigmaToolsCount;
+            }
         }
+
+        //if (EnigmaToolsCount == 4)
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        if (item.id == 5 || item.id == 6 || item.id == 7 || item.id == 8)
+        //        {
+        //            Items.Remove(item);
+        //        }
+        //    }
+        //}
     }
 
     public void SwitchToDetailsView()
