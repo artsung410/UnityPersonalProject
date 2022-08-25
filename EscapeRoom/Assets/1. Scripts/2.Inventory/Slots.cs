@@ -46,6 +46,11 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             if (item.name == ItemIcon.sprite.name)
             {
+                if (item.name == "Enigma_Full")
+                {
+                    return;
+                } 
+
                 if (InventoryManager.Instance.CurrentGripItem != null)
                 {
                     Destroy(InventoryManager.Instance.CurrentGripItemPrefab);

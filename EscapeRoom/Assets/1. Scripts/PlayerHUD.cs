@@ -10,7 +10,6 @@ public class PlayerHUD : MonoBehaviour
 
     [Header("InventoryUI")]
     public GameObject InventoryUI;
-    public bool isActiveInventory;
 
     [Header("ItemInfoUI")]
     [SerializeField] private GameObject ItemInfoPanelUI;
@@ -55,8 +54,8 @@ public class PlayerHUD : MonoBehaviour
     // Inventory
     public void DeActiveInventory()
     {
-        isActiveInventory = false;
-        InventoryUI.SetActive(isActiveInventory);
+        InventoryUI.SetActive(false);
+        ItemInfoPanelUI.gameObject.SetActive(false);
     }
 
     public void DeActivePickUpUI()

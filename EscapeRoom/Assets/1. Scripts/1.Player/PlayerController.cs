@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour, IMouseController
         RotateToMouse = GetComponent<RotateToMouse>();
         PlayerMovement = GetComponent<PlayerMovement>();
         Investigating = GetComponent<Investigation>();
-
         MouseCursorLock();
     }
 
@@ -33,24 +32,25 @@ public class PlayerController : MonoBehaviour, IMouseController
             InventoryManager.Instance.Add(enigmaItem);
         }
 
-        if (Input.GetKeyDown(ESC) && CameraManager.Instance.Cameras[1].gameObject.activeSelf || CameraManager.Instance.Cameras[2].gameObject.activeSelf == true)
+        if (Input.GetKeyDown(ESC))
         {
-            ResetCurrentInventoryMode();
+            CameraManager.Instance.SwitchToMain();
         }
 
         // <메인카메라일때는 기존 인벤토리만 유효>
-        if (CameraManager.Instance.Cameras[0].gameObject.activeSelf == true)
+        if (CameraManager.Instance.Cameras[0].enabled == true && CameraManager.Instance.Cameras[2].enabled == false)
         {
             UpdateInventory();
         }
+
         // <두번째 카메라일때는 서브 인벤토리만 유효>
-        else if (CameraManager.Instance.Cameras[1].gameObject.activeSelf == true)
+        else if (CameraManager.Instance.Cameras[1].enabled == true)
         {
             UpdateSubInventory();
         }
 
 
-        if (CameraManager.Instance.Cameras[0].gameObject.activeSelf == true && false == playerHUD.isActiveInventory)
+        if (CameraManager.Instance.Cameras[0].enabled == true && false == playerHUD.InventoryUI.activeSelf)
         {
             UpdateRaycasting();
             UpdateRotate();
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour, IMouseController
         }
 
         // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
-        if (CameraManager.Instance.Cameras[1].gameObject.activeSelf == true || CameraManager.Instance.Cameras[2].gameObject.activeSelf == true)
+        if (CameraManager.Instance.Cameras[1].enabled == true || CameraManager.Instance.Cameras[2].enabled == true)
         {
             if (playerHUD.PickUpUI.activeSelf == true)
             {
@@ -93,14 +93,13 @@ public class PlayerController : MonoBehaviour, IMouseController
     void UpdateInventory()
     {
         // 인벤토리 UI 활성화
-        if (Input.GetKeyDown(Inventory) || playerHUD.isActiveInventory && Input.GetKeyDown(ESC))
+        if (Input.GetKeyDown(Inventory) && playerHUD.InventoryUI.activeSelf == false )
         {
-            playerHUD.isActiveInventory = !playerHUD.isActiveInventory;
-            playerHUD.InventoryUI.SetActive(playerHUD.isActiveInventory);
+            playerHUD.InventoryUI.SetActive(true);
             InventoryManager.Instance.ListItems();
         }
 
-        if (playerHUD.isActiveInventory)
+        if (playerHUD.InventoryUI.activeSelf == true)
         {
             MouseCursorUnLock();
         }
@@ -160,9 +159,6 @@ public class PlayerController : MonoBehaviour, IMouseController
     private void ResetCurrentInventoryMode()
     {
         CameraManager.Instance.SwitchToMain();
-
-        playerHUD.isActiveInventory = true;
-        playerHUD.InventoryUI.SetActive(true);
     }
 
     // ###################### [IMouseController] Mouse Control ######################

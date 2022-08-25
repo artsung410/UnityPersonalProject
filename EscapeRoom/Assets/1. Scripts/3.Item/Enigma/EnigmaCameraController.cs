@@ -7,10 +7,6 @@ public class EnigmaCameraController : MonoBehaviour
     private Dictionary<int, string> aniName;
     private Animator animator;
 
-    private void Update()
-    {
-        Debug.Log(Enigma.currentSceneID);
-    }
     private void Start()
     {
         aniName = new Dictionary<int, string>();

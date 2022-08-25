@@ -88,7 +88,6 @@ public class InventoryManager : MonoBehaviour
                 // 애니그마완성품일때 버튼클릭시 애니그마 카메라로 전환한다. 
                 if (SelectImage.sprite.name == "Enigma_Full")
                 {
-                    Debug.Log("애니그마 씬 준비");
                     CameraManager.Instance.SwitchToEnigma();
                     return;
                 }
