@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
+
 
 public class Enigma : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class Enigma : MonoBehaviour
     [SerializeField] private TextMeshPro[] text;
     private int[] result, correctCombination;
     public bool IsZoomIn;
+    public bool IsCorrectRotor;
+
+    public static event Action KeyChangeSignal = delegate { };
+    [SerializeField] private KeyOutController keyContorl;
 
     private void Awake()
     {
@@ -45,6 +51,8 @@ public class Enigma : MonoBehaviour
         if (result[0] == correctCombination[0] && result[1] == correctCombination[1] && result[2] == correctCombination[2])
         {
             Debug.Log("Opened!");
+            IsCorrectRotor = true;
         }
     }
+
 }
