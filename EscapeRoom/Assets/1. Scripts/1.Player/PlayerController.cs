@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour, IMouseController
     [SerializeField] private CameraController CameraController;
 
     KeyCode ESC = KeyCode.Escape;
-    KeyCode SpaceBar = KeyCode.Space;
+    KeyCode Inventory = KeyCode.I;
 
     public Item enigmaItem;
 
@@ -33,32 +33,37 @@ public class PlayerController : MonoBehaviour, IMouseController
             InventoryManager.Instance.Add(enigmaItem);
         }
 
-        // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
-        if (InventoryManager.Instance.IsActiveEnigmaViewCamera || InventoryManager.Instance.IsActiveDetailViewCamera)
+        if (Input.GetKeyDown(ESC) && CameraManager.Instance.Cameras[1].gameObject.activeSelf || CameraManager.Instance.Cameras[2].gameObject.activeSelf == true)
         {
-            if (playerHUD.PickUpUI.activeSelf == true)
-            {
-                playerHUD.DeActivePickUpUI();
-            }
+            ResetCurrentInventoryMode();
         }
 
-        if (false == InventoryManager.Instance.IsActiveDetailViewCamera && false == InventoryManager.Instance.IsActiveEnigmaViewCamera)
+        // <메인카메라일때는 기존 인벤토리만 유효>
+        if (CameraManager.Instance.Cameras[0].gameObject.activeSelf == true)
         {
             UpdateInventory();
         }
-
-        else if (false == InventoryManager.Instance.IsActiveEnigmaViewCamera)
+        // <두번째 카메라일때는 서브 인벤토리만 유효>
+        else if (CameraManager.Instance.Cameras[1].gameObject.activeSelf == true)
         {
             UpdateSubInventory();
         }
 
 
-
-        if (false == playerHUD.isActiveInventory && false == InventoryManager.Instance.IsActiveDetailViewCamera && false == InventoryManager.Instance.IsActiveEnigmaViewCamera)
+        if (CameraManager.Instance.Cameras[0].gameObject.activeSelf == true && false == playerHUD.isActiveInventory)
         {
             UpdateRaycasting();
             UpdateRotate();
             UpdateMove();
+        }
+
+        // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
+        if (CameraManager.Instance.Cameras[1].gameObject.activeSelf == true || CameraManager.Instance.Cameras[2].gameObject.activeSelf == true)
+        {
+            if (playerHUD.PickUpUI.activeSelf == true)
+            {
+                playerHUD.DeActivePickUpUI();
+            }
         }
     }
 
@@ -88,7 +93,7 @@ public class PlayerController : MonoBehaviour, IMouseController
     void UpdateInventory()
     {
         // 인벤토리 UI 활성화
-        if (Input.GetKeyDown(SpaceBar) || playerHUD.isActiveInventory && Input.GetKeyDown(ESC))
+        if (Input.GetKeyDown(Inventory) || playerHUD.isActiveInventory && Input.GetKeyDown(ESC))
         {
             playerHUD.isActiveInventory = !playerHUD.isActiveInventory;
             playerHUD.InventoryUI.SetActive(playerHUD.isActiveInventory);
@@ -99,13 +104,13 @@ public class PlayerController : MonoBehaviour, IMouseController
         {
             MouseCursorUnLock();
         }
+
         else
         {
             playerHUD.DeActiveItemInfo();
             MouseCursorLock();
         }
     }
-
 
     // ###################### Section 2 ######################
 
@@ -114,14 +119,6 @@ public class PlayerController : MonoBehaviour, IMouseController
         float MouseX = Input.GetAxis("Mouse X");
         float MouseY = Input.GetAxis("Mouse Y");
 
-        Debug.Log($"mousX : { MouseX}");
-        Debug.Log($"mouseY : { MouseY}");
-
-        // 인벤토리 디테일뷰 비활성화
-        if (Input.GetKeyDown(ESC) && true == InventoryManager.Instance.IsActiveDetailViewCamera)
-        {
-            ResetDetailsInventory();
-        }
 
         // 왼쪽 마우스 클릭중 마우스를 움직일때 오브젝트 회전
         if (Input.GetMouseButton(0))
@@ -132,6 +129,7 @@ public class PlayerController : MonoBehaviour, IMouseController
         // 마우스 휠버튼 누르면서 움직일때 오브젝트 좌우, 위아래 움직임
         if (Input.GetMouseButton(2))
         {
+
             MoveDetailItem(MouseX, MouseY);
         }
 
@@ -159,12 +157,10 @@ public class PlayerController : MonoBehaviour, IMouseController
         CameraController.ZoomInOut(t_zoomDirection);
     }
 
-    private void ResetDetailsInventory()
+    private void ResetCurrentInventoryMode()
     {
-        InventoryManager.Instance.DetailViewCamera.gameObject.transform.position = InventoryManager.Instance.prevCameraPos;
-        InventoryManager.Instance.mainCamera.gameObject.SetActive(true);
-        InventoryManager.Instance.DetailViewCamera.gameObject.SetActive(false);
-        InventoryManager.Instance.IsActiveDetailViewCamera = false;
+        CameraManager.Instance.SwitchToMain();
+
         playerHUD.isActiveInventory = true;
         playerHUD.InventoryUI.SetActive(true);
     }

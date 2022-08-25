@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 enum ItemTag
 {
     Lench,
@@ -17,7 +16,7 @@ enum ItemTag
     Enigma_Box,
 }
 
-public class InventoryManager : MonoBehaviour, IMouseController
+public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
     public List<Item> Items = new List<Item>();
@@ -32,26 +31,19 @@ public class InventoryManager : MonoBehaviour, IMouseController
     public bool IsGripItem = false;
     public GameObject CurrentGripItemPrefab; 
     public Item CurrentGripItem;
-    [HideInInspector] public Camera mainCamera;
-    [SerializeField] private Image SelectImage;
 
+    [SerializeField] private Image SelectImage;
     [Header("DetailViewInventoryMode")]
-    public Camera DetailViewCamera;
     [SerializeField] private Transform DetailsTransform;
-    public Vector3 prevCameraPos;
-    [HideInInspector] public bool IsActiveDetailViewCamera = false;
     public GameObject CurrentDetailsViewItem;
 
     [Header("EnigmaInfo")]
-    [HideInInspector] public bool IsActiveEnigmaViewCamera = false;
-    public Camera EnigmaViewCamera;
     public int EnigmaToolsCount;
+
 
     private void Awake()
     {
-        prevCameraPos = DetailViewCamera.gameObject.transform.position;
         Instance = this;
-        mainCamera = Camera.main;
     }
 
     public void Add(Item item)
@@ -84,33 +76,20 @@ public class InventoryManager : MonoBehaviour, IMouseController
                 ++EnigmaToolsCount;
             }
         }
-
-        //if (EnigmaToolsCount == 4)
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        if (item.id == 5 || item.id == 6 || item.id == 7 || item.id == 8)
-        //        {
-        //            Items.Remove(item);
-        //        }
-        //    }
-
-        //    Add(EnigmaItem);
-        //}
     }
 
+    // 상세보기 버튼 클릭시 이벤트
     public void SwitchToDetailsView()
     {
         foreach (Item item in Items)
         {
             if (item.name == SelectImage.sprite.name)
             {
+                // 애니그마완성품일때 버튼클릭시 애니그마 카메라로 전환한다. 
                 if (SelectImage.sprite.name == "Enigma_Full")
                 {
-                    MouseCursorUnLock();
-                    mainCamera.gameObject.SetActive(false);
-                    EnigmaViewCamera.gameObject.SetActive(true);
-                    IsActiveEnigmaViewCamera = true;
+                    Debug.Log("애니그마 씬 준비");
+                    CameraManager.Instance.SwitchToEnigma();
                     return;
                 }
 
@@ -119,6 +98,7 @@ public class InventoryManager : MonoBehaviour, IMouseController
                     Destroy(CurrentDetailsViewItem);
                 }
 
+                // 디테일 카메라 전환시 오브젝트를 배치해준다.
                 Transform hand = DetailsTransform;
                 GameObject SelectItem = Instantiate(item.prefab, hand);
                 SelectItem.transform.position = DetailsTransform.position;
@@ -126,20 +106,6 @@ public class InventoryManager : MonoBehaviour, IMouseController
             }
         }
 
-        mainCamera.gameObject.SetActive(false);
-        DetailViewCamera.gameObject.SetActive(true);
-        IsActiveDetailViewCamera = true;
-    }
-
-    public void MouseCursorLock()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    public void MouseCursorUnLock()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        CameraManager.Instance.SwitchToDetail();
     }
 }

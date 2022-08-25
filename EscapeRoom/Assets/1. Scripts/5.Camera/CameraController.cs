@@ -20,14 +20,6 @@ public class CameraController : MonoBehaviour
         Vector3 itemPos = InventoryManager.Instance.CurrentDetailsViewItem.transform.position;
         Vector3 dir = itemPos - transform.position;
         float zoom = Vector3.Distance(transform.position, itemPos);
-        zoom = Mathf.Clamp(zoom, zoomMax, zoomMin);
-
-        //if (zoom <= zoomMax && zoomDirection > 0) { zoom += 0.5f; }
-
-        //if (zoom > zoomMin && zoomDirection < 0) { zoom -= 0.5f; };
-
         transform.position += dir * zoomDirection * zoomSpeed;
-
-        Debug.Log($"zoom : {zoom}");
     }
 }
