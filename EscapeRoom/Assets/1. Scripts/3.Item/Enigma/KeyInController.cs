@@ -6,7 +6,10 @@ public class KeyInController : MonoBehaviour
 {
     public float pingpongSpeed = 0.5f;
     private bool IsPushingKey = false;
-    Vector3 PrevPosition;
+    Vector3 CurrentPosition;
+    Vector3[] PrevPosition = new Vector3[26];
+    bool[] IsPrevPositionsSave = new bool[26];
+
     private void Start()
     {
         KeyIn.KeySignal += GetSignal;
@@ -19,12 +22,20 @@ public class KeyInController : MonoBehaviour
 
         Debug.Log(childId);
         GameObject currentKey = transform.GetChild(childId).gameObject;
-        PrevPosition = currentKey.transform.position;
-        StartCoroutine(pushingKey(currentKey));
+
+        CurrentPosition = currentKey.transform.position;
+
+        if (false == IsPrevPositionsSave[key])
+        {
+            IsPrevPositionsSave[key] = true;
+            PrevPosition[key] = CurrentPosition;
+        }
+
+        StartCoroutine(pushingKey(currentKey, key));
         StartCoroutine(DeactivePushing(currentKey));
     }
 
-    private IEnumerator pushingKey(GameObject currentKey)
+    private IEnumerator pushingKey(GameObject currentKey, int key)
     {
         IsPushingKey = true;
 
@@ -42,7 +53,7 @@ public class KeyInController : MonoBehaviour
 
             else
             {
-                currentKey.transform.position = PrevPosition;
+                currentKey.transform.position = PrevPosition[key];
                 yield break;
             }
         }
@@ -50,7 +61,7 @@ public class KeyInController : MonoBehaviour
 
     private IEnumerator DeactivePushing(GameObject currentKey)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         IsPushingKey = false;
     }
 }
