@@ -11,6 +11,7 @@ enum cam
 
 public class CameraManager : MonoBehaviour, IMouseController
 {
+    [SerializeField] private PlayerHUD playerHUD;
     public static CameraManager Instance;
     public Vector3 prevDetailViewCameraPos;
     public Vector3 prevEnigmaCameraPos;
@@ -57,6 +58,7 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[2].enabled = true;
         Cameras[0].enabled = false;
         Cameras[1].enabled = false;
+        playerHUD.ActiveEnigmaUI();
         MouseCursorUnLock();
     }
 

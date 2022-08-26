@@ -20,7 +20,6 @@ public class EnigmaCollider : MonoBehaviour
     {
         transmitID(id);
         boxCol.enabled = false;
-        Debug.Log($"{id} : 콜라이더 감지");
         Enigma.Instance.IsZoomIn = true;
     }
 

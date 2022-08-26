@@ -19,6 +19,9 @@ public class PlayerHUD : MonoBehaviour
     [Header("PickUpUI")]
     public GameObject PickUpUI;
 
+    [Header("EnigmaUI")]
+    [SerializeField] private GameObject EnigmaUI;
+
     void Start()
     {
         Slots.onButtonClickEvent.AddListener(DeActiveInventory);
@@ -46,16 +49,21 @@ public class PlayerHUD : MonoBehaviour
         // 아이템 설명
     }
 
+    public void ActiveEnigmaUI()
+    {
+        EnigmaUI.SetActive(true);
+    }
+
     public void DeActiveItemInfo()
     {
-        ItemInfoPanelUI.gameObject.SetActive(false);
+        ItemInfoPanelUI.SetActive(false);
     }
 
     // Inventory
     public void DeActiveInventory()
     {
         InventoryUI.SetActive(false);
-        ItemInfoPanelUI.gameObject.SetActive(false);
+        ItemInfoPanelUI.SetActive(false);
     }
 
     public void DeActivePickUpUI()
