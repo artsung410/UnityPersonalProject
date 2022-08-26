@@ -7,6 +7,9 @@ using TMPro;
 public class PlayerHUD : MonoBehaviour
 {
     Item currnetItem;
+    [Header("GetItemUI")]
+    public GameObject GetItemUI;
+    [SerializeField] private Image GetItemImage;
 
     [Header("InventoryUI")]
     public GameObject InventoryUI;
@@ -21,6 +24,8 @@ public class PlayerHUD : MonoBehaviour
 
     [Header("EnigmaUI")]
     [SerializeField] private GameObject EnigmaUI;
+
+
 
     void Start()
     {
@@ -52,6 +57,12 @@ public class PlayerHUD : MonoBehaviour
     public void ActiveEnigmaUI()
     {
         EnigmaUI.SetActive(true);
+    }
+
+    public void ActiveGetItemUI(Item item)
+    {
+        GetItemUI.SetActive(true);
+        GetItemImage.sprite = item.icon;
     }
 
     public void DeActiveItemInfo()

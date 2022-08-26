@@ -26,14 +26,13 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     void Update()
     {
-        // 치트키 (임시)
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            InventoryManager.Instance.Add(enigmaItem);
-        }
-
         if (Input.GetKeyDown(ESC))
         {
+            if (playerHUD.GetItemUI.activeSelf == true)
+            {
+                playerHUD.GetItemUI.SetActive(false);
+            }
+
             CameraManager.Instance.SwitchToMain();
         }
 

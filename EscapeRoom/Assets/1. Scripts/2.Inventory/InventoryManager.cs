@@ -18,6 +18,7 @@ enum ItemTag
 
 public class InventoryManager : MonoBehaviour
 {
+    [SerializeField] private PlayerHUD playerHUD;
     public static InventoryManager Instance;
     public List<Item> Items = new List<Item>();
 
@@ -39,8 +40,8 @@ public class InventoryManager : MonoBehaviour
 
     [Header("EnigmaInfo")]
     public int EnigmaToolsCount;
-
-
+    public Item enigmaItem;
+    public bool IsEnigmaAssembled;
     private void Awake()
     {
         Instance = this;
@@ -48,18 +49,36 @@ public class InventoryManager : MonoBehaviour
 
     public void Add(Item item)
     {
+        if (item.id == 5 || item.id == 6 || item.id == 7 || item.id == 8)
+        {
+            ++EnigmaToolsCount;
+
+            if (EnigmaToolsCount == 4)
+            {
+                Add(enigmaItem);
+                IsEnigmaAssembled = true;
+                EnigmaToolsDataRemove();
+                EnigmaToolsCount = 0;
+            }
+        }
+
+        if (IsEnigmaAssembled == true && ((item.id == 5 && item.id == 6 || item.id == 7 || item.id == 8)))
+        {
+            return;
+        }
+
         Items.Add(item);
+        playerHUD.ActiveGetItemUI(item);
     }
 
     public void Remove(Item item)
     {
         Items.Remove(item);
     }
-
+    
     public void ListItems()
     {
         //Clean content before open.
-        EnigmaToolsCount = 0;
         foreach (Transform item in ItemContent)
         {
             Destroy(item.gameObject);
@@ -70,11 +89,6 @@ public class InventoryManager : MonoBehaviour
             GameObject obj = Instantiate(InventoryItem, ItemContent);
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
             itemIcon.sprite = item.icon;
-
-            if (item.id == 5 || item.id == 6 || item.id == 7 || item.id == 8)
-            {
-                ++EnigmaToolsCount;
-            }
         }
     }
 
@@ -106,5 +120,18 @@ public class InventoryManager : MonoBehaviour
         }
 
         CameraManager.Instance.SwitchToDetail();
+    }
+
+    private void EnigmaToolsDataRemove()
+    {
+        int size = Items.Count;
+
+        for (int item = Items.Count - 1; item >=0; item--)
+        {
+            if (Items[item].id == 5 || Items[item].id == 6 || Items[item].id == 7 || Items[item].id == 8)
+            {
+                Items.Remove(Items[item]);
+            }
+        }
     }
 }
