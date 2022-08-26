@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour, IMouseController
     private PlayerMovement PlayerMovement;
     private Investigation Investigating;
 
-    [SerializeField] private PlayerHUD playerHUD;
+    private PlayerHUD playerHUD;
+
     [SerializeField] private CameraController CameraController;
 
     KeyCode ESC = KeyCode.Escape;
@@ -16,8 +17,11 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     public Item enigmaItem;
 
+    // 앉기 관련
+
     void Awake()
     {
+        playerHUD = GetComponent<PlayerHUD>();
         RotateToMouse = GetComponent<RotateToMouse>();
         PlayerMovement = GetComponent<PlayerMovement>();
         Investigating = GetComponent<Investigation>();
@@ -28,9 +32,15 @@ public class PlayerController : MonoBehaviour, IMouseController
     {
         if (Input.GetKeyDown(ESC))
         {
+            // getItemUI가 화면에 떠있고 ESC버튼을 눌렀을 때 비활성화
             if (playerHUD.GetItemUI.activeSelf == true)
             {
                 playerHUD.GetItemUI.SetActive(false);
+            }
+
+            if (playerHUD.InventoryUI.activeSelf == true)
+            {
+                playerHUD.DeActiveInventory();
             }
 
             CameraManager.Instance.SwitchToMain();
@@ -48,8 +58,7 @@ public class PlayerController : MonoBehaviour, IMouseController
             UpdateSubInventory();
         }
 
-
-        if (CameraManager.Instance.Cameras[0].enabled == true && false == playerHUD.InventoryUI.activeSelf)
+        if (CameraManager.Instance.Cameras[0].enabled == true && false == playerHUD.InventoryUI.activeSelf && false == playerHUD.GetItemUI.activeSelf)
         {
             UpdateRaycasting();
             UpdateRotate();
@@ -92,10 +101,17 @@ public class PlayerController : MonoBehaviour, IMouseController
     void UpdateInventory()
     {
         // 인벤토리 UI 활성화
-        if (Input.GetKeyDown(Inventory) && playerHUD.InventoryUI.activeSelf == false )
+        if (Input.GetKeyDown(Inventory))
         {
-            playerHUD.InventoryUI.SetActive(true);
-            InventoryManager.Instance.ListItems();
+            if(playerHUD.InventoryUI.activeSelf == false)
+            {
+                playerHUD.InventoryUI.SetActive(true);
+                InventoryManager.Instance.ListItems();
+            }
+            else
+            {
+                playerHUD.DeActiveInventory();
+            }
         }
 
         if (playerHUD.InventoryUI.activeSelf == true)
@@ -105,7 +121,6 @@ public class PlayerController : MonoBehaviour, IMouseController
 
         else
         {
-            playerHUD.DeActiveItemInfo();
             MouseCursorLock();
         }
     }

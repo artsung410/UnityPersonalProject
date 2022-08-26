@@ -29,15 +29,12 @@ public class LockController : MonoBehaviour
         {
             case "left":
                 result[0] = number;
-                //Debug.Log($"left{number}");
                 break;
             case "mid":
                 result[1] = number;
-                //Debug.Log($"mid{number}");
                 break;
             case "right":
                 result[2] = number;
-                //Debug.Log($"right{number}");
                 break;
         }
 
@@ -47,7 +44,6 @@ public class LockController : MonoBehaviour
             isNumLockOpen = true;
             numLock.Operate();
             StartCoroutine(DestroyNumLock());
-
         }
     }
 
@@ -58,13 +54,8 @@ public class LockController : MonoBehaviour
 
     IEnumerator DestroyNumLock()
     {
+        yield return new WaitForSeconds(1f);
         Destroy(numLock.gameObject);
-        yield return new WaitForSeconds(0.5f);
         toolBox.GetComponent<BoxCollider>().enabled = true;
     }
-
-    //IEnumerator DestroyNormalLock()
-    //{
-    //    yield return null;
-    //}
 }

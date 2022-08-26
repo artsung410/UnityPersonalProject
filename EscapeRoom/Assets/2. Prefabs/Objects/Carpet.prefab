@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7803090073219482270}
   - component: {fileID: 7799317032344391430}
   - component: {fileID: 7786873093585378458}
-  - component: {fileID: 2485487154552579234}
   - component: {fileID: 3243098471356084936}
   - component: {fileID: 5432782906773217217}
+  - component: {fileID: 2142913406266529108}
   m_Layer: 6
   m_Name: Carpet
   m_TagString: Object1
@@ -86,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2485487154552579234
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7800789540348662942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 218f82d5989bc2a41875ffbf40e9f3f6, type: 3}
 --- !u!95 &3243098471356084936
 Animator:
   serializedVersion: 4
@@ -136,3 +122,16 @@ MonoBehaviour:
   NeedItemName: 
   isActive: 0
   isOpened: 0
+--- !u!65 &2142913406266529108
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7800789540348662942}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.4454439, y: 0.047852, z: 4.908521}
+  m_Center: {x: -0.03940363, y: 0.021485, z: 0.04419934}

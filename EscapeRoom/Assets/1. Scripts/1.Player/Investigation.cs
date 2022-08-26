@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Investigation : MonoBehaviour
 {
     private Camera mainCamera;
-    private float rayDistance = 4f;
+    private float rayDistance = 5f;
     public GameObject pickupUI;
     public GameObject mouseClickUI;
 
@@ -43,16 +43,10 @@ public class Investigation : MonoBehaviour
 
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
             {
-                pickupUI.SetActive(true);
                 currentOutline = hit.transform.GetComponent<Outline>();
                 currentOutline.enabled = true;
             }
 
-            // 아이템 줍줍
-            if (Input.GetKeyDown(Confirm) && pickupUI.activeSelf == true && hit.transform.gameObject.layer == LayerMask.NameToLayer("Item"))
-            {
-                hit.transform.GetComponent<ItemPickup>().Pickup();
-            }
 
             // 오브젝트1 애니메이션 활성화 (getKeyDown - F버튼을 눌러서 오브젝트를 변화시킴, 쉐이더 테두리 적용 o)
             if (Input.GetKeyDown(Confirm) && pickupUI.activeSelf == true && hit.transform.CompareTag("Object1") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))

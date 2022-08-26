@@ -1649,7 +1649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0af99c20f75d21429f2ce6ad6f689fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenNum: 
   ScreenText: {fileID: 7379741322910920410}
 --- !u!1 &2767449363121987604
 GameObject:

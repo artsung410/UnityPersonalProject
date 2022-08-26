@@ -26,9 +26,9 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private GameObject EnigmaUI;
 
 
-
     void Start()
     {
+        ItemPickup.PickUpSignal += ActiveGetItemUI;
         Slots.onButtonClickEvent.AddListener(DeActiveInventory);
         Slots.onCursorEnterEvent.AddListener(ActiveItemInfo);
         Slots.onButtonClickEvent.AddListener(DeActiveItemInfo);
