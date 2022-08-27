@@ -56,6 +56,7 @@ public class PlayerHUD : MonoBehaviour
                 ItemInfoTitleText.text = item.name;
                 ItemInfoImage.sprite = item.icon;
                 ItemInfoPanelUI.SetActive(true);
+                SoundManager.Instance.playItemInfoSound();
                 break;
             }
         }
@@ -74,7 +75,7 @@ public class PlayerHUD : MonoBehaviour
         EnigmaUI.SetActive(true);
     }
 
-    public void DeACtiveEnigmaUI()
+    public void DeActiveEnigmaUI()
     {
         EnigmaUI.SetActive(false);
     }

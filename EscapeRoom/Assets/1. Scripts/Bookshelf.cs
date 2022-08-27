@@ -9,6 +9,11 @@ public class Bookshelf : InterectiveObject
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        PasswordController.PasswordUnlock += SetAvailability;
+    }
+
     public override void Operate()
     {
         if (true == PasswordController.IsGameWin)
@@ -16,5 +21,10 @@ public class Bookshelf : InterectiveObject
             isActive = true;
             animator.SetBool("isActive", true);
         }
+    }
+
+    public void SetAvailability()
+    {
+        isOpened = true;
     }
 }

@@ -33,7 +33,6 @@ public class PowerBox : InterectiveObject
 
             if (item.itemName == NeedItemName)
             {
-                isActive = true;
                 animator.SetBool("isActive", true);
                 Destroy(Bolt, 6f);
                 StartCoroutine(reset(activeTime));

@@ -15,6 +15,11 @@ public class ToolBox : InterectiveObject
         DeActiveBoxCollider(boxCol);
     }
 
+    private void Start()
+    {
+        NumLock.Unlock += SetAvailability;
+    }
+
     public override void Operate()
     {
         if (isOpened)
@@ -33,5 +38,10 @@ public class ToolBox : InterectiveObject
                 StartCoroutine(resetOnlyAnimation(activeTime));
             }
         }
+    }
+
+    public void SetAvailability()
+    {
+        isOpened = true;
     }
 }

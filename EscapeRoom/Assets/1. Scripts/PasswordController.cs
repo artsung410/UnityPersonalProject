@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 enum PasswordKeys
 {
@@ -11,6 +12,8 @@ enum PasswordKeys
 
 public class PasswordController : MonoBehaviour
 {
+    public static event Action PasswordUnlock = delegate { };
+
     [SerializeField] private TextMeshPro ScreenText;
 
     public static bool IsGameWin;
@@ -74,13 +77,13 @@ public class PasswordController : MonoBehaviour
             if (ScreenText.text == CorrectNum)
             {
                 IsGameWin = true;
+                PasswordUnlock();
                 Debug.Log("게임에서 승리하셨습니다.");
                 return;
             }
 
             if (ScreenText.text.Length == 8)
             {
-                Debug.Log("asdfasdf");
                 ScreenText.text = "0";
                 return;
 

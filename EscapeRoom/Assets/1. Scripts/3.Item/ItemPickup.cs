@@ -10,6 +10,7 @@ public class ItemPickup : MonoBehaviour
 
     private void OnMouseDown()
     {
+        SoundManager.Instance.playPickupSound();
         StartCoroutine(DelayPickUp());
         Pickup();
     }
@@ -17,6 +18,7 @@ public class ItemPickup : MonoBehaviour
     public void Pickup()
     {
         InventoryManager.Instance.Add(Item);
+
         Destroy(gameObject);
     }
 
