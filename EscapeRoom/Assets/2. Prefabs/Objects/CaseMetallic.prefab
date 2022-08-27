@@ -606,6 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTime: 4
   NeedItemName: 
+  ID: 0
   isActive: 0
   isOpened: 0
 --- !u!95 &6307389874281705357
@@ -974,6 +975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTime: 8
   NeedItemName: Gold_Key
+  ID: 1
   isActive: 0
   isOpened: 0
   Lock: {fileID: 7906924518070901502}

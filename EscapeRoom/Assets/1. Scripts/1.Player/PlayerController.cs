@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour, IMouseController
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (playerHUD.GetItemUI.activeSelf == true && playerHUD.IsReadyToDeactiveGetItemUI == true)
+            if (playerHUD.IsActiveGetItemUI() == true && playerHUD.IsReadyToDeactiveGetItemUI == true)
             {
                 playerHUD.DeActiveGetItemUI();
             }
@@ -41,18 +41,19 @@ public class PlayerController : MonoBehaviour, IMouseController
         if (Input.GetKeyDown(ESC))
         {
             // getItemUI가 화면에 떠있고 ESC버튼을 눌렀을 때 비활성화
-            if (playerHUD.GetItemUI.activeSelf == true)
+            if (playerHUD.IsActiveGetItemUI() == true)
             {
-                playerHUD.GetItemUI.SetActive(false);
+                playerHUD.DeActiveGetItemUI();
             }
 
-            if (playerHUD.InventoryUI.activeSelf == true)
+            if (playerHUD.IsActiveInventoryUI() == true)
             {
-                playerHUD.DeActiveInventory();
+                playerHUD.DeActiveInventoryUI();
             }
 
             CameraManager.Instance.SwitchToMain();
         }
+
 
         // <메인카메라일때는 기존 인벤토리만 유효>
         if (CameraManager.Instance.Cameras[0].enabled == true && CameraManager.Instance.Cameras[2].enabled == false)
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour, IMouseController
             UpdateSubInventory();
         }
 
-        if (CameraManager.Instance.Cameras[0].enabled == true && false == playerHUD.InventoryUI.activeSelf && false == playerHUD.GetItemUI.activeSelf)
+        if (CameraManager.Instance.Cameras[0].enabled == true && false == playerHUD.IsActiveInventoryUI() && false == playerHUD.IsActiveGetItemUI())
         {
             UpdateRaycasting();
             UpdateRotate();
@@ -76,9 +77,9 @@ public class PlayerController : MonoBehaviour, IMouseController
         // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
         if (CameraManager.Instance.Cameras[1].enabled == true || CameraManager.Instance.Cameras[2].enabled == true)
         {
-            if (playerHUD.PickUpUI.activeSelf == true)
+            if (playerHUD.IsActiveSelectedUI() == true)
             {
-                playerHUD.DeActivePickUpUI();
+                playerHUD.DeActiveSelectedUI();
             }
         }
     }
@@ -111,18 +112,18 @@ public class PlayerController : MonoBehaviour, IMouseController
         // 인벤토리 UI 활성화
         if (Input.GetKeyDown(Inventory))
         {
-            if(playerHUD.InventoryUI.activeSelf == false)
+            if(playerHUD.IsActiveInventoryUI() == false)
             {
-                playerHUD.InventoryUI.SetActive(true);
+                playerHUD.ActiveInventoryUI();
                 InventoryManager.Instance.ListItems();
             }
             else
             {
-                playerHUD.DeActiveInventory();
+                playerHUD.DeActiveInventoryUI();
             }
         }
 
-        if (playerHUD.InventoryUI.activeSelf == true)
+        if (playerHUD.IsActiveInventoryUI() == true)
         {
             MouseCursorUnLock();
         }

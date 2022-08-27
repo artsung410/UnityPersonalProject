@@ -6,36 +6,45 @@ using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    Item currnetItem;
-    [Header("GetItemUI")]
-    public GameObject GetItemUI;
-    [SerializeField] private Image GetItemImage;
-    public bool IsReadyToDeactiveGetItemUI;
-
     [Header("InventoryUI")]
-    public GameObject InventoryUI;
+    [SerializeField]  private GameObject      InventoryUI;
 
     [Header("ItemInfoUI")]
-    [SerializeField] private GameObject ItemInfoPanelUI;
-    [SerializeField] private Image ItemInfoImage;
-    [SerializeField] private TextMeshProUGUI ItemInfoTitleText;
+    [SerializeField]  private GameObject      ItemInfoPanelUI;
+    [SerializeField]  private Image           ItemInfoImage;
+    [SerializeField]  private TextMeshProUGUI ItemInfoTitleText;
+
+    [Header("GetItemUI")]
+    [SerializeField]  private GameObject      GetItemUI;
+    [SerializeField]  private Image           GetItemImage;
+    [HideInInspector] public bool             IsReadyToDeactiveGetItemUI;
 
     [Header("PickUpUI")]
-    public GameObject PickUpUI;
+    [SerializeField]  private GameObject      SelectedUI;
+
+    [Header("LockedUI")]
+    [SerializeField]  private GameObject      LockedUI;
+
+    [Header("MouseClickUI")]
+    [SerializeField]  private GameObject      MouseClickUI;
+
 
     [Header("EnigmaUI")]
-    [SerializeField] private GameObject EnigmaUI;
+    [SerializeField]  private GameObject      EnigmaUI;
 
 
     void Start()
     {
         ItemPickup.PickUpSignal += ActiveGetItemUI;
-        Slots.onButtonClickEvent.AddListener(DeActiveInventory);
+        InterectiveObject.UnLockedMessage += ActiveLockedUI;
+        InterectiveObject.SelectedMessage += ActiveMouseClickUI;
+        Slots.onButtonClickEvent.AddListener(DeActiveInventoryUI);
         Slots.onCursorEnterEvent.AddListener(ActiveItemInfo);
         Slots.onButtonClickEvent.AddListener(DeActiveItemInfo);
     }
 
     // ItemInfo
+    Item currnetItem;
     void ActiveItemInfo(Sprite itemImage)
     {
         // 아이템 사진
@@ -54,45 +63,118 @@ public class PlayerHUD : MonoBehaviour
         // 아이템 타이틀
         // 아이템 설명
     }
+    public void DeActiveItemInfo()
+    {
+        ItemInfoPanelUI.SetActive(false);
+    }
 
+    // EnigmaUI
     public void ActiveEnigmaUI()
     {
         EnigmaUI.SetActive(true);
+    }
+
+    public void DeACtiveEnigmaUI()
+    {
+        EnigmaUI.SetActive(false);
+    }
+
+    // GetItemUI
+    public bool IsActiveGetItemUI()
+    {
+        return GetItemUI.activeSelf;
     }
 
     public void ActiveGetItemUI(Item item)
     {
         GetItemUI.SetActive(true);
         GetItemImage.sprite = item.icon;
-        StartCoroutine(DelayGetItemNUISetBool());
+        StartCoroutine(DelayGetItemUISetBool());
     }
 
     public void DeActiveGetItemUI()
     {
         GetItemUI.SetActive(false);
-        IsReadyToDeactiveGetItemUI = false;
-    }
 
-    public void DeActiveItemInfo()
+        if (IsReadyToDeactiveGetItemUI == true)
+        {
+            IsReadyToDeactiveGetItemUI = false;
+        }
+
+    }
+    IEnumerator DelayGetItemUISetBool()
     {
-        ItemInfoPanelUI.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        IsReadyToDeactiveGetItemUI = true;
     }
 
-    // Inventory
-    public void DeActiveInventory()
+
+    // InventoryUI
+    public bool IsActiveInventoryUI()
+    {
+        return InventoryUI.activeSelf;
+    }
+
+    public void ActiveInventoryUI()
+    {
+        InventoryUI.SetActive(true);
+    }
+    public void DeActiveInventoryUI()
     {
         InventoryUI.SetActive(false);
         ItemInfoPanelUI.SetActive(false);
     }
 
-    public void DeActivePickUpUI()
+
+    // SelectedUI
+    public bool IsActiveSelectedUI()
     {
-        PickUpUI.SetActive(false);
+        return SelectedUI.activeSelf;
     }
 
-    IEnumerator DelayGetItemNUISetBool()
+    public void ActiveSelectedUI()
     {
-        yield return new WaitForSeconds(0.5f);
-        IsReadyToDeactiveGetItemUI = true;
+        LockedUI.SetActive(false);
+        MouseClickUI.SetActive(false);
+        SelectedUI.SetActive(true);
+    }
+
+    public void DeActiveSelectedUI()
+    {
+        SelectedUI.SetActive(false);
+    }
+
+    // MouseClickUI
+    public bool IsMouseClikedUI()
+    {
+        return MouseClickUI.activeSelf;
+    }
+    public void ActiveMouseClickUI()
+    {
+        SelectedUI.SetActive(false);
+        LockedUI.SetActive(false);
+        MouseClickUI.SetActive(true);
+    }
+    public void DeActiveMouseClickUI()
+    {
+        MouseClickUI.SetActive(false);
+    }
+
+    // LockedUI
+    public bool IsActiveLockedUI()
+    {
+        return LockedUI.activeSelf;
+    }
+
+    public void ActiveLockedUI()
+    {
+        SelectedUI.SetActive(false);
+        MouseClickUI.SetActive(false);
+        LockedUI.SetActive(true);
+    }
+
+    public void DeActiveLockedUI()
+    {
+        LockedUI.SetActive(false);
     }
 }
