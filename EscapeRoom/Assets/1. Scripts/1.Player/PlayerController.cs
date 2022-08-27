@@ -30,6 +30,14 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (playerHUD.GetItemUI.activeSelf == true && playerHUD.IsReadyToDeactiveGetItemUI == true)
+            {
+                playerHUD.DeActiveGetItemUI();
+            }
+        }
+
         if (Input.GetKeyDown(ESC))
         {
             // getItemUI가 화면에 떠있고 ESC버튼을 눌렀을 때 비활성화

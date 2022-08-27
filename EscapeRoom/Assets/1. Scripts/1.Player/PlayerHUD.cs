@@ -10,6 +10,7 @@ public class PlayerHUD : MonoBehaviour
     [Header("GetItemUI")]
     public GameObject GetItemUI;
     [SerializeField] private Image GetItemImage;
+    public bool IsReadyToDeactiveGetItemUI;
 
     [Header("InventoryUI")]
     public GameObject InventoryUI;
@@ -63,6 +64,13 @@ public class PlayerHUD : MonoBehaviour
     {
         GetItemUI.SetActive(true);
         GetItemImage.sprite = item.icon;
+        StartCoroutine(DelayGetItemNUISetBool());
+    }
+
+    public void DeActiveGetItemUI()
+    {
+        GetItemUI.SetActive(false);
+        IsReadyToDeactiveGetItemUI = false;
     }
 
     public void DeActiveItemInfo()
@@ -80,5 +88,11 @@ public class PlayerHUD : MonoBehaviour
     public void DeActivePickUpUI()
     {
         PickUpUI.SetActive(false);
+    }
+
+    IEnumerator DelayGetItemNUISetBool()
+    {
+        yield return new WaitForSeconds(0.5f);
+        IsReadyToDeactiveGetItemUI = true;
     }
 }
