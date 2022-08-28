@@ -12,10 +12,8 @@ public class Drawer : InterectiveObject
 
     public override void Operate()
     {
-        isActive = true;
-        animator.SetBool("isActive", true);
-        SoundManager.Instance.PlayObjectSound(audioSource, "DrawerOpen");
-        StartCoroutine(reset(activeTime));
-        StartCoroutine(PlayExitSound(activeTime, "DrawerClose"));
+        isActive = !isActive;
+        animator.SetBool("isActive", isActive);
+        SoundManager.Instance.PlayObjectSound(audioSource, "DrawerOpen", "DrawerClose", isActive);
     }
 }

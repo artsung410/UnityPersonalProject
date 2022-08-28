@@ -12,10 +12,8 @@ public class Box : InterectiveObject
 
     public override void Operate()
     {
-        isActive = true;
-        animator.SetBool("isActive", true);
-        SoundManager.Instance.PlayObjectSound(audioSource, "BoxMove");
-        StartCoroutine(reset(activeTime));
-        StartCoroutine(PlayExitSound(activeTime, "BoxReset"));
+        SoundManager.Instance.PlayObjectSound(audioSource, "BoxMove", "BoxReset", isActive);
+        isActive = !isActive;
+        animator.SetBool("isActive", isActive);
     }
 }

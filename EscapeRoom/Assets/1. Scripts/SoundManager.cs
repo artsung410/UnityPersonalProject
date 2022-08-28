@@ -82,11 +82,10 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
     }
 
-    public void PlayObjectSound(AudioSource source, string name)
+    public void PlayObjectSound(AudioSource source, string name1, string name2, bool isActive)
     {
-        source.clip = AudioDic[name];
+        source.clip = isActive == false ? AudioDic[name1] : AudioDic[name2];
         source.Play();
-
     }
 
     //public void PlayInteractiveObjectSound(int ID)
