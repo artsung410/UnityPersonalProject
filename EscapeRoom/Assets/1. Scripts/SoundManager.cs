@@ -2,19 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum Sound
+{
+    BoxMove,
+    BoxReset,
+    DrawerOpen,
+    DrawerClose,
+    Carpet,
+    RotateLock,
+    Unlock,
+    ToolBoxOpen,
+    ToolBoxClose,
+    PushKey,
+    keyPadError,
+    KeyPadApprove,
+    BookCaseOpen,
+    IronDoorOpen,
+    IronDoorClose,
+    WoddenDoorOpen,
+    WoddenDoorClose,
+    ExitDoorOpen,
+    Locked,
+    keyUnlock
+}
+
+
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
     private AudioSource audioSource;
+
+    [Header("<<SystemSound>>")]
+    [Header("ItemSound")]
     [SerializeField] private AudioClip PickupSound;
+
+    [Header("UISound")]
     [SerializeField] private AudioClip ItemInfoSound;
     [SerializeField] private AudioClip ButtonClickSound;
 
+
+    [Header("<<InteractiveObejctSound>>")]
+    [SerializeField] private AudioClip[] audioClips;
+
+    Sound sound;
+    Dictionary<string, AudioClip> AudioDic;
     // SoundManager.Instance.PlayItemInfoSound()
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        AudioDic = new Dictionary<string, AudioClip>();
         Instance = this;
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < (int)Sound.keyUnlock; i++)
+        {
+            sound = (Sound)i;
+            Debug.Log(sound.ToString());
+            AudioDic.Add(sound.ToString(), audioClips[i]);
+        }
     }
 
     public void playPickupSound()
@@ -33,6 +80,13 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.clip = ButtonClickSound;
         audioSource.Play();
+    }
+
+    public void PlayObjectSound(AudioSource source, string name)
+    {
+        source.clip = AudioDic[name];
+        source.Play();
+
     }
 
     //public void PlayInteractiveObjectSound(int ID)

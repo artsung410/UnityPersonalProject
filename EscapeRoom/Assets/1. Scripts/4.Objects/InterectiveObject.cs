@@ -15,7 +15,7 @@ public abstract class InterectiveObject : MonoBehaviour
     [HideInInspector] public bool isActive;
     [HideInInspector] public bool isOpened;
     protected Animator animator;
-
+    protected AudioSource audioSource;
 
     public abstract void Operate();
 
@@ -111,5 +111,9 @@ public abstract class InterectiveObject : MonoBehaviour
         animator.SetBool("isActive", false);
     }
 
-
+    protected IEnumerator PlayExitSound(float time, string soundName)
+    {
+        yield return new WaitForSeconds(time);
+        SoundManager.Instance.PlayObjectSound(audioSource, soundName);
+    }
 }

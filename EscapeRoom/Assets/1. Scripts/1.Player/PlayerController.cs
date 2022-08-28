@@ -17,14 +17,19 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     public Item enigmaItem;
 
-    // 앉기 관련
+
+    [Header("Audio Clips")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClipWalk;                      // 걷기 사운드
 
     void Awake()
     {
         playerHUD = GetComponent<PlayerHUD>();
         RotateToMouse = GetComponent<RotateToMouse>();
         PlayerMovement = GetComponent<PlayerMovement>();
+        audioSource = GetComponent<AudioSource>();
         Investigating = GetComponent<Investigation>();
+
         MouseCursorLock();
     }
 
@@ -98,8 +103,18 @@ public class PlayerController : MonoBehaviour, IMouseController
         float z = Input.GetAxis("Vertical");
 
         PlayerMovement.MoveTo(new Vector3(x, 0, z));
-    }
 
+        if (x != 0 || z != 0)
+        {
+            ActiveMoveSound();
+        }
+
+        else
+        {
+            DeActiveMoveSound();
+        }
+
+    }
     // [Investigation.cs]
     void UpdateRaycasting()
     {
@@ -112,7 +127,9 @@ public class PlayerController : MonoBehaviour, IMouseController
         // 인벤토리 UI 활성화
         if (Input.GetKeyDown(Inventory))
         {
-            if(playerHUD.IsActiveInventoryUI() == false)
+            DeActiveMoveSound();
+
+            if (playerHUD.IsActiveInventoryUI() == false)
             {
                 playerHUD.ActiveInventoryUI();
                 InventoryManager.Instance.ListItems();
@@ -196,5 +213,24 @@ public class PlayerController : MonoBehaviour, IMouseController
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void ActiveMoveSound()
+    {
+        audioSource.clip = audioClipWalk;
+
+        if (audioSource.isPlaying == false)
+        {
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    public void DeActiveMoveSound()
+    {
+        if (audioSource.isPlaying == true)
+        {
+            audioSource.Stop();
+        }
     }
 }
