@@ -19,6 +19,7 @@ public class EnigmaCollider : MonoBehaviour
     private void OnMouseDown()
     {
         transmitID(id);
+        PlayClickSound();
         boxCol.enabled = false;
         Enigma.Instance.IsZoomIn = true;
     }
@@ -27,5 +28,10 @@ public class EnigmaCollider : MonoBehaviour
     {
         boxCol.enabled = true;
         Enigma.Instance.IsZoomIn = false;
+    }
+
+    private void PlayClickSound()
+    {
+        SoundManager.Instance.PlayEnigmaSwitchingSound();
     }
 }

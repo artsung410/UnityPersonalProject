@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Bookshelf : InterectiveObject
 {
+    bool isBookshelfMove;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Start()
@@ -16,9 +19,11 @@ public class Bookshelf : InterectiveObject
 
     public override void Operate()
     {
-        if (true == PasswordController.IsGameWin)
+        if (true == PasswordController.IsGameWin && false == isBookshelfMove)
         {
             isActive = true;
+            isBookshelfMove = true;
+            SoundManager.Instance.PlayObjectSound(audioSource, "BoxMove");
             animator.SetBool("isActive", true);
         }
     }

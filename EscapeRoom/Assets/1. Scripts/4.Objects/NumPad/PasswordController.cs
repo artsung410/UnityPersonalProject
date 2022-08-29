@@ -15,15 +15,20 @@ public class PasswordController : MonoBehaviour
     public static event Action PasswordUnlock = delegate { };
 
     [SerializeField] private TextMeshPro ScreenText;
+    [SerializeField] private GameObject GreenLight;
+    [SerializeField] private GameObject RedLight;
+
 
     public static bool IsGameWin;
     private string CorrectNum;
-
+    private AudioSource audioSource;
+    
     private void Awake()
     {
         IsGameWin = false;
         CorrectNum = "4617460";
         PasswordKey.KeypadSignal += ShowPasswordOnScreen;
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Start()
@@ -78,17 +83,27 @@ public class PasswordController : MonoBehaviour
             {
                 IsGameWin = true;
                 PasswordUnlock();
+                SoundManager.Instance.PlayObjectSound(audioSource, "KeyPadApprove");
+                GreenLight.SetActive(true);
                 Debug.Log("게임에서 승리하셨습니다.");
                 return;
             }
 
             if (ScreenText.text.Length == 8)
             {
+                StartCoroutine(GlowingErrorBulb());
+                SoundManager.Instance.PlayObjectSound(audioSource, "keyPadError");
                 ScreenText.text = "0";
                 return;
-
-                // 금지 사운드 추가
             }
         }
+    }
+
+    float lightingDuration = 1f;
+    IEnumerator GlowingErrorBulb()
+    {
+        RedLight.SetActive(true);
+        yield return new WaitForSeconds(lightingDuration);
+        RedLight.SetActive(false);
     }
 }

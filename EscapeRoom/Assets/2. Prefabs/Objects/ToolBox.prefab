@@ -72,7 +72,6 @@ MonoBehaviour:
   NeedItemName: unLcok
   isActive: 0
   isOpened: 0
-  activeTime_AfterCompletion: 4
 --- !u!65 &4419528449562475431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -84,8 +83,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6636353, y: 1.4040756, z: 2.5455399}
-  m_Center: {x: -40.34388, y: 27.59579, z: 19.00568}
+  m_Size: {x: 1.4273834, y: 1.3390579, z: 2.4255333}
+  m_Center: {x: -40.464554, y: 27.563137, z: 19.018167}
 --- !u!1 &4786657237830836524
 GameObject:
   m_ObjectHideFlags: 0

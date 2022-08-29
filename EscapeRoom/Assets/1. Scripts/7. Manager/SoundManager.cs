@@ -37,6 +37,7 @@ public class SoundManager : MonoBehaviour
     [Header("<<SystemSound>>")]
     [Header("ItemSound")]
     [SerializeField] private AudioClip PickupSound;
+    [SerializeField] private AudioClip EnigmaPartSwitchingSound;
 
     [Header("UISound")]
     [SerializeField] private AudioClip ItemInfoSound;
@@ -82,6 +83,11 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
     }
 
+    public void PlayEnigmaSwitchingSound()
+    {
+        audioSource.clip = EnigmaPartSwitchingSound;
+        audioSource.Play();
+    }
     public void PlayObjectSound(AudioSource source, string name)
     {
         source.Stop();

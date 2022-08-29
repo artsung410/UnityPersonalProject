@@ -17,7 +17,6 @@ public class ToolBox : InterectiveObject
     private void Start()
     {
         NumLock.Unlock += SetAvailability;
-        ItemPickup.PickUpSignal += ActiveBoxCollider;
     }
 
     public override void Operate()
@@ -27,11 +26,6 @@ public class ToolBox : InterectiveObject
             isActive = !isActive;
             animator.SetBool("isActive", isActive);
             SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", isActive);
-            
-            if (isPickUpKey == false)
-            {
-                gameObject.GetComponent<BoxCollider>().enabled = false;
-            }
         }
 
         else
@@ -43,14 +37,5 @@ public class ToolBox : InterectiveObject
     public void SetAvailability()
     {
         isOpened = true;
-    }
-
-    public void ActiveBoxCollider(Item item)
-    {
-        if(item.name == "Silver_Key")
-        {
-            isPickUpKey = true;
-            gameObject.GetComponent<BoxCollider>().enabled = true;
-        }
     }
 }
