@@ -24,7 +24,8 @@ enum Sound
     ExitDoorOpen,
     Locked,
     KeyPush,
-    keyUnlock
+    Lench,
+    End,
 }
 
 
@@ -56,7 +57,7 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < (int)Sound.keyUnlock; i++)
+        for (int i = 0; i < (int)Sound.End; i++)
         {
             sound = (Sound)i;
             AudioDic.Add(sound.ToString(), audioClips[i]);

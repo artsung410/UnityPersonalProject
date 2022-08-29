@@ -35,8 +35,8 @@ public class DrawerNeedsKey : InterectiveObject
             if (item.itemName == NeedItemName)
             {
                 // 올바른 아이템 들고, 마우스 클릭시
-
                 animator.SetBool("isActive", true);
+                StartCoroutine(PlayKeyUnlockSound());
                 StartCoroutine(SetAvailability());
             }
 
@@ -54,5 +54,12 @@ public class DrawerNeedsKey : InterectiveObject
         isOpened = true;
         animator.SetBool("isOpened", true);
         animator.SetBool("isActive", false);
+    }
+
+    float delayTime = 1.3f;
+    private IEnumerator PlayKeyUnlockSound()
+    {
+        yield return new WaitForSeconds(delayTime);
+        SoundManager.Instance.PlayObjectSound(audioSource, "Unlock");
     }
 }

@@ -38,6 +38,7 @@ public class CabinetNeedsKey : InterectiveObject
             {
                 // 올바른 아이템 들고, 마우스 클릭시
                 animator.SetBool("isActive", true);
+                StartCoroutine(PlayKeyUnlockSound());
                 StartCoroutine(SetAvailability());
             }
 
@@ -56,5 +57,13 @@ public class CabinetNeedsKey : InterectiveObject
         isOpened = true;
         animator.SetBool("isOpened", true);
         animator.SetBool("isActive", false);
+    }
+
+
+    float delayTime = 2.2f;
+    private IEnumerator PlayKeyUnlockSound()
+    {
+        yield return new WaitForSeconds(delayTime);
+        SoundManager.Instance.PlayObjectSound(audioSource, "Unlock");
     }
 }

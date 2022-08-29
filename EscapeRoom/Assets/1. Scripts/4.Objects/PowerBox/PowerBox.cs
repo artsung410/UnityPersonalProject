@@ -20,6 +20,7 @@ public class PowerBox : InterectiveObject
             // <여러번 들어오는 조건문>
             isActive = !isActive;
             animator.SetBool("isActive", isActive);
+            SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
         }
 
         else
@@ -37,8 +38,9 @@ public class PowerBox : InterectiveObject
             if (item.itemName == NeedItemName)
             {
                 // 올바른 아이템 들고, 마우스 클릭시
-                isActive = true;
                 animator.SetBool("isActive", true);
+                Destroy(Bolt, 3.5f);
+                StartCoroutine(DelayLenchSound());
                 StartCoroutine(SetAvailability());
             }
 
@@ -55,5 +57,14 @@ public class PowerBox : InterectiveObject
         yield return new WaitForSeconds(activeTime);
         isOpened = true;
         animator.SetBool("isOpened", true);
+        animator.SetBool("isActive", false);
+    }
+
+    float delayTime = 0.6f;
+
+    private IEnumerator DelayLenchSound()
+    {
+        yield return new WaitForSeconds(delayTime);
+        SoundManager.Instance.PlayObjectSound(audioSource, "Lench");
     }
 }
