@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 5106393522651562172}
   - component: {fileID: 5893805829464848623}
   m_Layer: 6
-  m_Name: ElectronicBox
+  m_Name: PowerBox
   m_TagString: Object1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -482,8 +482,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.6190805, z: 0.29942834}
-  m_Center: {x: 0, y: -0.043822132, z: -0.03684522}
+  m_Size: {x: 1, y: 1.6190805, z: 0.758533}
+  m_Center: {x: 0, y: -0.043822132, z: 0.19270699}
 --- !u!114 &5893805829464848623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,12 +496,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f75bde0ff4447479a632dc2cb765c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTime: 8
+  activeTime: 3.5
   NeedItemName: Lench
   isActive: 0
   isOpened: 0
   Bolt: {fileID: 1630850351807297832}
-  activeTime_AfterCompletion: 4
+  activeTime_AfterCompletion: 3
 --- !u!1 &316453724365848212
 GameObject:
   m_ObjectHideFlags: 0

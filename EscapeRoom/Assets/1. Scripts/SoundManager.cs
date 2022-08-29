@@ -40,7 +40,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip ItemInfoSound;
     [SerializeField] private AudioClip ButtonClickSound;
 
-
     [Header("<<InteractiveObejctSound>>")]
     [SerializeField] private AudioClip[] audioClips;
 
@@ -59,7 +58,6 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < (int)Sound.keyUnlock; i++)
         {
             sound = (Sound)i;
-            Debug.Log(sound.ToString());
             AudioDic.Add(sound.ToString(), audioClips[i]);
         }
     }
@@ -82,14 +80,24 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
     }
 
-    public void PlayObjectSound(AudioSource source, string name1, string name2, bool isActive)
+    public void PlayObjectSound(AudioSource source, string name)
     {
-        source.clip = isActive == false ? AudioDic[name1] : AudioDic[name2];
+        source.Stop();
+        source.clip = AudioDic[name];
         source.Play();
     }
 
-    //public void PlayInteractiveObjectSound(int ID)
-    //{
-        
-    //}
+    public void PlayObjectSound(AudioSource source, string name1, string name2, bool isActive)
+    {
+        source.Stop();
+        source.clip = isActive == true ? AudioDic[name1] : AudioDic[name2];
+        source.Play();
+    }
+
+    public void PlayObjectSound(AudioSource source, string name1, string name2, string name3, bool isActive)
+    {
+        source.Stop();
+        source.clip = isActive == true ? AudioDic[name1] : AudioDic[name2];
+        source.Play();
+    }
 }

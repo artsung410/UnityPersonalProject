@@ -44,6 +44,19 @@ public abstract class InterectiveObject : MonoBehaviour
         ActiveCollider(boxCol, meshCol);
     }
 
+    protected void SwitchingBoxColliderStatus()
+    {
+        BoxCollider boxCol = gameObject.GetComponent<BoxCollider>();
+        boxCol.enabled = isActive == true ? false : true;
+    }
+
+    protected void SwitchinMeshxColliderStatus()
+    {
+        MeshCollider meshCol = gameObject.GetComponent<MeshCollider>();
+        meshCol.enabled = isActive == true ? false : true;
+    }
+
+
     protected IEnumerator resetOnlyAnimation(float time)
     {
         yield return new WaitForSeconds(time);

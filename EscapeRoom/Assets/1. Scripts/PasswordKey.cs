@@ -8,9 +8,10 @@ public class PasswordKey : MonoBehaviour
     public int Key;
 
     public static event Action<int> KeypadSignal = delegate { };
-    private void Start()
+    private AudioSource audioSource;
+    private void Awake()
     {
-        
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void OnMouseDown()
@@ -18,9 +19,11 @@ public class PasswordKey : MonoBehaviour
         StartCoroutine("Pushed");
     }
 
-    private void Pushed()
+    IEnumerator Pushed()
     {
+        SoundManager.Instance.PlayObjectSound(audioSource, "PushKey");
         KeypadSignal(Key);
+        yield return null;
     }
 }
 

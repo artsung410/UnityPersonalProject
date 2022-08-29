@@ -13,7 +13,7 @@ public class Cabinet : InterectiveObject
     public override void Operate()
     {
         isActive = !isActive;
-        animator.SetBool("isActive", true);
+        animator.SetBool("isActive", isActive);
         SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
     }
 }

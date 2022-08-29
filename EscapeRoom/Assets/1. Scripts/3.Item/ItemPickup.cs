@@ -11,20 +11,14 @@ public class ItemPickup : MonoBehaviour
     private void OnMouseDown()
     {
         SoundManager.Instance.playPickupSound();
-        StartCoroutine(DelayPickUp());
         Pickup();
     }
 
     public void Pickup()
     {
         InventoryManager.Instance.Add(Item);
-
-        Destroy(gameObject);
-    }
-
-    IEnumerator DelayPickUp()
-    {
-        yield return new WaitForSeconds(0.4f);
         PickUpSignal(Item);
+        Debug.Log("DelayPickUp");
+        Destroy(gameObject);
     }
 }

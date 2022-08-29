@@ -15,12 +15,14 @@ public class PlayerController : MonoBehaviour, IMouseController
     KeyCode ESC = KeyCode.Escape;
     KeyCode Inventory = KeyCode.I;
 
-    public Item enigmaItem;
 
 
     [Header("Audio Clips")]
     private AudioSource audioSource;
     [SerializeField] private AudioClip audioClipWalk;                      // 걷기 사운드
+
+    public Item[] ItemList;
+    public Item EnigmaItem;
 
     void Awake()
     {
@@ -35,6 +37,17 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     void Update()
     {
+        // 치트키
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            for (int i = 0; i < ItemList.Length; i++)
+            {
+                InventoryManager.Instance.Add(ItemList[i]);
+            }
+            InventoryManager.Instance.Add(EnigmaItem);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if (playerHUD.IsActiveGetItemUI() == true && playerHUD.IsReadyToDeactiveGetItemUI == true)

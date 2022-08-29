@@ -7,12 +7,13 @@ public class Carpet : InterectiveObject
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void Operate()
     {
-        isActive = true;
-        animator.SetBool("isActive", true);
-        StartCoroutine(reset(activeTime));
+        isActive = !isActive;
+        animator.SetBool("isActive", isActive);
+        SoundManager.Instance.PlayObjectSound(audioSource, "Carpet");
     }
 }

@@ -10,10 +10,11 @@ public class Box : InterectiveObject
         audioSource = GetComponent<AudioSource>();
     }
 
+    public int shift;
     public override void Operate()
     {
-        SoundManager.Instance.PlayObjectSound(audioSource, "BoxMove", "BoxReset", isActive);
         isActive = !isActive;
         animator.SetBool("isActive", isActive);
+        SoundManager.Instance.PlayObjectSound(audioSource, "BoxMove", "BoxReset", isActive);
     }
 }

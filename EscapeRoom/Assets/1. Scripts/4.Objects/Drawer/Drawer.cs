@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Drawer : InterectiveObject
-{   
+{
     private void Awake()
     {
         animator = GetComponent<Animator>();

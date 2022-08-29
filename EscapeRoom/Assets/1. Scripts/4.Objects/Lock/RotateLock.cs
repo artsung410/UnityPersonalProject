@@ -8,7 +8,12 @@ public class RotateLock : MonoBehaviour
     public static event Action<string, int> Rotated = delegate { };
 
     private int numberShown;
+    private AudioSource audioSource;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Start()
     {
         numberShown = 3;
@@ -20,10 +25,20 @@ public class RotateLock : MonoBehaviour
     }
 
     float angle;
+    float rotorSpeed = 0.01f;
+    float degree = 1f;
+
     private IEnumerator RotateWheel()
     {
+        SoundManager.Instance.PlayObjectSound(audioSource, "RotateLock");
+
         angle = 36f;
-        transform.Rotate(0f, 0f, angle);
+
+        for (int i = 0; i < angle; i++)
+        {
+            yield return new WaitForSeconds(rotorSpeed);
+            transform.Rotate(0f, 0f, degree);
+        }
 
         numberShown += 1;
 

@@ -52,15 +52,7 @@ public class Investigation : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && (playerHUD.IsMouseClikedUI() == true || playerHUD.IsActiveLockedUI() == true) && hit.transform.CompareTag("Object1") && hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
                 InterectiveObject interectObj = hit.transform.gameObject.GetComponent<InterectiveObject>();
-
-                if (false == interectObj.isActive)
-                {
-                    interectObj.Operate();
-                }
-                else
-                {
-                    interectObj.resetImmediately();
-                }
+                interectObj.Operate();
             }
         }
 

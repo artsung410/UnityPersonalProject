@@ -100,6 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 5
+  NeedItemName: 
+  isActive: 0
+  isOpened: 0
+  a1: {fileID: 8300000, guid: 7ffc27343d934d149a2b040b6ad3601f, type: 3}
+  a2: {fileID: 8300000, guid: d32f5d19cba210b46b290a06b9ccf584, type: 3}
 --- !u!65 &2750890664697112839
 BoxCollider:
   m_ObjectHideFlags: 0
