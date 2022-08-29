@@ -61,7 +61,7 @@ public class KeyInController : MonoBehaviour
 
     private IEnumerator DeactivePushing(GameObject currentKey)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         IsPushingKey = false;
     }
 }

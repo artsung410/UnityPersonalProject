@@ -21833,6 +21833,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d415d0b1e3c54c44caebf23127355048, type: 3}
   - {fileID: 8300000, guid: 7c849c72e77f55c46a95f29ec0b20d06, type: 3}
   - {fileID: 8300000, guid: 1252af89ecd44d4409024b3737c65db3, type: 3}
+  - {fileID: 8300000, guid: 6241117facd9fd945917f6d3ab0c432d, type: 3}
   - {fileID: 8300000, guid: 9822488eace91ce46b596d61627f29e0, type: 3}
 --- !u!82 &1319039533
 AudioSource:

@@ -23,6 +23,7 @@ enum Sound
     WoddenDoorClose,
     ExitDoorOpen,
     Locked,
+    KeyPush,
     keyUnlock
 }
 

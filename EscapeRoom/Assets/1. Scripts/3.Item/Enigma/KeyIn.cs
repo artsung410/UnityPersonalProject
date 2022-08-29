@@ -11,10 +11,13 @@ public class KeyIn : MonoBehaviour
     public static event Action<int> KeySignal = delegate { };
 
     Dictionary<int, int> CorrectKeys;
+    private AudioSource audioSource;
 
     void Awake()
     {
         CorrectKeys = new Dictionary<int, int>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+
     }
 
     private void Start()
@@ -32,6 +35,7 @@ public class KeyIn : MonoBehaviour
     IEnumerator keyboardDown()
     {
         Debug.Log(Id);
+        SoundManager.Instance.PlayObjectSound(audioSource, "KeyPush");
         if (false == Enigma.Instance.IsCorrectRotor)
         {
             ChangedID = ChangeStrangeKey(Id);
