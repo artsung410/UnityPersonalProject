@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1053655027530266605}
   - component: {fileID: 8268209878851725114}
   m_Layer: 2
-  m_Name: Battery
+  m_Name: BATTERY
   m_TagString: Enigma_Battery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

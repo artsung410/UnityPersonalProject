@@ -14,7 +14,6 @@ public class Enigma : MonoBehaviour
     public bool IsZoomIn;
     public bool IsCorrectRotor;
 
-    public static event Action KeyChangeSignal = delegate { };
     [SerializeField] private KeyOutController keyContorl;
 
     private void Awake()

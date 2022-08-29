@@ -26,12 +26,12 @@ public class RotateGear : MonoBehaviour
     {
         if (Enigma.Instance.IsZoomIn == true)
         {
+            RotateWheel();
             animator.SetTrigger("Rotate");
-            StartCoroutine("RotateWheel");
         }
     }
 
-    private IEnumerator RotateWheel()
+    private void RotateWheel()
     {
         numberShown += 1;
 
@@ -42,6 +42,5 @@ public class RotateGear : MonoBehaviour
 
         RotatedGear(name, numberShown);
         SoundManager.Instance.PlayObjectSound(audioSource, "RotateLock");
-        yield return null;
     }
 }

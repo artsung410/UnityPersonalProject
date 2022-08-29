@@ -16,4 +16,4 @@ MonoBehaviour:
   itemName: Iron_Cross
   value: 0
   icon: {fileID: 21300000, guid: ee2a0cd6fb279af40847ee2c9e1a5c85, type: 3}
-  prefab: {fileID: 4307775045657540602, guid: 89d672d37806e9e47a5c56605a8d66fd, type: 3}
+  prefab: {fileID: 638773619961504353, guid: cc8858843733ee74b8f0e8b034673c9d, type: 3}

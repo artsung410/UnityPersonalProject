@@ -16,4 +16,4 @@ MonoBehaviour:
   itemName: Enigma_Box
   value: 0
   icon: {fileID: 21300000, guid: 2faa2e1017407ac4a99999dfdbdd16f0, type: 3}
-  prefab: {fileID: 1441024824258626053, guid: e012ad947f3630e42832b3093359aea4, type: 3}
+  prefab: {fileID: 3709559541259608915, guid: f0957ee68d29bba438027423061227bc, type: 3}

@@ -16,4 +16,4 @@ MonoBehaviour:
   itemName: Enigma_Gear
   value: 0
   icon: {fileID: 21300000, guid: d1a545282a5506b458a5f8d2143452a5, type: 3}
-  prefab: {fileID: 4832304606817433794, guid: 3e92802f3fe598a46ab1d515836f27aa, type: 3}
+  prefab: {fileID: 1401349601503883471, guid: f3d683f5d0bd0834ab93058a4271d83c, type: 3}

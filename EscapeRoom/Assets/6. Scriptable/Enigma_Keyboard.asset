@@ -16,4 +16,4 @@ MonoBehaviour:
   itemName: Enigma_Keyboard
   value: 0
   icon: {fileID: 21300000, guid: 7218eb0aa3b374e4e926f56c74512556, type: 3}
-  prefab: {fileID: 1519733746504897780, guid: 8898df96fefffa544bf57e97226c96af, type: 3}
+  prefab: {fileID: 8942650050085308397, guid: 801b47fccc81b1f41aa5741bd5e6470d, type: 3}
