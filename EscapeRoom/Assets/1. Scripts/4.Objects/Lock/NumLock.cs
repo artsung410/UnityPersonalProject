@@ -9,6 +9,7 @@ public class NumLock : InterectiveObject
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public override void Operate()
@@ -16,13 +17,15 @@ public class NumLock : InterectiveObject
         if (LockController.isNumLockOpen == true)
         {
             animator.SetBool("isActive", true);
+            SoundManager.Instance.PlayObjectSound(audioSource, "RotateUnlock");
             StartCoroutine(DelayUnlock());
         }
     }
 
+    float delayTime = 0.7f;
     private IEnumerator DelayUnlock()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(delayTime);
         Unlock();
     }
 }

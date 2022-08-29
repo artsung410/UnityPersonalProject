@@ -25,6 +25,8 @@ enum Sound
     Locked,
     KeyPush,
     Lench,
+    RotateUnlock,
+    KeyGet,
     End,
 }
 
@@ -65,9 +67,17 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void playPickupSound()
+    public void playPickupSound(Item item)
     {
-        audioSource.clip = PickupSound;
+        if (item.itemName == "Silver_Key" || item.itemName == "Gold_Key")
+        {
+            audioSource.clip = AudioDic["KeyGet"];
+        }
+        else
+        {
+            audioSource.clip = PickupSound;
+        }
+
         audioSource.Play();
     }
 
@@ -102,10 +112,4 @@ public class SoundManager : MonoBehaviour
         source.Play();
     }
 
-    public void PlayObjectSound(AudioSource source, string name1, string name2, string name3, bool isActive)
-    {
-        source.Stop();
-        source.clip = isActive == true ? AudioDic[name1] : AudioDic[name2];
-        source.Play();
-    }
 }

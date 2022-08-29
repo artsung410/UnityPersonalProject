@@ -7,10 +7,10 @@ public class ItemPickup : MonoBehaviour
 {
     public static event Action<Item> PickUpSignal = delegate { };
     public Item Item;
-
+    
     private void OnMouseDown()
     {
-        SoundManager.Instance.playPickupSound();
+        SoundManager.Instance.playPickupSound(Item);
         Pickup();
     }
 
