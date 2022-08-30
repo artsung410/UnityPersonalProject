@@ -8,6 +8,16 @@ public class TitleSceneManager : MonoBehaviour
 {
     [SerializeField] Image backGroundImage;
     [SerializeField] private AnimationCurve curveScreen;
+    [SerializeField] private GameObject GameStartUI;
+    [SerializeField] private GameObject SkipButtonUI;
+    [SerializeField] private GameObject SubtitleUI;
+
+    public static TitleSceneManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -31,12 +41,26 @@ public class TitleSceneManager : MonoBehaviour
             color.a = randValue;
             backGroundImage.color = color;
             yield return new WaitForSeconds(flikerValue);
-
         }
     }
 
     public void SwichingScene()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void ActiveGamestartUI()
+    {
+        GameStartUI.SetActive(true);
+    }
+
+    public void DeActiveSikpButtonUI()
+    {
+        SkipButtonUI.SetActive(false);
+    }
+
+    public void DeActiveSubtitles()
+    {
+        SubtitleUI.SetActive(false);
     }
 }
