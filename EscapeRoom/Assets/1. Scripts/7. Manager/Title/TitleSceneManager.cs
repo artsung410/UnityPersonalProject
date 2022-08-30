@@ -2,31 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviour
 {
-    [SerializeField] Image backGroundImage;
-    [SerializeField] private AnimationCurve curveScreen;
+    [Header("1. GameStartUI")]
     [SerializeField] private GameObject GameStartUI;
+
+
+    [Header("2. FlikerImage")]
+    [SerializeField] private Image FlikerImage;
+    [SerializeField] private AnimationCurve curveScreen;
+
+
+    [Header("3. SkipButtonUI")]
     [SerializeField] private GameObject SkipButtonUI;
+    
+
+    // 백그라운드 이미지 / 자막
+    [Header("4. BackgroundImage")]
+    [SerializeField] private Sprite[] backGroundSprite;
+    [SerializeField] private Image BackgroundImage;
+
+    [Header("5. BGM_Player >>")]
+    [SerializeField] private BGMPlayer bgmPlayer;
+
+    [Header("6. Narr_Player >>")]
+    [SerializeField] private NarrSoundPlayer narrPlayer;
+
+    [Header("7. Subtitle")]
     [SerializeField] private GameObject SubtitleUI;
-
-    public static TitleSceneManager Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
+    [SerializeField] private TextMeshProUGUI subtitleText;
+    public string[] subtitles;
 
     private void Start()
     {
         StartCoroutine(FillControl());
+        StartCoroutine(ShowMovie());
+        StartCoroutine(PlayBackgroundMusic());
+
     }
 
     IEnumerator FillControl()
     {
-        Color color = backGroundImage.color;
+        Color color = FlikerImage.color;
         while (true)
         {
             int randNum = Random.Range(1, 10);
@@ -39,7 +59,7 @@ public class TitleSceneManager : MonoBehaviour
             }
 
             color.a = randValue;
-            backGroundImage.color = color;
+            FlikerImage.color = color;
             yield return new WaitForSeconds(flikerValue);
         }
     }
@@ -62,5 +82,44 @@ public class TitleSceneManager : MonoBehaviour
     public void DeActiveSubtitles()
     {
         SubtitleUI.SetActive(false);
+    }
+
+
+    // ################# 백그라운드 이미지 / 자막 / 음성 ################# 
+    int count = 0;
+
+    IEnumerator ShowMovie()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            if (count == backGroundSprite.Length)
+            {
+                ActiveGamestartUI();
+                DeActiveSikpButtonUI();
+                DeActiveSubtitles();
+                DeActiveImage();
+                yield break;
+            }
+
+            subtitleText.text = subtitles[count];
+            BackgroundImage.sprite = backGroundSprite[count];
+            narrPlayer.PlaySound(count);
+            float duration = narrPlayer.GetAudioPlayTime(count);
+            yield return new WaitForSeconds(duration);
+            count++;
+        }
+    }
+
+    IEnumerator PlayBackgroundMusic()
+    {
+        bgmPlayer.PlaySound();
+        yield return null;
+    }
+
+    public void DeActiveImage()
+    {
+        BackgroundImage.gameObject.SetActive(false);
     }
 }

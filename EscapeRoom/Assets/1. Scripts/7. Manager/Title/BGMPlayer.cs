@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundSoundManager : MonoBehaviour
+public class BGMPlayer : MonoBehaviour
 {
     AudioSource audioSource;
     [SerializeField] private AudioClip backGroundAudioClip;
@@ -12,14 +12,14 @@ public class BackgroundSoundManager : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
     }
 
-    private void Start()
-    {
-        audioSource.clip = backGroundAudioClip;
-        audioSource.Play();
-    }
-
     public void DeActiveSound()
     {
         audioSource.Stop();
+    }
+
+    public void PlaySound()
+    {
+        audioSource.clip = backGroundAudioClip;
+        audioSource.Play();
     }
 }
