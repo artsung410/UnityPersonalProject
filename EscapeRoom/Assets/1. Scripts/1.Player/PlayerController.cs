@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     private PlayerHUD playerHUD;
 
-    [SerializeField] private CameraController CameraController;
+    [SerializeField] private DetailCameraController CameraController;
 
     KeyCode ESC = KeyCode.Escape;
     KeyCode Inventory = KeyCode.I;
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour, IMouseController
                 playerHUD.DeActiveInventoryUI();
             }
 
-            CameraManager.Instance.SwitchToMain();
+            CameraManager.Instance.InitMainCamera();
         }
 
 
@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     private void ResetCurrentInventoryMode()
     {
-        CameraManager.Instance.SwitchToMain();
+        CameraManager.Instance.InitMainCamera();
     }
 
     // ###################### [IMouseController] Mouse Control ######################

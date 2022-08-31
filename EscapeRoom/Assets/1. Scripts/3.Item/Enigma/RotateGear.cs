@@ -19,7 +19,12 @@ public class RotateGear : MonoBehaviour
 
     private void Start()
     {
-        numberShown = 0;
+        InitSetNumber(0);
+    }
+
+    public void InitSetNumber(int number)
+    {
+        numberShown = number;
     }
 
     private void OnMouseDown()

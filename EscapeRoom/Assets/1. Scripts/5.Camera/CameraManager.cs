@@ -14,18 +14,18 @@ public class CameraManager : MonoBehaviour, IMouseController
     [SerializeField] private PlayerHUD playerHUD;
     public static CameraManager Instance;
     public Vector3 prevDetailViewCameraPos;
-    public Vector3 prevEnigmaCameraPos;
 
     public Camera[] Cameras;
+    private Animator EnigmaCameraAnimator;
 
     private void Awake()
     {
         prevDetailViewCameraPos = Cameras[1].gameObject.transform.position;
-        prevEnigmaCameraPos = Cameras[2].gameObject.transform.position;
+        EnigmaCameraAnimator = Cameras[2].GetComponent<Animator>();
         Instance = this;
     }
 
-    public void SwitchToMain()
+    public void InitMainCamera()
     {
         // 2번째 위치에서 메인으로 전환할때, 카메라 위치 초기화.
         if (Cameras[1].enabled == true)
@@ -33,10 +33,14 @@ public class CameraManager : MonoBehaviour, IMouseController
             Cameras[1].gameObject.transform.position = prevDetailViewCameraPos;
         }
 
-        // 3번째 카메라에서 메인으로 전환할때, 카메라 위치 초기화.
+        // 3번째 카메라에서 메인으로 전환할때, 카메라 애니메이션 초기화
         else if (Cameras[2].enabled == true)
         {
-            Cameras[2].gameObject.transform.position = prevEnigmaCameraPos;
+            EnigmaCameraAnimator.SetBool("onTop", false);
+            EnigmaCameraAnimator.SetBool("onBottom", false);
+            EnigmaCameraAnimator.SetBool("onMiddle", false);
+            Enigma.Instance.InitParts();
+            playerHUD.DeActiveEnigmaSceneUI();
         }
 
         Cameras[0].enabled = true;
@@ -45,7 +49,7 @@ public class CameraManager : MonoBehaviour, IMouseController
         MouseCursorUnLock();
     }
 
-    public void SwitchToDetail()
+    public void InitDetailViewCamera()
     {
         Cameras[0].enabled = false;
         Cameras[1].enabled = true;
@@ -53,12 +57,11 @@ public class CameraManager : MonoBehaviour, IMouseController
         MouseCursorLock();
     }
 
-    public void SwitchToEnigma()
+    public void InitEnigmaViewCamera()
     {
         Cameras[2].enabled = true;
         Cameras[0].enabled = false;
         Cameras[1].enabled = false;
-        playerHUD.ActiveEnigmaSceneUI();
         playerHUD.ActiveReturnButtonUI();
         MouseCursorUnLock();
     }

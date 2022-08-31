@@ -2,21 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class DetailCameraController : MonoBehaviour
 {
     [SerializeField] private float zoomSpeed = 0f;
     [SerializeField] private float zoom_Max;
     [SerializeField] private float zoom_Min;
-
-    PlayerController player;
-    bool isAvailableCamera = true;
-
-
-
-    private void Awake()
-    {
-        player = GetComponentInParent<PlayerController>();
-    }
 
     public void ZoomInOut(float zoomDirection)
     {

@@ -1736,6 +1736,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1769377140}
+        m_TargetAssemblyTypeName: Enigma, Assembly-CSharp
+        m_MethodName: InitCollider
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1929162788}
         m_TargetAssemblyTypeName: EnigmaCameraController, Assembly-CSharp
         m_MethodName: DeActive
@@ -1748,33 +1760,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5922688017441493335}
-        m_TargetAssemblyTypeName: EnigmaCollider, Assembly-CSharp
-        m_MethodName: ActiveCollider
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3022571522433850066}
-        m_TargetAssemblyTypeName: EnigmaCollider, Assembly-CSharp
-        m_MethodName: ActiveCollider
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3717278839678667568}
-        m_TargetAssemblyTypeName: EnigmaCollider, Assembly-CSharp
-        m_MethodName: ActiveCollider
+      - m_Target: {fileID: 398016905}
+        m_TargetAssemblyTypeName: PlayerHUD, Assembly-CSharp
+        m_MethodName: DeActiveEnigmaInitButtonUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1787,18 +1775,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1319039532}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: PlayButtonClickSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 398016905}
-        m_TargetAssemblyTypeName: PlayerHUD, Assembly-CSharp
-        m_MethodName: DeActiveEnigmaInitButtonUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6839,7 +6815,6 @@ MonoBehaviour:
   IsReadyToDeactiveGetItemUI: 0
   LockedUI: {fileID: 172469930}
   MouseClickUI: {fileID: 1545004386}
-  EnigmaSceneUI: {fileID: 0}
   ReturnButtonUI: {fileID: 878375488}
   EnigmaInitButtonUI: {fileID: 84019689}
 --- !u!82 &398016906
@@ -14251,7 +14226,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHUD: {fileID: 398016905}
   prevDetailViewCameraPos: {x: 0, y: 0, z: 0}
-  prevEnigmaCameraPos: {x: 0, y: 0, z: 0}
   Cameras:
   - {fileID: 963194227}
   - {fileID: 185362497}
@@ -17080,7 +17054,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 745060986}
         m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
-        m_MethodName: SwitchToMain
+        m_MethodName: InitMainCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34967,6 +34941,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768021075}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1769377140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3276372987339000619, guid: db782a868068cdc478edcfa418901e8a, type: 3}
+  m_PrefabInstance: {fileID: 2543902928706811613}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19755a302c589fe4785260143a668146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1770309414
 GameObject:
   m_ObjectHideFlags: 0
@@ -46243,6 +46228,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 53893109501478606, guid: db782a868068cdc478edcfa418901e8a, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457464911826435904, guid: db782a868068cdc478edcfa418901e8a, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2512075495948897687, guid: db782a868068cdc478edcfa418901e8a, type: 3}
       propertyPath: m_Name
       value: Enigma_Full(modified)
@@ -46289,6 +46282,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2997004772555298605, guid: db782a868068cdc478edcfa418901e8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5254653219585593687, guid: db782a868068cdc478edcfa418901e8a, type: 3}
+      propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -47313,17 +47310,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3022571522433850066 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 774503641121074191, guid: db782a868068cdc478edcfa418901e8a, type: 3}
-  m_PrefabInstance: {fileID: 2543902928706811613}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9784a6295f48284087f401d1f4fd2b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!33 &3044444143122497975
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -48087,17 +48073,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8378624379552304486}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &3717278839678667568 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1214757302682959341, guid: db782a868068cdc478edcfa418901e8a, type: 3}
-  m_PrefabInstance: {fileID: 2543902928706811613}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9784a6295f48284087f401d1f4fd2b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &3722865623784637217
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -51511,17 +51486,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5922688017441493335 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8177515902400800650, guid: db782a868068cdc478edcfa418901e8a, type: 3}
-  m_PrefabInstance: {fileID: 2543902928706811613}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9784a6295f48284087f401d1f4fd2b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5981167140018887912
 GameObject:
   m_ObjectHideFlags: 0

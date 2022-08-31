@@ -69,19 +69,11 @@ public class PlayerHUD : MonoBehaviour
     }
 
     // EnigmaUI
-    //public bool IsActiveEnigmaSceneUI()
-    //{
-    //    //return EnigmaSceneUI.activeSelf;
-    //}
-
-    public void ActiveEnigmaSceneUI()
-    {
-        ActiveEnigmaInitButtonUI();
-    }
 
     public void DeActiveEnigmaSceneUI()
     {
-        //EnigmaSceneUI.SetActive(false);
+        DeActiveReturnButtonUI();
+        DeActiveEnigmaInitButtonUI();
     }
 
     public bool IsActiveReturnButtonUI()

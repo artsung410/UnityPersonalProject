@@ -102,7 +102,7 @@ public class InventoryManager : MonoBehaviour
                 // 애니그마완성품일때 버튼클릭시 애니그마 카메라로 전환한다. 
                 if (SelectImage.sprite.name == "Enigma_Full")
                 {
-                    CameraManager.Instance.SwitchToEnigma();
+                    CameraManager.Instance.InitEnigmaViewCamera();
                     return;
                 }
 
@@ -119,7 +119,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        CameraManager.Instance.SwitchToDetail();
+        CameraManager.Instance.InitDetailViewCamera();
     }
 
     private void EnigmaToolsDataRemove()

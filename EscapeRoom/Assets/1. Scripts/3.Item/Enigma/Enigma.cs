@@ -16,16 +16,68 @@ public class Enigma : MonoBehaviour
 
     [SerializeField] private KeyOutController keyContorl;
 
+
+    [SerializeField] private GameObject Rotor;
+    private RotateGear Rotor_left;
+    private RotateGear Rotor_middle;
+    private RotateGear Rotor_right;
+
+
+    [SerializeField] private GameObject ColliderSet;
+    private EnigmaCollider Collider_Description;
+    private EnigmaCollider Collider_Rotor;
+    private EnigmaCollider Collider_KeyBoard;
+
     private void Awake()
     {
         Instance = this;
+        Rotor_left = Rotor.transform.GetChild(0).gameObject.GetComponent<RotateGear>();
+        Rotor_middle = Rotor.transform.GetChild(1).gameObject.GetComponent<RotateGear>();
+        Rotor_right = Rotor.transform.GetChild(2).gameObject.GetComponent<RotateGear>();
+
+        Collider_Description = ColliderSet.transform.GetChild(0).gameObject.GetComponent<EnigmaCollider>();
+        Collider_Rotor = ColliderSet.transform.GetChild(1).gameObject.GetComponent<EnigmaCollider>();
+        Collider_KeyBoard = ColliderSet.transform.GetChild(2).gameObject.GetComponent<EnigmaCollider>();
     }
 
     private void Start()
     {
+        RotateGear.RotatedGear += CheckResults;
+        InitParts();
+    }
+
+    public void InitParts()
+    {
+        // Camera
+        IsZoomIn = false;
+
+        // RotorInit
+        InitRotor();
+
+        // ColliderInit
+        InitCollider();
+    }
+
+    public void InitCollider()
+    {
+        Collider_Description.ActiveCollider();
+        Collider_Rotor.ActiveCollider();
+        Collider_KeyBoard.ActiveCollider();
+    }
+
+    public void InitRotor()
+    {
+        IsCorrectRotor = false;
         result = new int[] { 0, 0, 0 };
         correctCombination = new int[] { 5, 0, 9 };
-        RotateGear.RotatedGear += CheckResults;
+
+        Rotor_left.InitSetNumber(0);
+        Rotor_middle.InitSetNumber(0);
+        Rotor_right.InitSetNumber(0);
+
+        text[0].text = "0";
+        text[1].text = "0";
+        text[2].text = "0";
     }
 
     private void CheckResults(string wheelName, int number)
