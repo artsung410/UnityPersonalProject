@@ -58,7 +58,8 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[2].enabled = true;
         Cameras[0].enabled = false;
         Cameras[1].enabled = false;
-        playerHUD.ActiveEnigmaUI();
+        playerHUD.ActiveEnigmaSceneUI();
+        playerHUD.ActiveReturnButtonUI();
         MouseCursorUnLock();
     }
 

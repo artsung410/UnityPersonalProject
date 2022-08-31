@@ -25,16 +25,18 @@ public class PlayerHUD : MonoBehaviour
     [Header("MouseClickUI")]
     [SerializeField]  private GameObject      MouseClickUI;
 
-
     [Header("EnigmaUI")]
-    [SerializeField]  private GameObject      EnigmaUI;
-
+    [SerializeField]  private GameObject      ReturnButtonUI;
+    [SerializeField]  private GameObject      EnigmaInitButtonUI;
 
     void Start()
     {
+        // 교수님 피드백 위치★
         ItemPickup.PickUpSignal += ActiveGetItemUI;
         InterectiveObject.UnLockedMessage += ActiveLockedUI;
         InterectiveObject.SelectedMessage += ActiveMouseClickUI;
+        EnigmaCollider.colliderClickSignal += ActiveEnigmaInitButtonUI;
+
         Slots.onButtonClickEvent.AddListener(DeActiveInventoryUI);
         Slots.onCursorEnterEvent.AddListener(ActiveItemInfo);
         Slots.onButtonClickEvent.AddListener(DeActiveItemInfo);
@@ -67,16 +69,53 @@ public class PlayerHUD : MonoBehaviour
     }
 
     // EnigmaUI
-    public void ActiveEnigmaUI()
+    //public bool IsActiveEnigmaSceneUI()
+    //{
+    //    //return EnigmaSceneUI.activeSelf;
+    //}
+
+    public void ActiveEnigmaSceneUI()
     {
-        EnigmaUI.SetActive(true);
+        ActiveEnigmaInitButtonUI();
     }
 
-    public void DeActiveEnigmaUI()
+    public void DeActiveEnigmaSceneUI()
     {
-        EnigmaUI.SetActive(false);
+        //EnigmaSceneUI.SetActive(false);
     }
 
+    public bool IsActiveReturnButtonUI()
+    {
+        return ReturnButtonUI.activeSelf;
+    }
+
+    public void ActiveReturnButtonUI()
+    {
+        ReturnButtonUI.SetActive(true);
+    }
+
+    public void DeActiveReturnButtonUI()
+    {
+        ReturnButtonUI.SetActive(false);
+    }
+
+
+    public bool IsActiveEnigmaInitButtonUI()
+    {
+        return EnigmaInitButtonUI.activeSelf;
+    }
+
+    public void ActiveEnigmaInitButtonUI()
+    {
+        EnigmaInitButtonUI.SetActive(true);
+    }
+
+    public void DeActiveEnigmaInitButtonUI()
+    {
+        EnigmaInitButtonUI.SetActive(false);
+    }
+
+     
     // GetItemUI
     public bool IsActiveGetItemUI()
     {
@@ -122,7 +161,6 @@ public class PlayerHUD : MonoBehaviour
         InventoryUI.SetActive(false);
         ItemInfoPanelUI.SetActive(false);
     }
-
 
     public void ActiveSelectedUI()
     {

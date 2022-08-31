@@ -7,6 +7,7 @@ using System;
 public class EnigmaCollider : MonoBehaviour
 {
     public static event Action<int> transmitID = delegate { };
+    public static event Action colliderClickSignal = delegate { };
 
     [SerializeField] private int id;
     private BoxCollider boxCol;
@@ -19,6 +20,7 @@ public class EnigmaCollider : MonoBehaviour
     private void OnMouseDown()
     {
         transmitID(id);
+        colliderClickSignal();
         PlayClickSound();
         boxCol.enabled = false;
         Enigma.Instance.IsZoomIn = true;
