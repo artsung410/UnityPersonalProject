@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 782146160878446018}
   - component: {fileID: 8992311177638041842}
   m_Layer: 2
-  m_Name: Enigma_Full
+  m_Name: ENIGMA_Full
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

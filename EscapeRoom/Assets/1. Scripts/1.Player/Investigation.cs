@@ -67,10 +67,11 @@ public class Investigation : MonoBehaviour
             playerHUD.DeActiveLockedUI();
         }
 
-        // 오브젝트 활성화 안되었을 때, 다른곳 클릭시 현재 쥐고 있는 아이템이 제거되도록 설정
+        // 오브젝트 활성화 안되었을 때, 다른곳 클릭시 현재 쥐고 있는 아이템이 비활성화 되도록 처리.
         if (InventoryManager.Instance.CurrentGripItemPrefab != null && playerHUD.IsMouseClikedUI() == false && Input.GetMouseButtonDown(0) || Input.GetKeyDown(Confirm))
         {
-            Destroy(InventoryManager.Instance.CurrentGripItemPrefab);
+            InventoryManager.Instance.CurrentGripItemPrefab.SetActive(false);
+            InventoryManager.Instance.CurrentGripItemPrefab = null;
             InventoryManager.Instance.CurrentGripItem = null;
         }
     }
