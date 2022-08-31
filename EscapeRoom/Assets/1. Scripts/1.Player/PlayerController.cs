@@ -95,9 +95,10 @@ public class PlayerController : MonoBehaviour, IMouseController
         // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
         if (CameraManager.Instance.Cameras[1].enabled == true || CameraManager.Instance.Cameras[2].enabled == true)
         {
-            if (playerHUD.IsActiveSelectedUI() == true)
+            if (playerHUD.IsActiveLockedUI() == true || playerHUD.IsMouseClikedUI() == true)
             {
-                playerHUD.DeActiveSelectedUI();
+                playerHUD.DeActiveLockedUI();
+                playerHUD.DeActiveMouseClickUI();
             }
         }
     }

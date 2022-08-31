@@ -19,9 +19,6 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField]  private Image           GetItemImage;
     [HideInInspector] public bool             IsReadyToDeactiveGetItemUI;
 
-    [Header("PickUpUI")]
-    [SerializeField]  private GameObject      SelectedUI;
-
     [Header("LockedUI")]
     [SerializeField]  private GameObject      LockedUI;
 
@@ -53,7 +50,7 @@ public class PlayerHUD : MonoBehaviour
             if (item.icon == itemImage)
             {
                 currnetItem = item;
-                ItemInfoTitleText.text = item.name;
+                ItemInfoTitleText.text = item.name.Replace("_", " ");
                 ItemInfoImage.sprite = item.icon;
                 ItemInfoPanelUI.SetActive(true);
                 SoundManager.Instance.playItemInfoSound();
@@ -127,22 +124,10 @@ public class PlayerHUD : MonoBehaviour
     }
 
 
-    // SelectedUI
-    public bool IsActiveSelectedUI()
-    {
-        return SelectedUI.activeSelf;
-    }
-
     public void ActiveSelectedUI()
     {
         LockedUI.SetActive(false);
         MouseClickUI.SetActive(false);
-        SelectedUI.SetActive(true);
-    }
-
-    public void DeActiveSelectedUI()
-    {
-        SelectedUI.SetActive(false);
     }
 
     // MouseClickUI
@@ -152,7 +137,6 @@ public class PlayerHUD : MonoBehaviour
     }
     public void ActiveMouseClickUI()
     {
-        SelectedUI.SetActive(false);
         LockedUI.SetActive(false);
         MouseClickUI.SetActive(true);
     }
@@ -169,7 +153,6 @@ public class PlayerHUD : MonoBehaviour
 
     public void ActiveLockedUI()
     {
-        SelectedUI.SetActive(false);
         MouseClickUI.SetActive(false);
         LockedUI.SetActive(true);
     }
