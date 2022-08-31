@@ -2047,6 +2047,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148659055}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &157943346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 157943347}
+  m_Layer: 0
+  m_Name: BgmAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &157943347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157943346}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.1555, y: 1.8219764, z: 8.552988}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1319039534}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &161425178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2418523550979213314, guid: ac2b2adeddc5a0d4dbdd3bb76d02a9db, type: 3}
@@ -21754,6 +21785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c9f5136c03aae4e93f9182004526b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGMAudio: {fileID: 157943346}
+  BGM: {fileID: 8300000, guid: 06fb6107c70ff574c9b3ff3069f00e8d, type: 3}
   PickupSound: {fileID: 8300000, guid: 31cd35c9136f103438add3ebb4bd2e01, type: 3}
   EnigmaPartSwitchingSound: {fileID: 8300000, guid: d664c74a6c8f1554192401995b1ca91b, type: 3}
   ItemInfoSound: {fileID: 8300000, guid: a8db2bdc13410c344aeb041cb87ed072, type: 3}
@@ -21890,7 +21923,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 157943347}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -37,6 +37,11 @@ public class SoundManager : MonoBehaviour
     private AudioSource audioSource;
 
     [Header("<<SystemSound>>")]
+    [Header("BGM")]
+    [SerializeField] private GameObject BGMAudio;
+    [SerializeField] private AudioClip BGM;
+    private AudioSource BGMAudioSource;
+
     [Header("ItemSound")]
     [SerializeField] private AudioClip PickupSound;
     [SerializeField] private AudioClip EnigmaPartSwitchingSound;
@@ -44,6 +49,7 @@ public class SoundManager : MonoBehaviour
     [Header("UISound")]
     [SerializeField] private AudioClip ItemInfoSound;
     [SerializeField] private AudioClip ButtonClickSound;
+
 
     [Header("<<InteractiveObejctSound>>")]
     [SerializeField] private AudioClip[] audioClips;
@@ -53,6 +59,7 @@ public class SoundManager : MonoBehaviour
     // SoundManager.Instance.PlayItemInfoSound()
     private void Awake()
     {
+        BGMAudioSource = BGMAudio.gameObject.AddComponent<AudioSource>();
         audioSource = GetComponent<AudioSource>();
         AudioDic = new Dictionary<string, AudioClip>();
         Instance = this;
@@ -60,6 +67,11 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        // BGMÀç»ý
+        BGMAudioSource.clip = BGM;
+        BGMAudioSource.loop = true;
+        BGMAudioSource.Play();
+
         for (int i = 0; i < (int)Sound.End; i++)
         {
             sound = (Sound)i;

@@ -31,10 +31,15 @@ public class TitleSceneManager : MonoBehaviour
     [Header("6. Narr_Player >>")]
     [SerializeField] private NarrSoundPlayer narrPlayer;
 
-    [Header("7. Subtitle")]
+    [Header("8. Effective_Player >>")]
+    [SerializeField] private EffectiveSoundPlayer effectPlayer;
+
+    [Header("9. Subtitle")]
     [SerializeField] private GameObject SubtitleUI;
-    [SerializeField] private TextMeshProUGUI subtitleText;
+    [SerializeField] private TextMeshProUGUI subtitleText_Eng;
+    [SerializeField] private TextMeshProUGUI subtitleText_Kor;
     public string[] subtitles;
+    public string[] subtitles_Kor;
 
     private void Start()
     {
@@ -82,6 +87,12 @@ public class TitleSceneManager : MonoBehaviour
     public void DeActiveSubtitles()
     {
         SubtitleUI.SetActive(false);
+        narrPlayer.gameObject.SetActive(false);
+    }
+
+    public void DeActiveMovieImage()
+    {
+        BackgroundImage.gameObject.SetActive(false);
     }
 
 
@@ -103,8 +114,14 @@ public class TitleSceneManager : MonoBehaviour
                 yield break;
             }
 
-            subtitleText.text = subtitles[count];
+            subtitleText_Eng.text = subtitles[count];
+            subtitleText_Kor.text = subtitles_Kor[count];
             BackgroundImage.sprite = backGroundSprite[count];
+            if (count == 8)
+            {
+                effectPlayer.PlaySound();
+            }
+
             narrPlayer.PlaySound(count);
             float duration = narrPlayer.GetAudioPlayTime(count);
             yield return new WaitForSeconds(duration);
