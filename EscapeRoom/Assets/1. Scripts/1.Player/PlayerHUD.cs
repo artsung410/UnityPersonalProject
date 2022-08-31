@@ -31,22 +31,20 @@ public class PlayerHUD : MonoBehaviour
 
     void Start()
     {
-        // 교수님 피드백 위치★
         ItemPickup.PickUpSignal += ActiveGetItemUI;
         InterectiveObject.UnLockedMessage += ActiveLockedUI;
         InterectiveObject.SelectedMessage += ActiveMouseClickUI;
         EnigmaCollider.colliderClickSignal += ActiveEnigmaInitButtonUI;
 
-        Slots.onButtonClickEvent.AddListener(DeActiveInventoryUI);
-        Slots.onCursorEnterEvent.AddListener(ActiveItemInfo);
-        Slots.onButtonClickEvent.AddListener(DeActiveItemInfo);
+        Slots.onCursorEnterEvent += ActiveItemInfo;
+        Slots.onButtonClickEvent += DeActiveInventoryUI;
+        Slots.onButtonClickEvent += DeActiveItemInfo;
     }
 
     // ItemInfo
     Item currnetItem;
     void ActiveItemInfo(Sprite itemImage)
     {
-        // 아이템 사진
         foreach (Item item in InventoryManager.Instance.Items)
         {
             if (item.icon == itemImage)
@@ -59,9 +57,6 @@ public class PlayerHUD : MonoBehaviour
                 break;
             }
         }
-
-        // 아이템 타이틀
-        // 아이템 설명
     }
     public void DeActiveItemInfo()
     {
@@ -69,7 +64,6 @@ public class PlayerHUD : MonoBehaviour
     }
 
     // EnigmaUI
-
     public void DeActiveEnigmaSceneUI()
     {
         DeActiveReturnButtonUI();
@@ -107,7 +101,7 @@ public class PlayerHUD : MonoBehaviour
         EnigmaInitButtonUI.SetActive(false);
     }
 
-     
+  
     // GetItemUI
     public bool IsActiveGetItemUI()
     {
@@ -137,7 +131,6 @@ public class PlayerHUD : MonoBehaviour
         IsReadyToDeactiveGetItemUI = true;
     }
 
-
     // InventoryUI
     public bool IsActiveInventoryUI()
     {
@@ -160,6 +153,7 @@ public class PlayerHUD : MonoBehaviour
         MouseClickUI.SetActive(false);
     }
 
+
     // MouseClickUI
     public bool IsMouseClikedUI()
     {
@@ -175,18 +169,17 @@ public class PlayerHUD : MonoBehaviour
         MouseClickUI.SetActive(false);
     }
 
+
     // LockedUI
     public bool IsActiveLockedUI()
     {
         return LockedUI.activeSelf;
     }
-
     public void ActiveLockedUI()
     {
         MouseClickUI.SetActive(false);
         LockedUI.SetActive(true);
     }
-
     public void DeActiveLockedUI()
     {
         LockedUI.SetActive(false);

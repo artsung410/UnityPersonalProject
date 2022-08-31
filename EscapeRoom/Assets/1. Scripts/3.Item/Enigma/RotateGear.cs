@@ -22,11 +22,6 @@ public class RotateGear : MonoBehaviour
         InitSetNumber(0);
     }
 
-    public void InitSetNumber(int number)
-    {
-        numberShown = number;
-    }
-
     private void OnMouseDown()
     {
         if (Enigma.Instance.IsZoomIn == true)
@@ -35,7 +30,10 @@ public class RotateGear : MonoBehaviour
             animator.SetTrigger("Rotate");
         }
     }
-
+    public void InitSetNumber(int number)
+    {
+        numberShown = number;
+    }
     private void RotateWheel()
     {
         numberShown += 1;

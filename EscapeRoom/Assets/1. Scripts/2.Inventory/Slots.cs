@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-public class OnCursorEnterEvent : UnityEngine.Events.UnityEvent<Sprite> { }
-public class OnCursorExitEvent : UnityEngine.Events.UnityEvent { }
-public class OnButtonClickEvent : UnityEngine.Events.UnityEvent { }
+using System;
 
 public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public static OnCursorEnterEvent onCursorEnterEvent = new OnCursorEnterEvent();
-    public static OnCursorExitEvent onCursorExitEvent = new OnCursorExitEvent();
-    public static OnCursorExitEvent onButtonClickEvent = new OnCursorExitEvent();
+    public static event Action<Sprite> onCursorEnterEvent = delegate { };
+    public static event Action onCursorExitEvent = delegate { };
+    public static event Action onButtonClickEvent = delegate { };
 
     private Image ItemIcon;
     private Camera mainCamera;
