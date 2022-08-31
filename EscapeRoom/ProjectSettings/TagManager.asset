@@ -19,6 +19,7 @@ TagManager:
   - Enigma_Full
   - Enigma_Keyboard
   - Chair
+  - view1
   layers:
   - Default
   - TransparentFX

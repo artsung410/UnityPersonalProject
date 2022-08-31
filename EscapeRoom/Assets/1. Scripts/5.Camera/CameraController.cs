@@ -5,8 +5,13 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private float zoomSpeed = 0f;
+    [SerializeField] private float zoom_Max;
+    [SerializeField] private float zoom_Min;
 
     PlayerController player;
+    bool isAvailableCamera = true;
+
+
 
     private void Awake()
     {
@@ -17,7 +22,20 @@ public class CameraController : MonoBehaviour
     {
         Vector3 itemPos = InventoryManager.Instance.CurrentDetailsViewItem.transform.position;
         Vector3 dir = itemPos - transform.position;
-        float zoom = Vector3.Distance(transform.position, itemPos);
-        transform.position += dir * zoomDirection * zoomSpeed;
+
+        if (dir.z > zoom_Max && zoomDirection > 0)
+        {
+            dir.z = zoom_Max; return;
+        }
+
+        if(dir.z < zoom_Min && zoomDirection < 0)
+        {
+            dir.z = zoom_Min; return;
+        }
+
+        else
+        {
+            transform.position += dir * zoomDirection * zoomSpeed * Time.deltaTime;
+        }
     }
 }

@@ -578,12 +578,12 @@ MonoBehaviour:
     \uACF5\uC2B5\uC774 \uC77C\uC5B4\uB09C \uB4A4"
   - "\uB098\uCE58\uC5D0 \uB300\uD55C \uC801\uB300\uAC10\uC774 \uC804\uAD6D\uC801\uC73C\uB85C
     \uD655\uC0B0\uB418\uC5C8\uB2E4"
-  - "\uC2DC\uAC04\uC774 \uC9C0\uB098\uACE0, \uB4DC\uB192\uC740 \uD558\uB298\uC758
-    \uD328\uAD8C\uC744 \uB193\uACE0 \uB450 \uB098\uB77C \uC0AC\uC774\uC5D0 \uCE58\uC5F4\uD55C
-    \uC804\uD22C\uAC00 \uC2DC\uC791\uB418\uC5C8\uB2E4."
+  - "\uC2DC\uAC04\uC774 \uC9C0\uB098\uACE0 \uACB0\uAD6D \uB450 \uB098\uB77C \uC0AC\uC774\uC5D0
+    \uCE58\uC5F4\uD55C \uC804\uD22C\uAC00 \uC2DC\uC791\uB418\uC5C8\uB2E4, \uC800
+    \uB4DC\uB192\uC740 \uD558\uB298\uC758 \uD328\uAD8C\uC744 \uB450\uACE0"
   - "\uC5BC\uB9C8\uC804\uC5D0, \uD504\uB791\uC2A4 \uD574\uD611\uC5D0\uC11C \uCE58\uC5F4\uD55C
     \uACF5\uC911\uC804\uC774 \uBC8C\uC5B4\uC84C\uB2E4"
-  - "\uB098\uB294 \uC7A5\uAD70\uC5D0\uAC8C \uBA85\uB839\uC744\uBC1B\uACE0 \uACE7\uC7A5
+  - "\uB098\uB294 \uC7A5\uAD70\uC758 \uBA85\uB839\uC744\uBC1B\uACE0 \uACE7\uC7A5
     \uBCA0\uB97C\uB9B0\uC73C\uB85C \uD5A5\uD588\uB2E4"
   - "\uC131\uACF5\uC801\uC778 \uC815\uCC30\uC744 \uB9C8\uCE58\uACE0 \uB7F0\uB358\uC73C\uB85C
     \uB3CC\uC544\uAC00\uB294 \uAE38..."
@@ -591,10 +591,10 @@ MonoBehaviour:
   - "\uB300\uACF5\uD3EC\uC5D0 \uACA9\uCD94\uAC00 \uB418\uC5C8\uB358\uAC83\uC774\uC600\uB2E4"
   - "\uB098\uCE58\uAC00 \uC8FC\uB454\uD558\uB358 \uC11C\uBD80\uC804\uC120 \uADFC\uBC29\uC5D0
     \uCD94\uB77D\uD558\uC600\uACE0"
-  - "\uB3C4\uB9DD\uCE60 \uD2C8\uB3C4 \uC5C6\uC774 \uACF5\uAD70 \uC7A5\uAD50\uC5D0\uAC8C
-    \uBD99\uC7A1\uD614\uB2E4."
-  - "\uACF5\uAD70 \uC815\uBCF4\uC2E4 \uC5D0\uC11C \uC218\uC2ED\uCC28\uB840 \uACE0\uBB38\uC744
-    \uB2F9\uD55C \uD6C4"
+  - "\uD3EC\uC704\uB9DD\uC744 \uB6AB\uC9C0 \uBABB\uD558\uACE0 \uC5B4\uB290 \uACF5\uAD70
+    \uC7A5\uAD50\uC5D0\uAC8C \uBD99\uC7A1\uD614\uB2E4."
+  - "\uACF5\uAD70 \uC815\uBCF4\uC2E4\uB85C \uCD94\uC815\uB418\uB294 \uACF3\uC5D0\uC11C
+    \uC218\uC2ED\uCC28\uB840 \uACE0\uBB38\uC744 \uB2F9\uD55C \uD6C4"
   - "\uB9C8\uC9C0\uB9C9\uC73C\uB85C \uAE30\uC5B5\uB098\uB294\uAC74 \uC9C0\uD558\uBC99\uCEE4\uB85C
     \uAC00\uB294\uAE38\uBAA9\uC774\uC600\uB2E4."
 --- !u!1 &598279377
@@ -738,8 +738,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.020000458}
+  m_SizeDelta: {x: 0, y: -4.499998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &744292808
 MonoBehaviour:
@@ -761,17 +761,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '>> S K I P'
+  m_text: S k i p
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ea90a2e299fd6ca4993bbb5af747594b, type: 2}
+  m_sharedMaterial: {fileID: 4477257563098279004, guid: ea90a2e299fd6ca4993bbb5af747594b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -788,8 +788,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 663f166edf2a6ca4a89dadb21ef755ce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2ff00c506d0bc284b8255f94ef5f04e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1787,7 +1787,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.000030517578, y: 50}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 30, y: 133.81}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1558171088

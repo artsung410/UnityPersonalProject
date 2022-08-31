@@ -172,18 +172,13 @@ public class PlayerController : MonoBehaviour, IMouseController
         float MouseX = Input.GetAxis("Mouse X");
         float MouseY = Input.GetAxis("Mouse Y");
 
+        Debug.Log($"[Mouse X] : {MouseX}");
+        Debug.Log($"[MouseY] : {MouseY}");
 
         // 왼쪽 마우스 클릭중 마우스를 움직일때 오브젝트 회전
         if (Input.GetMouseButton(0))
         {
             RotateDetailsItem(MouseX, MouseY);
-        }
-
-        // 마우스 휠버튼 누르면서 움직일때 오브젝트 좌우, 위아래 움직임
-        if (Input.GetMouseButton(2))
-        {
-
-            MoveDetailItem(MouseX, MouseY);
         }
 
         ZoomToDetailsItem();
@@ -196,16 +191,10 @@ public class PlayerController : MonoBehaviour, IMouseController
         ItemTransform.Rotate(-y * speed, -x * speed, 0f, Space.World);
     }
 
-    void MoveDetailItem(float x, float y)
-    {
-        Transform ItemTransform = InventoryManager.Instance.CurrentDetailsViewItem.transform;
-        ItemTransform.position += new Vector3(-x, y, 0f) * Time.deltaTime * speed;
-    }
-
     void ZoomToDetailsItem()
     {
         float t_zoomDirection = Input.GetAxis("Mouse ScrollWheel");
-        Debug.Log(t_zoomDirection);
+        Debug.Log($"[Zoom] : {t_zoomDirection}");
 
         CameraController.ZoomInOut(t_zoomDirection);
     }
