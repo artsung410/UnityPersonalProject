@@ -22,6 +22,4 @@ public class RotateToMouse : MonoBehaviour
         Camera.transform.rotation = Quaternion.Euler(eulerAngleX, eulerAngleY, 0);
         transform.rotation = Quaternion.Euler(0, eulerAngleY, 0);
     }
-
-    // 카메라 x축 회전의 경우 회전 범위를 설정
 }

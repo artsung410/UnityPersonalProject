@@ -46,6 +46,8 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[0].enabled = true;
         Cameras[1].enabled = false;
         Cameras[2].enabled = false;
+        playerHUD.ActiveCenterDot();
+        playerHUD.DeActiveESC_UI();
         MouseCursorUnLock();
     }
 
@@ -54,6 +56,8 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[0].enabled = false;
         Cameras[1].enabled = true;
         Cameras[2].enabled = false;
+        playerHUD.DeActiveCentorDot();
+        playerHUD.ActiveESC_UI();
         MouseCursorLock();
     }
 
@@ -63,6 +67,7 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[0].enabled = false;
         Cameras[1].enabled = false;
         playerHUD.ActiveReturnButtonUI();
+        playerHUD.DeActiveCentorDot();
         MouseCursorUnLock();
     }
 

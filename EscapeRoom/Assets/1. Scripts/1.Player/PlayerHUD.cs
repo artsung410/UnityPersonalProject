@@ -6,8 +6,16 @@ using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
+    public static PlayerHUD Instance;
+
+    [Header("InventoryUI")]
+    [SerializeField]  private GameObject      centerDot;
+
     [Header("InventoryUI")]
     [SerializeField]  private GameObject      InventoryUI;
+
+    [Header("CombinationUI")]
+    [SerializeField]  private GameObject      CombinationUI;
 
     [Header("ItemInfoUI")]
     [SerializeField]  private GameObject      ItemInfoPanelUI;
@@ -29,8 +37,17 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField]  private GameObject      ReturnButtonUI;
     [SerializeField]  private GameObject      EnigmaInitButtonUI;
 
+    [Header("ESC_UI")]
+    [SerializeField]  private GameObject      ESC_UI;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
+
+        CombinationSlot.CombinationComplete += ActiveGetItemUI;
         ItemPickup.PickUpSignal += ActiveGetItemUI;
         InterectiveObject.UnLockedMessage += ActiveLockedUI;
         InterectiveObject.SelectedMessage += ActiveMouseClickUI;
@@ -153,6 +170,20 @@ public class PlayerHUD : MonoBehaviour
         MouseClickUI.SetActive(false);
     }
 
+    // CombinationUI
+    public bool IsActiveCombinationUI()
+    {
+        return CombinationUI.activeSelf;
+    }
+
+    public void ActiveCombinationUI()
+    {
+        CombinationUI.SetActive(true);
+    }
+    public void DeActiveCombinationUI()
+    {
+        CombinationUI.SetActive(false);
+    }
 
     // MouseClickUI
     public bool IsMouseClikedUI()
@@ -183,5 +214,29 @@ public class PlayerHUD : MonoBehaviour
     public void DeActiveLockedUI()
     {
         LockedUI.SetActive(false);
+    }
+
+    // CenterDot
+    public void ActiveCenterDot()
+    {
+        centerDot.SetActive(true);
+    }
+
+    public void DeActiveCentorDot()
+    {
+        centerDot.SetActive(false);
+    }
+
+
+    // ESC_UI
+
+    public void ActiveESC_UI()
+    {
+        ESC_UI.SetActive(true);
+    }
+
+    public void DeActiveESC_UI()
+    {
+        ESC_UI.SetActive(false);
     }
 }

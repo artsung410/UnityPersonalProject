@@ -40,33 +40,20 @@ public class InventoryManager : MonoBehaviour
 
     [Header("EnigmaInfo")]
     public int EnigmaToolsCount;
-    public Item enigmaItem;
     public bool IsEnigmaAssembled;
+
     private void Awake()
     {
         Instance = this;
     }
 
+    private void Start()
+    {
+        CombinationSlot.CombinationComplete += GetEnigma;
+    }
+
     public void Add(Item item)
     {
-        if (item.id == 5 || item.id == 6 || item.id == 7 || item.id == 8)
-        {
-            ++EnigmaToolsCount;
-
-            if (EnigmaToolsCount == 4)
-            {
-                Add(enigmaItem);
-                IsEnigmaAssembled = true;
-                EnigmaToolsDataRemove();
-                EnigmaToolsCount = 0;
-            }
-        }
-
-        if (IsEnigmaAssembled == true && ((item.id == 5 && item.id == 6 || item.id == 7 || item.id == 8)))
-        {
-            return;
-        }
-
         Items.Add(item);
         playerHUD.ActiveGetItemUI(item);
     }
@@ -124,8 +111,6 @@ public class InventoryManager : MonoBehaviour
 
     private void EnigmaToolsDataRemove()
     {
-        int size = Items.Count;
-
         for (int item = Items.Count - 1; item >=0; item--)
         {
             if (Items[item].id == 5 || Items[item].id == 6 || Items[item].id == 7 || Items[item].id == 8)
@@ -133,5 +118,12 @@ public class InventoryManager : MonoBehaviour
                 Items.Remove(Items[item]);
             }
         }
+    }
+
+    private void GetEnigma(Item Enigma)
+    {
+        EnigmaToolsDataRemove();
+        Add(Enigma);
+        ListItems();
     }
 }

@@ -10,7 +10,6 @@ public class Box : InterectiveObject
         audioSource = GetComponent<AudioSource>();
     }
 
-    public int shift;
     public override void Operate()
     {
         isActive = !isActive;

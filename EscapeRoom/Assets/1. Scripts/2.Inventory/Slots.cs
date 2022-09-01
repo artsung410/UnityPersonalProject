@@ -10,6 +10,7 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public static event Action<Sprite> onCursorEnterEvent = delegate { };
     public static event Action onCursorExitEvent = delegate { };
     public static event Action onButtonClickEvent = delegate { };
+    public static event Action<Item> onTransmtItem = delegate { };
 
     private Image ItemIcon;
     private Camera mainCamera;
@@ -23,7 +24,12 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         Sprite ItemImage = ItemIcon.sprite;
-        onCursorEnterEvent.Invoke(ItemImage);
+
+        if (false == PlayerHUD.Instance.IsActiveCombinationUI())
+        {
+            onCursorEnterEvent.Invoke(ItemImage);
+        }
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -33,30 +39,49 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ButtonClicking()
     {
-        if (InventoryManager.Instance.CurrentGripItemPrefab != null)
+        if (false == PlayerHUD.Instance.IsActiveCombinationUI())
         {
-            InventoryManager.Instance.CurrentGripItemPrefab.SetActive(false);
+            if (InventoryManager.Instance.CurrentGripItemPrefab != null)
+            {
+                InventoryManager.Instance.CurrentGripItemPrefab.SetActive(false);
+            }
+
+            Vector3 CameraPos = mainCamera.gameObject.transform.position;
+
+            foreach (Item item in InventoryManager.Instance.Items)
+            {
+                if (item.name == ItemIcon.sprite.name)
+                {
+                    if (item.name == "Enigma_Full")
+                    {
+                        return;
+                    }
+
+                    GameObject currentPick = item.prefab;
+                    InventoryManager.Instance.CurrentGripItem = item;
+                    InventoryManager.Instance.CurrentGripItemPrefab = mainCamera.transform.GetChild(item.id).gameObject;
+                    InventoryManager.Instance.CurrentGripItemPrefab.SetActive(true);
+                    InventoryManager.Instance.IsGripItem = true;
+                }
+            }
+
+            onButtonClickEvent.Invoke();
         }
 
-        Vector3 CameraPos = mainCamera.gameObject.transform.position;
-
-        foreach (Item item in InventoryManager.Instance.Items)
+        else
         {
-            if (item.name == ItemIcon.sprite.name)
+            foreach (Item item in InventoryManager.Instance.Items)
             {
-                if (item.name == "Enigma_Full")
+                if (item.name == ItemIcon.sprite.name)
                 {
-                    return;
-                } 
+                    if (item.name == "Enigma_Full")
+                    {
+                        return;
+                    }
 
-                GameObject currentPick = item.prefab;
-                InventoryManager.Instance.CurrentGripItem = item;
-                InventoryManager.Instance.CurrentGripItemPrefab = mainCamera.transform.GetChild(item.id).gameObject;
-                InventoryManager.Instance.CurrentGripItemPrefab.SetActive(true);
-                InventoryManager.Instance.IsGripItem = true;
+                    onTransmtItem.Invoke(item);
+                }
             }
         }
-
-        onButtonClickEvent.Invoke();
     }
 }
