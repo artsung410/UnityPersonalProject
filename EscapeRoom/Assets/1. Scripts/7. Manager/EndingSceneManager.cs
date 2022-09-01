@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class TitleSceneManager : MonoBehaviour
+public class EndingSceneManager : MonoBehaviour
 {
     [Header("1. GameStartUI")]
     [SerializeField] private GameObject GameStartUI;
@@ -18,7 +18,7 @@ public class TitleSceneManager : MonoBehaviour
 
     [Header("3. SkipButtonUI")]
     [SerializeField] private GameObject SkipButtonUI;
-    
+
 
     // 백그라운드 이미지 / 자막
     [Header("4. BackgroundImage")]
@@ -93,7 +93,6 @@ public class TitleSceneManager : MonoBehaviour
     {
         BackgroundImage.gameObject.SetActive(false);
     }
-
 
     // ################# 백그라운드 이미지 / 자막 / 음성 ################# 
     int count = 0;
