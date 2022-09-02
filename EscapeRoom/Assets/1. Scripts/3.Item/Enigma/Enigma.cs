@@ -22,11 +22,14 @@ public class Enigma : MonoBehaviour
     private RotateGear Rotor_middle;
     private RotateGear Rotor_right;
 
-
     [SerializeField] private GameObject ColliderSet;
     private EnigmaCollider Collider_Description;
     private EnigmaCollider Collider_Rotor;
     private EnigmaCollider Collider_KeyBoard;
+
+    [Header("GlowingRotorNumbers")]
+    [SerializeField] private GameObject[] GlowingRotorNumbers;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -38,6 +41,8 @@ public class Enigma : MonoBehaviour
         Collider_Description = ColliderSet.transform.GetChild(0).gameObject.GetComponent<EnigmaCollider>();
         Collider_Rotor = ColliderSet.transform.GetChild(1).gameObject.GetComponent<EnigmaCollider>();
         Collider_KeyBoard = ColliderSet.transform.GetChild(2).gameObject.GetComponent<EnigmaCollider>();
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Start()
@@ -52,7 +57,10 @@ public class Enigma : MonoBehaviour
         IsZoomIn = false;
 
         // RotorInit
-        InitRotor();
+        if (false == IsCorrectRotor)
+        {
+            InitRotor();
+        }
 
         // ColliderInit
         InitCollider();
@@ -103,6 +111,13 @@ public class Enigma : MonoBehaviour
         {
             Debug.Log("Opened!");
             IsCorrectRotor = true;
+
+            for (int i = 0; i < GlowingRotorNumbers.Length; i++)
+            {
+                GlowingRotorNumbers[i].SetActive(true);
+            }
+
+            SoundManager.Instance.PlayObjectSound(audioSource, "RotateUnlock");
         }
     }
 

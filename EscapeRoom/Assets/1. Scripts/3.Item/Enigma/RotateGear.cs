@@ -24,7 +24,7 @@ public class RotateGear : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (Enigma.Instance.IsZoomIn == true)
+        if (true == Enigma.Instance.IsZoomIn && false == Enigma.Instance.IsCorrectRotor)
         {
             RotateWheel();
             animator.SetTrigger("Rotate");

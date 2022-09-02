@@ -40,7 +40,7 @@ public class CameraManager : MonoBehaviour, IMouseController
             EnigmaCameraAnimator.SetBool("onBottom", false);
             EnigmaCameraAnimator.SetBool("onMiddle", false);
             Enigma.Instance.InitParts();
-            playerHUD.DeActiveEnigmaSceneUI();
+            playerHUD.DeActiveEnigmaInitButtonUI();
         }
 
         Cameras[0].enabled = true;
@@ -66,7 +66,7 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[2].enabled = true;
         Cameras[0].enabled = false;
         Cameras[1].enabled = false;
-        playerHUD.ActiveReturnButtonUI();
+        playerHUD.ActiveESC_UI();
         playerHUD.DeActiveCentorDot();
         MouseCursorUnLock();
     }

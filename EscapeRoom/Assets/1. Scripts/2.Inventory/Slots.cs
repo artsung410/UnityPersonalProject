@@ -37,8 +37,11 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         onCursorExitEvent.Invoke();
     }
 
+
+    // 아이템 슬롯 클릭
     public void ButtonClicking()
     {
+        // 아이템 슬롯 클릭시, 조합UI가 비활성화 일때 아이템을 플레이어 손에 장착하도록 한다.
         if (false == PlayerHUD.Instance.IsActiveCombinationUI())
         {
             if (InventoryManager.Instance.CurrentGripItemPrefab != null)
@@ -68,6 +71,7 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             onButtonClickEvent.Invoke();
         }
 
+        // 아이템 슬롯 클릭시, 조합UI가 활성화 상태일 때 아이템 조합이 가능하도록 한다.
         else
         {
             foreach (Item item in InventoryManager.Instance.Items)

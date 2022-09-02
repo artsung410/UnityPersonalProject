@@ -35,11 +35,6 @@ public class PlayerController : MonoBehaviour, IMouseController
         MouseCursorLock();
     }
 
-    void FixedUpdate()
-    {
-
-    }
-
     void Update()
     {
         if (CameraManager.Instance.Cameras[0].enabled == true && false == playerHUD.IsActiveInventoryUI() && false == playerHUD.IsActiveGetItemUI())
@@ -51,7 +46,7 @@ public class PlayerController : MonoBehaviour, IMouseController
 
         // ġƮŰ
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             for (int i = 0; i < ItemList.Length; i++)
             {
@@ -65,6 +60,7 @@ public class PlayerController : MonoBehaviour, IMouseController
             if (playerHUD.IsActiveGetItemUI() == true && playerHUD.IsReadyToDeactiveGetItemUI == true)
             {
                 playerHUD.DeActiveGetItemUI();
+                playerHUD.DeActiveESC_UI();
             }
         }
 
@@ -84,6 +80,16 @@ public class PlayerController : MonoBehaviour, IMouseController
             if (playerHUD.IsActiveCombinationUI())
             {
                 playerHUD.DeActiveCombinationUI();
+            }
+
+            if (playerHUD.IsActiveHintUI())
+            {
+                playerHUD.DeActiveHintImage();
+            }
+
+            if (playerHUD.IsActiveESC_UI())
+            {
+                playerHUD.DeActiveESC_UI();
             }
 
             CameraManager.Instance.InitMainCamera();

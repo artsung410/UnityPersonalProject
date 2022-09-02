@@ -20,6 +20,7 @@ TagManager:
   - Enigma_Keyboard
   - Chair
   - view1
+  - Hint
   layers:
   - Default
   - TransparentFX

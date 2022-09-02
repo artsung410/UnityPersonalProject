@@ -34,7 +34,6 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField]  private GameObject      MouseClickUI;
 
     [Header("EnigmaUI")]
-    [SerializeField]  private GameObject      ReturnButtonUI;
     [SerializeField]  private GameObject      EnigmaInitButtonUI;
 
     [Header("ESC_UI")]
@@ -44,8 +43,11 @@ public class PlayerHUD : MonoBehaviour
     public GameObject      EscapeSuccessUI;
 
     [Header("FadeInOutImage")]
-    public GameObject      FadeImage; 
+    public GameObject      FadeImage;
 
+    [Header("HintImage")]
+    public GameObject      HintImage;
+    public Sprite[]        HintSprites;
 
     private void Awake()
     {
@@ -62,8 +64,7 @@ public class PlayerHUD : MonoBehaviour
         EnigmaCollider.colliderClickSignal += ActiveEnigmaInitButtonUI;
 
         Slots.onCursorEnterEvent += ActiveItemInfo;
-        Slots.onButtonClickEvent += DeActiveInventoryUI;
-        Slots.onButtonClickEvent += DeActiveItemInfo;
+        Slots.onButtonClickEvent += DeActive_UI_Main_All;
     }
 
     IEnumerator StartFadeIn()
@@ -80,6 +81,14 @@ public class PlayerHUD : MonoBehaviour
         }
 
         FadeImage.SetActive(false);
+    }
+
+    // 메인씬에 있는 UI 전부 비활성화
+    public void DeActive_UI_Main_All()
+    {
+        DeActiveInventoryUI();
+        DeActiveItemInfo();
+        DeActiveESC_UI();
     }
 
     // ItemInfo
@@ -105,38 +114,14 @@ public class PlayerHUD : MonoBehaviour
     }
 
     // EnigmaUI
-    public void DeActiveEnigmaSceneUI()
-    {
-        DeActiveReturnButtonUI();
-        DeActiveEnigmaInitButtonUI();
-    }
-
-    public bool IsActiveReturnButtonUI()
-    {
-        return ReturnButtonUI.activeSelf;
-    }
-
-    public void ActiveReturnButtonUI()
-    {
-        ReturnButtonUI.SetActive(true);
-    }
-
-    public void DeActiveReturnButtonUI()
-    {
-        ReturnButtonUI.SetActive(false);
-    }
-
-
     public bool IsActiveEnigmaInitButtonUI()
     {
         return EnigmaInitButtonUI.activeSelf;
     }
-
     public void ActiveEnigmaInitButtonUI()
     {
         EnigmaInitButtonUI.SetActive(true);
     }
-
     public void DeActiveEnigmaInitButtonUI()
     {
         EnigmaInitButtonUI.SetActive(false);
@@ -148,14 +133,13 @@ public class PlayerHUD : MonoBehaviour
     {
         return GetItemUI.activeSelf;
     }
-
     public void ActiveGetItemUI(Item item)
     {
         GetItemUI.SetActive(true);
+        ActiveESC_UI();
         GetItemImage.sprite = item.icon;
         StartCoroutine(DelayGetItemUISetBool());
     }
-
     public void DeActiveGetItemUI()
     {
         GetItemUI.SetActive(false);
@@ -177,9 +161,9 @@ public class PlayerHUD : MonoBehaviour
     {
         return InventoryUI.activeSelf;
     }
-
     public void ActiveInventoryUI()
     {
+        ActiveESC_UI();
         InventoryUI.SetActive(true);
     }
     public void DeActiveInventoryUI()
@@ -187,7 +171,6 @@ public class PlayerHUD : MonoBehaviour
         InventoryUI.SetActive(false);
         ItemInfoPanelUI.SetActive(false);
     }
-
     public void ActiveSelectedUI()
     {
         LockedUI.SetActive(false);
@@ -199,7 +182,6 @@ public class PlayerHUD : MonoBehaviour
     {
         return CombinationUI.activeSelf;
     }
-
     public void ActiveCombinationUI()
     {
         CombinationUI.SetActive(true);
@@ -245,7 +227,6 @@ public class PlayerHUD : MonoBehaviour
     {
         centerDot.SetActive(true);
     }
-
     public void DeActiveCentorDot()
     {
         centerDot.SetActive(false);
@@ -253,14 +234,33 @@ public class PlayerHUD : MonoBehaviour
 
 
     // ESC_UI
-
+    public bool IsActiveESC_UI()
+    {
+        return ESC_UI.activeSelf;
+    }
     public void ActiveESC_UI()
     {
         ESC_UI.SetActive(true);
     }
-
     public void DeActiveESC_UI()
     {
         ESC_UI.SetActive(false);
+    }
+
+    // Deactive HintImage
+    public bool IsActiveHintUI()
+    {
+        return HintImage.activeSelf;
+    }
+    public void DeActiveHintImage()
+    {
+        DeActiveESC_UI();
+        HintImage.SetActive(false);
+    }
+    public void ActiveHintImage(int ID)
+    {
+        ActiveESC_UI();
+        HintImage.GetComponent<Image>().sprite = HintSprites[ID];
+        HintImage.SetActive(true);
     }
 }
