@@ -40,13 +40,21 @@ public class PlayerHUD : MonoBehaviour
     [Header("ESC_UI")]
     [SerializeField]  private GameObject      ESC_UI;
 
+    [Header("EscapeSuccessUI")]
+    public GameObject      EscapeSuccessUI;
+
+    [Header("FadeInOutImage")]
+    public GameObject      FadeImage; 
+
+
     private void Awake()
     {
         Instance = this;
     }
+
     void Start()
     {
-
+        StartCoroutine(StartFadeIn());
         CombinationSlot.CombinationComplete += ActiveGetItemUI;
         ItemPickup.PickUpSignal += ActiveGetItemUI;
         InterectiveObject.UnLockedMessage += ActiveLockedUI;
@@ -56,6 +64,22 @@ public class PlayerHUD : MonoBehaviour
         Slots.onCursorEnterEvent += ActiveItemInfo;
         Slots.onButtonClickEvent += DeActiveInventoryUI;
         Slots.onButtonClickEvent += DeActiveItemInfo;
+    }
+
+    IEnumerator StartFadeIn()
+    {
+        float fadeCount = 1;
+
+        Image image = FadeImage.GetComponent<Image>();
+
+        while (fadeCount > 0f)
+        {
+            fadeCount -= 0.01f;
+            yield return new WaitForSeconds(0.01f);
+            image.color = new Color(0, 0, 0, fadeCount);
+        }
+
+        FadeImage.SetActive(false);
     }
 
     // ItemInfo

@@ -7,18 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class EndingSceneManager : MonoBehaviour
 {
-    [Header("1. GameStartUI")]
-    [SerializeField] private GameObject GameStartUI;
-
-
-    [Header("2. FlikerImage")]
-    [SerializeField] private Image FlikerImage;
-    [SerializeField] private AnimationCurve curveScreen;
-
-
-    [Header("3. SkipButtonUI")]
-    [SerializeField] private GameObject SkipButtonUI;
-
+    // Fade이미지
+    [SerializeField] private GameObject FadeImage;
 
     // 백그라운드 이미지 / 자막
     [Header("4. BackgroundImage")]
@@ -31,56 +21,21 @@ public class EndingSceneManager : MonoBehaviour
     [Header("6. Narr_Player >>")]
     [SerializeField] private NarrSoundPlayer narrPlayer;
 
-    [Header("8. Effective_Player >>")]
-    [SerializeField] private EffectiveSoundPlayer effectPlayer;
-
     [Header("9. Subtitle")]
     [SerializeField] private GameObject SubtitleUI;
     [SerializeField] private TextMeshProUGUI subtitleText_Eng;
     [SerializeField] private TextMeshProUGUI subtitleText_Kor;
+
     public string[] subtitles;
     public string[] subtitles_Kor;
 
+    public string[] subtitles_Ending;
+    public string[] subtitles_Kor_Ending;
+
     private void Start()
     {
-        StartCoroutine(FillControl());
-        StartCoroutine(ShowMovie());
-        StartCoroutine(PlayBackgroundMusic());
-    }
-
-    IEnumerator FillControl()
-    {
-        Color color = FlikerImage.color;
-        while (true)
-        {
-            int randNum = Random.Range(1, 10);
-            float randValue = 0;
-            float flikerValue = Random.Range(0f, 0.3f);
-
-            if (randNum == 2)
-            {
-                randValue = Random.Range(0f, 1f);
-            }
-
-            color.a = randValue;
-            FlikerImage.color = color;
-            yield return new WaitForSeconds(flikerValue);
-        }
-    }
-
-    public void SwichingScene()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    public void ActiveGamestartUI()
-    {
-        GameStartUI.SetActive(true);
-    }
-
-    public void DeActiveSikpButtonUI()
-    {
-        SkipButtonUI.SetActive(false);
+        StartCoroutine(StartFadeIn());
+        StartCoroutine(DelayStart());
     }
 
     public void DeActiveSubtitles()
@@ -96,29 +51,30 @@ public class EndingSceneManager : MonoBehaviour
 
     // ################# 백그라운드 이미지 / 자막 / 음성 ################# 
     int count = 0;
+    IEnumerator DelayStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(ShowMovie());
+        StartCoroutine(PlayBackgroundMusic());
+        
+    }
 
     IEnumerator ShowMovie()
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.7f);
 
             if (count == backGroundSprite.Length)
             {
-                ActiveGamestartUI();
-                DeActiveSikpButtonUI();
                 DeActiveSubtitles();
                 DeActiveImage();
                 yield break;
             }
 
-            subtitleText_Eng.text = subtitles[count];
-            subtitleText_Kor.text = subtitles_Kor[count];
+            subtitleText_Eng.text = subtitles_Ending[count];
+            subtitleText_Kor.text = subtitles_Kor_Ending[count];
             BackgroundImage.sprite = backGroundSprite[count];
-            if (count == 8)
-            {
-                effectPlayer.PlaySound();
-            }
 
             narrPlayer.PlaySound(count);
             float duration = narrPlayer.GetAudioPlayTime(count);
@@ -131,6 +87,22 @@ public class EndingSceneManager : MonoBehaviour
     {
         bgmPlayer.PlaySound();
         yield return null;
+    }
+
+    IEnumerator StartFadeIn()
+    {
+        float fadeCount = 1;
+
+        Image image = FadeImage.GetComponent<Image>();
+
+        while (fadeCount > 0f)
+        {
+            fadeCount -= 0.01f;
+            yield return new WaitForSeconds(0.01f);
+            image.color = new Color(0, 0, 0, fadeCount);
+        }
+
+        FadeImage.SetActive(false);
     }
 
     public void DeActiveImage()

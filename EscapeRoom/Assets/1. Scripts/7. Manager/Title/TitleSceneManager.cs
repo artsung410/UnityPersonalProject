@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviour
 {
+    [Header("FadeImage")]
+    [SerializeField] private GameObject FadeImage;
+
     [Header("1. GameStartUI")]
     [SerializeField] private GameObject GameStartUI;
 
@@ -70,6 +73,13 @@ public class TitleSceneManager : MonoBehaviour
 
     public void SwichingScene()
     {
+        StartCoroutine(StartFadeOut());
+        StartCoroutine(DelaySwitchingScene());
+    }
+
+    IEnumerator DelaySwitchingScene()
+    {
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(1);
     }
 
@@ -93,7 +103,6 @@ public class TitleSceneManager : MonoBehaviour
     {
         BackgroundImage.gameObject.SetActive(false);
     }
-
 
     // ################# 백그라운드 이미지 / 자막 / 음성 ################# 
     int count = 0;
@@ -132,6 +141,19 @@ public class TitleSceneManager : MonoBehaviour
     {
         bgmPlayer.PlaySound();
         yield return null;
+    }
+
+    IEnumerator StartFadeOut()
+    {
+        float fadeCount = 0;
+        Image image = FadeImage.GetComponent<Image>();
+        FadeImage.SetActive(true);
+        while (fadeCount < 1.0f)
+        {
+            fadeCount += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+            image.color = new Color(0, 0, 0, fadeCount);
+        }
     }
 
     public void DeActiveImage()

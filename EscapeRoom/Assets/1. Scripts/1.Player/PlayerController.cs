@@ -37,16 +37,18 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     void FixedUpdate()
     {
+
+    }
+
+    void Update()
+    {
         if (CameraManager.Instance.Cameras[0].enabled == true && false == playerHUD.IsActiveInventoryUI() && false == playerHUD.IsActiveGetItemUI())
         {
             UpdateRaycasting();
             UpdateRotate();
             UpdateMove();
         }
-    }
 
-    void Update()
-    {
         // ġƮŰ
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

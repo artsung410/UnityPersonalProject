@@ -18,7 +18,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void MoveTo(Vector3 direction)
-    {
+    {       
+        // 허공에 떠있으면 중력만큼 y축 이동속도 감소
+        if (!controller.isGrounded)
+        {
+            moveForce.y += gravity * Time.deltaTime;
+        }
+
         // 이동 방향 = 캐릭터 회전 값 * 방향 값 ( 카메라 회전으로 전방 방향이 변하기 때문에 회전값을 곱해서 연산해야한다.)
         direction = transform.rotation * new Vector3(direction.x, 0, direction.z);
 
