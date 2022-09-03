@@ -17,10 +17,8 @@ public class KeyInController : MonoBehaviour
 
     private void GetSignal(int key)
     {
-        Debug.Log(key);
         int childId = key;
 
-        Debug.Log(childId);
         GameObject currentKey = transform.GetChild(childId).gameObject;
 
         CurrentPosition = currentKey.transform.position;

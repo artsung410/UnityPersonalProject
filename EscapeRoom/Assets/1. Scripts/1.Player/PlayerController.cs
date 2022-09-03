@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour, IMouseController
     KeyCode ESC = KeyCode.Escape;
     KeyCode Inventory = KeyCode.I;
 
-
-
     [Header("Audio Clips")]
     private AudioSource audioSource;
     [SerializeField] private AudioClip audioClipWalk;                      // 걷기 사운드
@@ -37,7 +35,12 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     void Update()
     {
-        if (CameraManager.Instance.Cameras[0].enabled == true && false == playerHUD.IsActiveInventoryUI() && false == playerHUD.IsActiveGetItemUI())
+        if (true == CameraManager.Instance.Cameras[0].enabled && 
+            false == playerHUD.IsActiveInventoryUI() && 
+            false == playerHUD.IsActiveGetItemUI() && 
+            false == playerHUD.IsActivePushedUI() &&
+            false == playerHUD.IsActiveHintUI() && 
+            false == playerHUD.IsActiveSettingUI())
         {
             UpdateRaycasting();
             UpdateRotate();
@@ -46,7 +49,7 @@ public class PlayerController : MonoBehaviour, IMouseController
 
         // 치트키
 
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             for (int i = 0; i < ItemList.Length; i++)
             {
@@ -60,52 +63,38 @@ public class PlayerController : MonoBehaviour, IMouseController
             if (playerHUD.IsActiveGetItemUI() == true && playerHUD.IsReadyToDeactiveGetItemUI == true)
             {
                 playerHUD.DeActiveGetItemUI();
-                playerHUD.DeActiveESC_UI();
             }
         }
 
         if (Input.GetKeyDown(ESC))
         {
-            // getItemUI가 화면에 떠있고 ESC버튼을 눌렀을 때 비활성화
-            if (playerHUD.IsActiveGetItemUI())
+            if (false == playerHUD.IsActiveHintUI() && 
+                false == playerHUD.IsActiveGetItemUI() &&
+                false == playerHUD.IsActiveInventoryUI() &&
+                false == playerHUD.IsActiveSettingUI() &&
+                false == CameraManager.Instance.Cameras[1].enabled && 
+                false == CameraManager.Instance.Cameras[2].enabled)
             {
-                playerHUD.DeActiveGetItemUI();
+                playerHUD.SwitchingPushedUI();
+                DeActiveMoveSound();
             }
 
-            if (playerHUD.IsActiveInventoryUI())
-            {
-                playerHUD.DeActiveInventoryUI();
-            }
+            if (playerHUD.IsActiveHintUI()) playerHUD.DeActiveHintImage();
 
-            if (playerHUD.IsActiveCombinationUI())
-            {
-                playerHUD.DeActiveCombinationUI();
-            }
+            if (playerHUD.IsActiveGetItemUI()) playerHUD.DeActiveGetItemUI();
 
-            if (playerHUD.IsActiveHintUI())
-            {
-                playerHUD.DeActiveHintImage();
-            }
+            if (playerHUD.IsActiveReturnButtonUI()) playerHUD.DeActiveReturnButtonUI();
 
-            if (playerHUD.IsActiveESC_UI())
-            {
-                playerHUD.DeActiveESC_UI();
-            }
-
-            CameraManager.Instance.InitMainCamera();
+            if (playerHUD.IsActiveSettingUI()) playerHUD.DeActiveSettingsUI();
+                
+            if (CameraManager.Instance.Cameras[1].enabled || CameraManager.Instance.Cameras[2].enabled) CameraManager.Instance.InitMainCamera();
         }
 
         // <메인카메라일때는 기존 인벤토리만 유효>
-        if (CameraManager.Instance.Cameras[0].enabled == true && CameraManager.Instance.Cameras[2].enabled == false)
-        {
-            UpdateInventory();
-        }
+        if (CameraManager.Instance.Cameras[0].enabled == true && CameraManager.Instance.Cameras[2].enabled == false) UpdateInventory();
 
         // <두번째 카메라일때는 서브 인벤토리만 유효>
-        else if (CameraManager.Instance.Cameras[1].enabled == true)
-        {
-            UpdateSubInventory();
-        }
+        else if (CameraManager.Instance.Cameras[1].enabled == true) UpdateSubInventory();
 
         // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
         if (CameraManager.Instance.Cameras[1].enabled == true || CameraManager.Instance.Cameras[2].enabled == true)
@@ -173,11 +162,6 @@ public class PlayerController : MonoBehaviour, IMouseController
         {
             MouseCursorUnLock();
         }
-
-        else
-        {
-            MouseCursorLock();
-        }
     }
 
     // ###################### Section 2 ######################
@@ -214,11 +198,6 @@ public class PlayerController : MonoBehaviour, IMouseController
         CameraController.ZoomInOut(t_zoomDirection);
     }
 
-    private void ResetCurrentInventoryMode()
-    {
-        CameraManager.Instance.InitMainCamera();
-    }
-
     // ###################### [IMouseController] Mouse Control ######################
 
     public void MouseCursorLock()
@@ -250,5 +229,11 @@ public class PlayerController : MonoBehaviour, IMouseController
         {
             audioSource.Stop();
         }
+    }
+
+    public void GameQuit()
+    {
+        Application.Quit();
+        Debug.Log("게임종료");
     }
 }

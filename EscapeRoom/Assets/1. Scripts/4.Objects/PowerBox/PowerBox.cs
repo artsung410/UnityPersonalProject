@@ -10,7 +10,7 @@ public class PowerBox : InterectiveObject
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void Operate()

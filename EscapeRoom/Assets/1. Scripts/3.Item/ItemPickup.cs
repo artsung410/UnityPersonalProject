@@ -18,7 +18,6 @@ public class ItemPickup : MonoBehaviour
     {
         InventoryManager.Instance.Add(Item);
         PickUpSignal(Item);
-        Debug.Log("DelayPickUp");
         Destroy(gameObject);
     }
 }

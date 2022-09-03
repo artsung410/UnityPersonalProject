@@ -7,6 +7,15 @@ using TMPro;
 public class PlayerHUD : MonoBehaviour
 {
     public static PlayerHUD Instance;
+    [Header("PaushedUI")]
+    [SerializeField]  private GameObject      PushedUI;
+    bool isActivePushedUI = false;
+
+    [Header("SettingsUI")]
+    [SerializeField]  private GameObject      SettingsUI;
+
+    [Header("ReturnButtonUI")]
+    [SerializeField]  private GameObject      ReturnButtonUI;
 
     [Header("InventoryUI")]
     [SerializeField]  private GameObject      centerDot;
@@ -35,9 +44,6 @@ public class PlayerHUD : MonoBehaviour
 
     [Header("EnigmaUI")]
     [SerializeField]  private GameObject      EnigmaInitButtonUI;
-
-    [Header("ESC_UI")]
-    [SerializeField]  private GameObject      ESC_UI;
 
     [Header("EscapeSuccessUI")]
     public GameObject      EscapeSuccessUI;
@@ -88,7 +94,64 @@ public class PlayerHUD : MonoBehaviour
     {
         DeActiveInventoryUI();
         DeActiveItemInfo();
-        DeActiveESC_UI();
+    }
+
+    // ReturnButtonUI
+    public bool IsActiveReturnButtonUI()
+    {
+        return ReturnButtonUI.activeSelf;
+    }
+    public void ActiveReturnButtonUI()
+    {
+        ReturnButtonUI.SetActive(true);
+    }
+
+    public void DeActiveReturnButtonUI()
+    {
+        ReturnButtonUI.SetActive(false);
+    }
+
+    // PushedUI
+    public bool IsActivePushedUI()
+    {
+        return PushedUI.activeSelf;
+    }
+
+    public void SwitchingPushedUI()
+    {
+        isActivePushedUI = !isActivePushedUI;
+        PushedUI.SetActive(isActivePushedUI);
+
+        if (IsActivePushedUI())
+        {
+            centerDot.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            if (false == IsActiveSettingUI())
+            {
+                centerDot.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+    }
+
+    // SettingsUI
+    public bool IsActiveSettingUI()
+    {
+        return SettingsUI.activeSelf;
+    }
+    public void ActiveSettingsUI()
+    {
+        SettingsUI.SetActive(true);
+    }
+
+    public void DeActiveSettingsUI()
+    {
+        SettingsUI.SetActive(false);
     }
 
     // ItemInfo
@@ -136,7 +199,6 @@ public class PlayerHUD : MonoBehaviour
     public void ActiveGetItemUI(Item item)
     {
         GetItemUI.SetActive(true);
-        ActiveESC_UI();
         GetItemImage.sprite = item.icon;
         StartCoroutine(DelayGetItemUISetBool());
     }
@@ -163,7 +225,6 @@ public class PlayerHUD : MonoBehaviour
     }
     public void ActiveInventoryUI()
     {
-        ActiveESC_UI();
         InventoryUI.SetActive(true);
     }
     public void DeActiveInventoryUI()
@@ -232,35 +293,33 @@ public class PlayerHUD : MonoBehaviour
         centerDot.SetActive(false);
     }
 
-
-    // ESC_UI
-    public bool IsActiveESC_UI()
-    {
-        return ESC_UI.activeSelf;
-    }
-    public void ActiveESC_UI()
-    {
-        ESC_UI.SetActive(true);
-    }
-    public void DeActiveESC_UI()
-    {
-        ESC_UI.SetActive(false);
-    }
-
-    // Deactive HintImage
+    // HintImage
     public bool IsActiveHintUI()
     {
         return HintImage.activeSelf;
     }
     public void DeActiveHintImage()
     {
-        DeActiveESC_UI();
         HintImage.SetActive(false);
+        MouseCursorLock();
     }
+
     public void ActiveHintImage(int ID)
     {
-        ActiveESC_UI();
+        MouseCursorUnLock();
         HintImage.GetComponent<Image>().sprite = HintSprites[ID];
         HintImage.SetActive(true);
+    }
+
+    public void MouseCursorUnLock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void MouseCursorLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

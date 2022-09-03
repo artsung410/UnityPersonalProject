@@ -11,7 +11,7 @@ public class ToolBox : InterectiveObject
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()

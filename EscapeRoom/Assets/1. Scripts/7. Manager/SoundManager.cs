@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum Sound
 {
@@ -34,7 +35,7 @@ enum Sound
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    private AudioSource audioSource;
+    private AudioSource ItemAudioSource;
 
     [Header("<<SystemSound>>")]
     [Header("BGM")]
@@ -53,6 +54,11 @@ public class SoundManager : MonoBehaviour
 
     [Header("<<InteractiveObejctSound>>")]
     [SerializeField] private AudioClip[] audioClips;
+    [SerializeField] private AudioSource[] InteractiveAudioSources;
+
+    [Header("Music/Sound Slider UI")]
+    [SerializeField] private Slider MusicSlider;
+    [SerializeField] private Slider SoundSlider;
 
     Sound sound;
     Dictionary<string, AudioClip> AudioDic;
@@ -60,7 +66,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         BGMAudioSource = BGMAudio.gameObject.AddComponent<AudioSource>();
-        audioSource = GetComponent<AudioSource>();
+        ItemAudioSource = GetComponent<AudioSource>();
         AudioDic = new Dictionary<string, AudioClip>();
         Instance = this;
     }
@@ -68,6 +74,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         // BGMÀç»ý
+        Init_All_AudioSource_Volumes();
         BGMAudioSource.clip = BGM;
         BGMAudioSource.loop = true;
         BGMAudioSource.Play();
@@ -79,36 +86,48 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    private void Init_All_AudioSource_Volumes()
+    {
+        BGMAudioSource.volume = 0.75f;
+        ItemAudioSource.volume = 0.75f;
+
+        for(int i = 0; i < InteractiveAudioSources.Length; i++)
+        {
+            InteractiveAudioSources[i].volume = 0.75f;
+        }
+
+    }
+
     public void playPickupSound(Item item)
     {
         if (item.itemName == "Silver_Key" || item.itemName == "Gold_Key")
         {
-            audioSource.clip = AudioDic["KeyGet"];
+            ItemAudioSource.clip = AudioDic["KeyGet"];
         }
         else
         {
-            audioSource.clip = PickupSound;
+            ItemAudioSource.clip = PickupSound;
         }
 
-        audioSource.Play();
+        ItemAudioSource.Play();
     }
 
     public void playItemInfoSound()
     {
-        audioSource.clip = ItemInfoSound;
-        audioSource.Play();
+        ItemAudioSource.clip = ItemInfoSound;
+        ItemAudioSource.Play();
     }
 
     public void PlayButtonClickSound()
     {
-        audioSource.clip = ButtonClickSound;
-        audioSource.Play();
+        ItemAudioSource.clip = ButtonClickSound;
+        ItemAudioSource.Play();
     }
 
     public void PlayEnigmaSwitchingSound()
     {
-        audioSource.clip = EnigmaPartSwitchingSound;
-        audioSource.Play();
+        ItemAudioSource.clip = EnigmaPartSwitchingSound;
+        ItemAudioSource.Play();
     }
     public void PlayObjectSound(AudioSource source, string name)
     {
@@ -122,6 +141,27 @@ public class SoundManager : MonoBehaviour
         source.Stop();
         source.clip = isActive == true ? AudioDic[name1] : AudioDic[name2];
         source.Play();
+    }
+
+    public void On_BGM_SliderEvent(float volume)
+    {
+        BGMAudioSource.volume = volume;
+    }
+
+    public void On_Sound_SliderEvent(float volume)
+    {
+        ItemAudioSource.volume = volume;
+
+        for (int i = 0; i < InteractiveAudioSources.Length; i++)
+        {
+            InteractiveAudioSources[i].volume = volume;
+        }
+    }
+    
+    public void Reset_Slider()
+    {
+        MusicSlider.value = 0.75f;
+        SoundSlider.value = 0.75f;
     }
 
 }

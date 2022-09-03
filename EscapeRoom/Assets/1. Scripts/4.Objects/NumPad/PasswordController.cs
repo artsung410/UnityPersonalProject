@@ -28,7 +28,7 @@ public class PasswordController : MonoBehaviour
         IsGameWin = false;
         CorrectNum = "4617460";
         PasswordKey.KeypadSignal += ShowPasswordOnScreen;
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()

@@ -47,8 +47,7 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[1].enabled = false;
         Cameras[2].enabled = false;
         playerHUD.ActiveCenterDot();
-        playerHUD.DeActiveESC_UI();
-        MouseCursorUnLock();
+        MouseCursorLock();
     }
 
     public void InitDetailViewCamera()
@@ -57,8 +56,8 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[1].enabled = true;
         Cameras[2].enabled = false;
         playerHUD.DeActiveCentorDot();
-        playerHUD.ActiveESC_UI();
-        MouseCursorLock();
+        playerHUD.ActiveReturnButtonUI();
+        MouseCursorUnLock();
     }
 
     public void InitEnigmaViewCamera()
@@ -66,8 +65,8 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[2].enabled = true;
         Cameras[0].enabled = false;
         Cameras[1].enabled = false;
-        playerHUD.ActiveESC_UI();
         playerHUD.DeActiveCentorDot();
+        playerHUD.ActiveReturnButtonUI();
         MouseCursorUnLock();
     }
 

@@ -42,7 +42,7 @@ public class Enigma : MonoBehaviour
         Collider_Rotor = ColliderSet.transform.GetChild(1).gameObject.GetComponent<EnigmaCollider>();
         Collider_KeyBoard = ColliderSet.transform.GetChild(2).gameObject.GetComponent<EnigmaCollider>();
 
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
