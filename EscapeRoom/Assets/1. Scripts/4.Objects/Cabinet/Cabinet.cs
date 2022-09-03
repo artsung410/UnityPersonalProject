@@ -14,6 +14,19 @@ public class Cabinet : InterectiveObject
     {
         isActive = !isActive;
         animator.SetBool("isActive", isActive);
+        if (true == isActive)
+        {
+            SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
+        }
+        else
+        {
+            StartCoroutine(DelayPlaySound());
+        }
+    }
+
+    IEnumerator DelayPlaySound()
+    {
+        yield return new WaitForSeconds(1f);
         SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
     }
 }

@@ -25,7 +25,15 @@ public class ToolBox : InterectiveObject
         {
             isActive = !isActive;
             animator.SetBool("isActive", isActive);
-            SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", isActive);
+            if (true == isActive)
+            {
+                SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", isActive);
+            }
+            else
+            {
+                StartCoroutine(DelayPlaySound());
+            }
+
         }
 
         else
@@ -37,5 +45,11 @@ public class ToolBox : InterectiveObject
     public void SetAvailability()
     {
         isOpened = true;
+    }
+
+    IEnumerator DelayPlaySound()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", isActive);
     }
 }

@@ -14,6 +14,19 @@ public class Door : InterectiveObject
     {
         isActive = !isActive;
         animator.SetBool("isActive", isActive);
+        if (true == isActive)
+        {
+            SoundManager.Instance.PlayObjectSound(audioSource, "WoddenDoorOpen", "WoddenDoorClose", isActive);
+        }
+        else
+        {
+            StartCoroutine(DelayPlaySound());
+        }
+    }
+
+    IEnumerator DelayPlaySound()
+    {
+        yield return new WaitForSeconds(0.7f);
         SoundManager.Instance.PlayObjectSound(audioSource, "WoddenDoorOpen", "WoddenDoorClose", isActive);
     }
 }

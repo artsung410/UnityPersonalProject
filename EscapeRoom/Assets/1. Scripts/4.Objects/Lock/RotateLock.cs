@@ -21,7 +21,14 @@ public class RotateLock : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartCoroutine("RotateWheel");
+        if(false == LockController.isNumLockOpen)
+        {
+            StartCoroutine(RotateWheel());
+        }
+        else
+        {
+            StopCoroutine(RotateWheel());
+        }
     }
 
     float angle;
