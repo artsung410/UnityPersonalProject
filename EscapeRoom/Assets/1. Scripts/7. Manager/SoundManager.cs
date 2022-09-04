@@ -65,10 +65,10 @@ public class SoundManager : MonoBehaviour
     // SoundManager.Instance.PlayItemInfoSound()
     private void Awake()
     {
+        Instance = this;
         BGMAudioSource = BGMAudio.gameObject.AddComponent<AudioSource>();
         ItemAudioSource = GetComponent<AudioSource>();
         AudioDic = new Dictionary<string, AudioClip>();
-        Instance = this;
     }
 
     private void Start()

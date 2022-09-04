@@ -18,7 +18,6 @@ enum ItemTag
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] private PlayerHUD playerHUD;
     public static InventoryManager Instance;
     public List<Item> Items = new List<Item>();
 
@@ -55,7 +54,7 @@ public class InventoryManager : MonoBehaviour
     public void Add(Item item)
     {
         Items.Add(item);
-        playerHUD.ActiveGetItemUI(item);
+        PlayerHUD.Instance.ActiveGetItemUI(item);
     }
 
     public void Remove(Item item)

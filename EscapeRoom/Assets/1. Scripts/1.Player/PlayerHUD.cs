@@ -94,6 +94,7 @@ public class PlayerHUD : MonoBehaviour
     {
         DeActiveInventoryUI();
         DeActiveItemInfo();
+        MouseCursorLock();
     }
 
     // ReturnButtonUI
@@ -137,6 +138,12 @@ public class PlayerHUD : MonoBehaviour
                 Cursor.visible = false;
             }
         }
+    }
+
+    public void DeActivePushedUI()
+    {
+        isActivePushedUI = false;
+        PushedUI.SetActive(false);
     }
 
     // SettingsUI
@@ -226,10 +233,12 @@ public class PlayerHUD : MonoBehaviour
     public void ActiveInventoryUI()
     {
         InventoryUI.SetActive(true);
+        MouseCursorUnLock();
     }
     public void DeActiveInventoryUI()
     {
         InventoryUI.SetActive(false);
+        CombinationUI.SetActive(false);
         ItemInfoPanelUI.SetActive(false);
     }
     public void ActiveSelectedUI()
@@ -321,5 +330,17 @@ public class PlayerHUD : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+
+    // MainScene_ButtonEvent
+    public void RestartButtonEvent()
+    {
+        GameManager.Instance.LoadTitleScene();
+    }
+
+    public void QuitButtonEvent()
+    {
+        GameManager.Instance.GameQuit();
     }
 }

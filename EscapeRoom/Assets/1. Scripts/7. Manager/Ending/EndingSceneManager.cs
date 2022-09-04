@@ -78,6 +78,12 @@ public class EndingSceneManager : MonoBehaviour
 
             narrPlayer.PlaySound(count);
             float duration = narrPlayer.GetAudioPlayTime(count);
+
+            if (count == 7 || count == 9)
+            {
+                duration += 1.5f;
+            }
+
             yield return new WaitForSeconds(duration);
             count++;
         }
@@ -108,5 +114,10 @@ public class EndingSceneManager : MonoBehaviour
     public void DeActiveImage()
     {
         BackgroundImage.gameObject.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

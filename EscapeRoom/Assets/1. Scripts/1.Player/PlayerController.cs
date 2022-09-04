@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour, IMouseController
     private PlayerMovement PlayerMovement;
     private Investigation Investigating;
 
-    private PlayerHUD playerHUD;
-
     [SerializeField] private DetailCameraController CameraController;
 
     KeyCode ESC = KeyCode.Escape;
@@ -24,23 +22,26 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     void Awake()
     {
-        playerHUD = GetComponent<PlayerHUD>();
         RotateToMouse = GetComponent<RotateToMouse>();
         PlayerMovement = GetComponent<PlayerMovement>();
         audioSource = GetComponent<AudioSource>();
         Investigating = GetComponent<Investigation>();
-
         MouseCursorLock();
+    }
+    
+    void Start()
+    {
+        PlayerHUD.Instance.ActiveCenterDot();
     }
 
     void Update()
     {
         if (true == CameraManager.Instance.Cameras[0].enabled && 
-            false == playerHUD.IsActiveInventoryUI() && 
-            false == playerHUD.IsActiveGetItemUI() && 
-            false == playerHUD.IsActivePushedUI() &&
-            false == playerHUD.IsActiveHintUI() && 
-            false == playerHUD.IsActiveSettingUI())
+            false == PlayerHUD.Instance.IsActiveInventoryUI() && 
+            false == PlayerHUD.Instance.IsActiveGetItemUI() && 
+            false == PlayerHUD.Instance.IsActivePushedUI() &&
+            false == PlayerHUD.Instance.IsActiveHintUI() && 
+            false == PlayerHUD.Instance.IsActiveSettingUI())
         {
             UpdateRaycasting();
             UpdateRotate();
@@ -60,32 +61,41 @@ public class PlayerController : MonoBehaviour, IMouseController
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (playerHUD.IsActiveGetItemUI() == true && playerHUD.IsReadyToDeactiveGetItemUI == true)
+            if (PlayerHUD.Instance.IsActiveGetItemUI() == true && PlayerHUD.Instance.IsReadyToDeactiveGetItemUI == true)
             {
-                playerHUD.DeActiveGetItemUI();
+                PlayerHUD.Instance.DeActiveGetItemUI();
             }
         }
 
         if (Input.GetKeyDown(ESC))
         {
-            if (false == playerHUD.IsActiveHintUI() && 
-                false == playerHUD.IsActiveGetItemUI() &&
-                false == playerHUD.IsActiveInventoryUI() &&
-                false == playerHUD.IsActiveSettingUI() &&
+            if (false == PlayerHUD.Instance.IsActiveHintUI() && 
+                false == PlayerHUD.Instance.IsActiveGetItemUI() &&
+                false == PlayerHUD.Instance.IsActiveInventoryUI() &&
+                false == PlayerHUD.Instance.IsActiveSettingUI() &&
                 false == CameraManager.Instance.Cameras[1].enabled && 
                 false == CameraManager.Instance.Cameras[2].enabled)
             {
-                playerHUD.SwitchingPushedUI();
+                PlayerHUD.Instance.SwitchingPushedUI();
                 DeActiveMoveSound();
             }
 
-            if (playerHUD.IsActiveHintUI()) playerHUD.DeActiveHintImage();
+            if (PlayerHUD.Instance.IsActiveHintUI()) PlayerHUD.Instance.DeActiveHintImage();
 
-            if (playerHUD.IsActiveGetItemUI()) playerHUD.DeActiveGetItemUI();
+            if (PlayerHUD.Instance.IsActiveGetItemUI()) PlayerHUD.Instance.DeActiveGetItemUI();
 
-            if (playerHUD.IsActiveReturnButtonUI()) playerHUD.DeActiveReturnButtonUI();
+            if (PlayerHUD.Instance.IsActiveReturnButtonUI()) PlayerHUD.Instance.DeActiveReturnButtonUI();
 
-            if (playerHUD.IsActiveSettingUI()) playerHUD.DeActiveSettingsUI();
+            if (PlayerHUD.Instance.IsActiveSettingUI()) PlayerHUD.Instance.DeActiveSettingsUI();
+
+            if (PlayerHUD.Instance.IsActiveInventoryUI())
+            {
+                PlayerHUD.Instance.DeActiveInventoryUI();
+                MouseCursorLock();
+            }
+
+            if (PlayerHUD.Instance.IsActiveCombinationUI()) PlayerHUD.Instance.DeActiveCombinationUI();
+
                 
             if (CameraManager.Instance.Cameras[1].enabled || CameraManager.Instance.Cameras[2].enabled) CameraManager.Instance.InitMainCamera();
         }
@@ -99,10 +109,10 @@ public class PlayerController : MonoBehaviour, IMouseController
         // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
         if (CameraManager.Instance.Cameras[1].enabled == true || CameraManager.Instance.Cameras[2].enabled == true)
         {
-            if (playerHUD.IsActiveLockedUI() == true || playerHUD.IsMouseClikedUI() == true)
+            if (PlayerHUD.Instance.IsActiveLockedUI() == true || PlayerHUD.Instance.IsMouseClikedUI() == true)
             {
-                playerHUD.DeActiveLockedUI();
-                playerHUD.DeActiveMouseClickUI();
+                PlayerHUD.Instance.DeActiveLockedUI();
+                PlayerHUD.Instance.DeActiveMouseClickUI();
             }
         }
     }
@@ -147,20 +157,15 @@ public class PlayerController : MonoBehaviour, IMouseController
         {
             DeActiveMoveSound();
 
-            if (playerHUD.IsActiveInventoryUI() == false)
+            if (PlayerHUD.Instance.IsActiveInventoryUI() == false)
             {
-                playerHUD.ActiveInventoryUI();
+                PlayerHUD.Instance.ActiveInventoryUI();
                 InventoryManager.Instance.ListItems();
             }
             else
             {
-                playerHUD.DeActiveInventoryUI();
+                PlayerHUD.Instance.DeActiveInventoryUI();
             }
-        }
-
-        if (playerHUD.IsActiveInventoryUI() == true)
-        {
-            MouseCursorUnLock();
         }
     }
 
@@ -229,11 +234,5 @@ public class PlayerController : MonoBehaviour, IMouseController
         {
             audioSource.Stop();
         }
-    }
-
-    public void GameQuit()
-    {
-        Application.Quit();
-        Debug.Log("게임종료");
     }
 }

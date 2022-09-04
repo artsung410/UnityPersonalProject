@@ -11,7 +11,6 @@ enum cam
 
 public class CameraManager : MonoBehaviour, IMouseController
 {
-    [SerializeField] private PlayerHUD playerHUD;
     public static CameraManager Instance;
     public Vector3 prevDetailViewCameraPos;
 
@@ -40,13 +39,13 @@ public class CameraManager : MonoBehaviour, IMouseController
             EnigmaCameraAnimator.SetBool("onBottom", false);
             EnigmaCameraAnimator.SetBool("onMiddle", false);
             Enigma.Instance.InitParts();
-            playerHUD.DeActiveEnigmaInitButtonUI();
+            PlayerHUD.Instance.DeActiveEnigmaInitButtonUI();
         }
 
         Cameras[0].enabled = true;
         Cameras[1].enabled = false;
         Cameras[2].enabled = false;
-        playerHUD.ActiveCenterDot();
+        PlayerHUD.Instance.ActiveCenterDot();
         MouseCursorLock();
     }
 
@@ -55,8 +54,8 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[0].enabled = false;
         Cameras[1].enabled = true;
         Cameras[2].enabled = false;
-        playerHUD.DeActiveCentorDot();
-        playerHUD.ActiveReturnButtonUI();
+        PlayerHUD.Instance.DeActiveCentorDot();
+        PlayerHUD.Instance.ActiveReturnButtonUI();
         MouseCursorUnLock();
     }
 
@@ -65,8 +64,8 @@ public class CameraManager : MonoBehaviour, IMouseController
         Cameras[2].enabled = true;
         Cameras[0].enabled = false;
         Cameras[1].enabled = false;
-        playerHUD.DeActiveCentorDot();
-        playerHUD.ActiveReturnButtonUI();
+        PlayerHUD.Instance.DeActiveCentorDot();
+        PlayerHUD.Instance.ActiveReturnButtonUI();
         MouseCursorUnLock();
     }
 

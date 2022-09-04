@@ -10,6 +10,9 @@ public class TitleSceneManager : MonoBehaviour
     [Header("FadeImage")]
     [SerializeField] private GameObject FadeImage;
 
+    [Header("0. ManualUI")]
+    [SerializeField] private GameObject ManualUI;
+
     [Header("1. GameStartUI")]
     [SerializeField] private GameObject GameStartUI;
 
@@ -21,7 +24,7 @@ public class TitleSceneManager : MonoBehaviour
 
     [Header("3. SkipButtonUI")]
     [SerializeField] private GameObject SkipButtonUI;
-    
+
 
     // 백그라운드 이미지 / 자막
     [Header("4. BackgroundImage")]
@@ -43,6 +46,15 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI subtitleText_Kor;
     public string[] subtitles;
     public string[] subtitles_Kor;
+
+    // SystemSound
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip buttonClickSound;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -137,6 +149,12 @@ public class TitleSceneManager : MonoBehaviour
         }
     }
 
+    public void PlayButtonClickSound()
+    {
+        audioSource.clip = buttonClickSound;
+        audioSource.Play();
+    }
+
     IEnumerator PlayBackgroundMusic()
     {
         bgmPlayer.PlaySound();
@@ -159,5 +177,20 @@ public class TitleSceneManager : MonoBehaviour
     public void DeActiveImage()
     {
         BackgroundImage.gameObject.SetActive(false);
+    }
+
+    public void ActivateManualUI()
+    {
+        ManualUI.SetActive(true);
+    }
+
+    public void DeActivateManualUI()
+    {
+        ManualUI.SetActive(false);
+    }
+
+    public void GameQuit()
+    {
+        Application.Quit();
     }
 }

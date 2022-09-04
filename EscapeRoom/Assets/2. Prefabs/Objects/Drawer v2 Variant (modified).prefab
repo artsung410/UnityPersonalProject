@@ -1397,7 +1397,6 @@ GameObject:
   - component: {fileID: 6134128340362486326}
   - component: {fileID: 839973581578077758}
   - component: {fileID: 23453260817885013}
-  - component: {fileID: 6093462111808600591}
   m_Layer: 6
   m_Name: Drawer v1:3
   m_TagString: Object1
@@ -1471,19 +1470,6 @@ MonoBehaviour:
   NeedItemName: Silver_Key
   isActive: 0
   isOpened: 0
---- !u!65 &6093462111808600591
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7224817267472519547}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.005, z: 0.11}
-  m_Center: {x: -0.075, y: 0.148, z: 0.185}
 --- !u!1 &7656567342553853067
 GameObject:
   m_ObjectHideFlags: 0

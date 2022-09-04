@@ -12,6 +12,7 @@ public class NarrSoundPlayer : MonoBehaviour
     private void Awake()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = 0.5f;
     }
 
     public void DeActiveSound()
@@ -28,6 +29,7 @@ public class NarrSoundPlayer : MonoBehaviour
         }
         else
         {
+            audioSource.volume = 1f;
             audioSource.clip = narrAudioClips_ending[index];
             audioSource.Play();
         }
