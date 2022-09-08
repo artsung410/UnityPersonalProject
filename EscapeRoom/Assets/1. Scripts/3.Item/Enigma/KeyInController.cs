@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class KeyInController : MonoBehaviour
 {
-    public float pingpongSpeed = 0.5f;
-    private bool IsPushingKey = false;
-    Vector3 CurrentPosition;
-    Vector3[] PrevPosition = new Vector3[26];
-    bool[] IsPrevPositionsSave = new bool[26];
+    private float       _pingpongSpeed      = 0.5f;
+    private bool        _isPushingKey       = false;
+    private Vector3     CurrentPosition;
+    private Vector3[]   PrevPosition        = new Vector3[26];
+    private bool[]      IsPrevPositionsSave = new bool[26];
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public class KeyInController : MonoBehaviour
 
     private IEnumerator pushingKey(GameObject currentKey, int key)
     {
-        IsPushingKey = true;
+        _isPushingKey = true;
 
         DeactivePushing(currentKey);
         float y = currentKey.transform.position.y;
@@ -43,9 +43,9 @@ public class KeyInController : MonoBehaviour
         Vector3 dirDown = new Vector3(0f, 1f, -4f);
         while (true)
         {
-            if(true == IsPushingKey)
+            if(true == _isPushingKey)
             {
-                currentKey.transform.Translate(dirDown.normalized * Time.deltaTime * pingpongSpeed);
+                currentKey.transform.Translate(dirDown.normalized * Time.deltaTime * _pingpongSpeed);
                 yield return null;
             }
 
@@ -60,6 +60,6 @@ public class KeyInController : MonoBehaviour
     private IEnumerator DeactivePushing(GameObject currentKey)
     {
         yield return new WaitForSeconds(0.2f);
-        IsPushingKey = false;
+        _isPushingKey = false;
     }
 }

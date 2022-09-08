@@ -12,11 +12,11 @@ public class Cabinet : InterectiveObject
 
     public override void Operate()
     {
-        isActive = !isActive;
-        animator.SetBool("isActive", isActive);
-        if (true == isActive)
+        IsActive = !IsActive;
+        animator.SetBool("isActive", IsActive);
+        if (true == IsActive)
         {
-            SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
+            SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", IsActive);
         }
         else
         {
@@ -27,6 +27,6 @@ public class Cabinet : InterectiveObject
     IEnumerator DelayPlaySound()
     {
         yield return new WaitForSeconds(1f);
-        SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
+        SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", IsActive);
     }
 }

@@ -4136,9 +4136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653c183edce780f4ca149d4eda2f9111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 40
-  zoom_Max: -0.4
-  zoom_Min: -2
+  _zoomSpeed: 40
+  _zoomMax: -0.4
+  _zoomMin: -2
 --- !u!1 &187697874
 GameObject:
   m_ObjectHideFlags: 0
@@ -8856,8 +8856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5026c67993629b4ebb55edf4be0b908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotCamXAxisSpeed: 3
-  rotCamYAxisSpeed: 2
+  mRotCamXAxisSpeed: 5
+  mRotCamYAxisSpeed: 3
   Camera: {fileID: 963194225}
 --- !u!114 &398016899
 MonoBehaviour:
@@ -8871,10 +8871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5321397711a57478689d34e3c54af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  moveForce: {x: 0, y: 0, z: 0}
-  gravity: -20
-  jumpForce: 10
+  _MoveSpeed: 10
+  _Gravity: -9
 --- !u!114 &398016900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8889,13 +8887,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraController: {fileID: 185362499}
   audioClipWalk: {fileID: 8300000, guid: 522bdb237bab78944bef77e9e5c0ed2b, type: 3}
-  ItemList:
-  - {fileID: 11400000, guid: 50f13a9736c2e5645ad7959941e77d87, type: 2}
-  - {fileID: 11400000, guid: 893fc746551809441b034182f3fb75d3, type: 2}
-  - {fileID: 11400000, guid: aeb1c1c69eef370478c4d6a06a657c97, type: 2}
-  - {fileID: 11400000, guid: bf75faa8d980c214fa56cf7ade860aed, type: 2}
-  - {fileID: 11400000, guid: 5cceb4268eb041c48a15f81605a3e916, type: 2}
-  EnigmaItem: {fileID: 11400000, guid: 3e12a30e0dfcbb04ab0bddcf25c1d78e, type: 2}
 --- !u!114 &398016903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49612,18 +49603,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Items: []
+  InventoryItems: []
   ItemContent: {fileID: 1698157452}
   InventoryItem: {fileID: 3604354129367976027, guid: 6b972c79a14f5504ebe09887222463b8, type: 3}
   EnableRemove: {fileID: 0}
-  InventoryItems: []
-  IsGripItem: 0
   CurrentGripItemPrefab: {fileID: 0}
   CurrentGripItem: {fileID: 0}
   SelectImage: {fileID: 634013807}
   DetailsTransform: {fileID: 1698540110}
   CurrentDetailsViewItem: {fileID: 0}
-  EnigmaToolsCount: 0
-  IsEnigmaAssembled: 0
 --- !u!4 &2063273288
 Transform:
   m_ObjectHideFlags: 0
@@ -51873,6 +51861,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 421b899ba0aa05f4fb82d336cf0abe61, type: 2}
+    - target: {fileID: 5893805829464848623, guid: 9a7210e633164eb4588268fc9c92272b, type: 3}
+      propertyPath: ActiveTime
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8859975494262169494, guid: 9a7210e633164eb4588268fc9c92272b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1

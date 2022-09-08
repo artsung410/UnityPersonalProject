@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class DetailCameraController : MonoBehaviour
 {
-    [SerializeField] private float zoomSpeed = 0f;
-    [SerializeField] private float zoom_Max;
-    [SerializeField] private float zoom_Min;
+    [SerializeField] private float _zoomSpeed = 0f;
+    [SerializeField] private float _zoomMax;
+    [SerializeField] private float _zoomMin;
 
     public void ZoomInOut(float zoomDirection)
     {
         Vector3 itemPos = InventoryManager.Instance.CurrentDetailsViewItem.transform.position;
         Vector3 dir = itemPos - transform.position;
 
-        if (dir.z > zoom_Max && zoomDirection > 0)
+        if (dir.z > _zoomMax && zoomDirection > 0)
         {
-            dir.z = zoom_Max; return;
+            dir.z = _zoomMax; return;
         }
 
-        if(dir.z < zoom_Min && zoomDirection < 0)
+        if(dir.z < _zoomMin && zoomDirection < 0)
         {
-            dir.z = zoom_Min; return;
+            dir.z = _zoomMin; return;
         }
 
         else
         {
-            transform.position += dir * zoomDirection * zoomSpeed * Time.deltaTime;
+            transform.position += dir * zoomDirection * _zoomSpeed * Time.deltaTime;
         }
     }
 }

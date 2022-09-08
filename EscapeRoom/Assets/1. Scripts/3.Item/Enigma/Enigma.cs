@@ -7,29 +7,57 @@ using TMPro;
 
 public class Enigma : MonoBehaviour
 {
-    public static Enigma Instance;
-    public static int currentSceneID;
-    [SerializeField] private TextMeshPro[] text;
-    private int[] result, correctCombination;
-    public bool IsZoomIn;
-    public bool IsCorrectRotor;
+    public static Enigma        Instance;
+    public static int           currentSceneID;
+    private       int[]         result, correctCombination;
 
+    [Header("KeyOut")]
     [SerializeField] private KeyOutController keyContorl;
 
-
-    [SerializeField] private GameObject Rotor;
-    private RotateGear Rotor_left;
-    private RotateGear Rotor_middle;
-    private RotateGear Rotor_right;
-
-    [SerializeField] private GameObject ColliderSet;
+    [Header("Collider")]
+    [SerializeField] private GameObject       ColliderSet;
     private EnigmaCollider Collider_Description;
     private EnigmaCollider Collider_Rotor;
     private EnigmaCollider Collider_KeyBoard;
 
-    [Header("GlowingRotorNumbers")]
+    [Header("Rotor")]
+    [SerializeField] private TextMeshPro[] text;
+    [SerializeField] private GameObject Rotor;
     [SerializeField] private GameObject[] GlowingRotorNumbers;
+    private RotateGear  Rotor_left;
+    private RotateGear  Rotor_middle;
+    private RotateGear  Rotor_right;
     private AudioSource audioSource;
+
+    //camera
+    private bool _isZoomIn;
+    private bool _isCorrectRotor;
+
+    public bool IsZoomIn
+    {
+        get
+        {
+            return _isZoomIn;
+        }
+
+        set
+        {
+            _isZoomIn = value;
+        }
+    }
+
+    public bool IsCorrectRotor
+    {
+        get
+        {
+            return _isCorrectRotor;
+        }
+
+        set
+        {
+            _isCorrectRotor = value;
+        }
+    }
 
     private void Awake()
     {

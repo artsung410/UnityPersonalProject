@@ -620,10 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d21d1a6ed61d94690578ac0a1e19e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTime: 4
   NeedItemName: 
-  isActive: 0
-  isOpened: 0
+  ActiveTime: 0
 --- !u!95 &6307389874281705357
 Animator:
   serializedVersion: 4
@@ -1084,10 +1082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34438e61af281cc4f87a8585e5f8dc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTime: 3
   NeedItemName: Gold_Key
-  isActive: 0
-  isOpened: 0
+  ActiveTime: 3
   Lock: {fileID: 7906924518070901502}
 --- !u!95 &1582514924762516711
 Animator:

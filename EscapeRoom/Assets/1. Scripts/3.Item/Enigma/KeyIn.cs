@@ -5,24 +5,15 @@ using System;
 
 public class KeyIn : MonoBehaviour
 {
-    [SerializeField] private int Id;
-
     public static event Action<int> KeyChangeSignal = delegate { };
-    public static event Action<int> KeySignal = delegate { };
+    public static event Action<int> KeySignal       = delegate { };
 
-    Dictionary<int, int> CorrectKeys;
+    [SerializeField] private int Id;
     private AudioSource audioSource;
 
     void Awake()
     {
-        CorrectKeys = new Dictionary<int, int>();
         audioSource = gameObject.AddComponent<AudioSource>();
-
-    }
-
-    private void Start()
-    {
-        SetCorrectKey();
     }
 
     private void OnMouseDown()
@@ -34,7 +25,6 @@ public class KeyIn : MonoBehaviour
     int ChangedID;
     IEnumerator keyboardDown()
     {
-        Debug.Log(Id);
         SoundManager.Instance.PlayObjectSound(audioSource, "KeyPush");
         if (false == Enigma.Instance.IsCorrectRotor)
         {
@@ -61,15 +51,7 @@ public class KeyIn : MonoBehaviour
 
     private int ChangeCorrectKey(int key)
     {
-        int CorrectId = CorrectKeys[key];
+        int CorrectId = 25 - key;
         return CorrectId;
-    }
-
-    private void SetCorrectKey()
-    {
-        for (int i = 0; i < 26; i++)
-        {
-            CorrectKeys.Add(i, 25 - i);
-        }
     }
 }

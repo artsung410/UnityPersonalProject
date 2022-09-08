@@ -6,9 +6,8 @@ using System;
 
 public class EnigmaCollider : MonoBehaviour
 {
-    public static event Action<int> transmitID = delegate { };
+    public static event Action<int> transmitID     = delegate { };
     public static event Action colliderClickSignal = delegate { };
-
     [SerializeField] private int id;
     private BoxCollider boxCol;
 

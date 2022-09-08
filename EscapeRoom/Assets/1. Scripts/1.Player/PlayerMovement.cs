@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float  mMoveSpeed;
-    [SerializeField] private float  mGravity;
+    [SerializeField] private float  _MoveSpeed;
+    [SerializeField] private float  _Gravity;
     private Vector3                 moveForce;
     private CharacterController     controller;
 
@@ -18,11 +18,11 @@ public class PlayerMovement : MonoBehaviour
     {       
         if (!controller.isGrounded)
         {
-            moveForce.y += mGravity * Time.deltaTime;
+            moveForce.y += _Gravity * Time.deltaTime;
         }
 
         direction = transform.rotation * new Vector3(direction.x, 0, direction.z);
-        moveForce = new Vector3(direction.x * mMoveSpeed, moveForce.y, direction.z * mMoveSpeed);
+        moveForce = new Vector3(direction.x * _MoveSpeed, moveForce.y, direction.z * _MoveSpeed);
         controller.Move(moveForce * Time.deltaTime);
     }
 }

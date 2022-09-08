@@ -22,11 +22,11 @@ public class ToolBox : InterectiveObject
     {
         if (LockController.isNumLockOpen == true)
         {
-            isActive = !isActive;
-            animator.SetBool("isActive", isActive);
-            if (true == isActive)
+            IsActive = !IsActive;
+            animator.SetBool("isActive", IsActive);
+            if (true == IsActive)
             {
-                SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", isActive);
+                SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", IsActive);
             }
             else
             {
@@ -43,12 +43,12 @@ public class ToolBox : InterectiveObject
 
     public void SetAvailability()
     {
-        isOpened = true;
+        IsOpened = true;
     }
 
     private IEnumerator delayPlaySound()
     {
         yield return new WaitForSeconds(1.5f);
-        SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", isActive);
+        SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", IsActive);
     }
 }

@@ -15,13 +15,13 @@ public class CabinetNeedsKey : InterectiveObject
 
     public override void Operate()
     {
-        if(isOpened)
+        if(IsOpened)
         {
-            isActive = !isActive;
-            animator.SetBool("isActive", isActive);
-            if (true == isActive)
+            IsActive = !IsActive;
+            animator.SetBool("isActive", IsActive);
+            if (true == IsActive)
             {
-                SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
+                SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", IsActive);
             }
             else
             {
@@ -59,9 +59,9 @@ public class CabinetNeedsKey : InterectiveObject
 
     private IEnumerator SetAvailability()
     {
-        yield return new WaitForSeconds(activeTime);
+        yield return new WaitForSeconds(ActiveTime);
         Destroy(Lock);
-        isOpened = true;
+        IsOpened = true;
         animator.SetBool("isOpened", true);
         animator.SetBool("isActive", false);
     }
@@ -77,6 +77,6 @@ public class CabinetNeedsKey : InterectiveObject
     IEnumerator DelayPlaySound()
     {
         yield return new WaitForSeconds(1f);
-        SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
+        SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", IsActive);
     }
 }

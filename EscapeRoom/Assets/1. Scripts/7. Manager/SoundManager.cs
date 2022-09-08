@@ -95,7 +95,6 @@ public class SoundManager : MonoBehaviour
         {
             InteractiveAudioSources[i].volume = 0.75f;
         }
-
     }
 
     public void playPickupSound(Item item)

@@ -12,8 +12,8 @@ public class Carpet : InterectiveObject
 
     public override void Operate()
     {
-        isActive = !isActive;
-        animator.SetBool("isActive", isActive);
+        IsActive = !IsActive;
+        animator.SetBool("isActive", IsActive);
         SoundManager.Instance.PlayObjectSound(audioSource, "Carpet");
     }
 }

@@ -54,7 +54,7 @@ public class PlayerHUD : MonoBehaviour
     public Sprite[]        HintSprites;
 
     public static PlayerHUD Instance;
-    bool isActivePushedUI = false;
+    private bool _IsActivePushedUI = false;
 
     private void Awake()
     {
@@ -119,8 +119,8 @@ public class PlayerHUD : MonoBehaviour
     }
     public void SwitchingPushedUI()
     {
-        isActivePushedUI = !isActivePushedUI;
-        PushedUI.SetActive(isActivePushedUI);
+        _IsActivePushedUI = !_IsActivePushedUI;
+        PushedUI.SetActive(_IsActivePushedUI);
 
         if (IsActivePushedUI())
         {
@@ -140,7 +140,7 @@ public class PlayerHUD : MonoBehaviour
     }
     public void DeActivePushedUI()
     {
-        isActivePushedUI = false;
+        _IsActivePushedUI = false;
         PushedUI.SetActive(false);
     }
 

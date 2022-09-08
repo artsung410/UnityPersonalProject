@@ -10,8 +10,8 @@ public class CombinationSlot : MonoBehaviour
   
     [SerializeField] private List<Item> CslotItems = new List<Item>();
     [SerializeField] private Item       EnigmaItem;
-    private          int                mChildSpriteMaxCount = 4;
-    private          int                mEnigmaToolsCount = 0;
+    private          int                _ChildSpriteMaxCount = 4;
+    private          int                _EnigmaToolsCount = 0;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class CombinationSlot : MonoBehaviour
 
     private void remveAllSprite()
     {
-        for (int i = 0; i < mChildSpriteMaxCount; i++)
+        for (int i = 0; i < _ChildSpriteMaxCount; i++)
         {
             transform.GetChild(i).gameObject.GetComponent<Image>().sprite = null;
             transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
@@ -44,7 +44,7 @@ public class CombinationSlot : MonoBehaviour
 
     public void InitSlots()
     {
-        if (CslotItems.Count == 4 && mEnigmaToolsCount == 4)
+        if (CslotItems.Count == 4 && _EnigmaToolsCount == 4)
         {
             RunCombination();
             Debug.Log("조합 완료");
@@ -57,7 +57,7 @@ public class CombinationSlot : MonoBehaviour
             CslotItems.Remove(CslotItems[i]);
         }
 
-        mEnigmaToolsCount = 0;
+        _EnigmaToolsCount = 0;
     }
 
     public void InputItem(Item item)
@@ -80,7 +80,7 @@ public class CombinationSlot : MonoBehaviour
 
         if (item.id == 5 || item.id == 6 || item.id == 7 || item.id == 8)
         {
-            ++mEnigmaToolsCount;
+            ++_EnigmaToolsCount;
         }
     }
 

@@ -9,19 +9,47 @@ public abstract class InterectiveObject : MonoBehaviour
     public static event Action SelectedMessage = delegate { };
 
     [Header("InterectiveObject")]
-    public float activeTime;
-    public string NeedItemName;
+    private float _activeTime;
+    private string _needItemName;
+    private bool _isActive;
+    private bool _isOpend;
 
-    public bool isActive;
-    [HideInInspector] public bool isOpened;
     protected Animator animator;
     protected AudioSource audioSource;
+    public string NeedItemName;
+    public float ActiveTime;
 
+    public bool IsActive
+    {
+        get
+        {
+            return _isActive;
+        }
+
+        set
+        {
+            _isActive = value;
+        }
+    }
+
+    public bool IsOpened
+    {
+        get
+        {
+            return _isOpend;
+        }
+
+        set
+        {
+            _isOpend = value;
+        }
+    }
+   
     public abstract void Operate();
 
     public void PopUpMessage()
     {
-        if (NeedItemName.Length >= 1 && false == isOpened)
+        if (NeedItemName.Length >= 1 && false == IsOpened)
         {
             UnLockedMessage();
         }

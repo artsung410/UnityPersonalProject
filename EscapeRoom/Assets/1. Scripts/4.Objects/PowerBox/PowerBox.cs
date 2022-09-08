@@ -15,14 +15,14 @@ public class PowerBox : InterectiveObject
 
     public override void Operate()
     {
-        if (isOpened)
+        if (IsOpened)
         {
             // <여러번 들어오는 조건문>
-            isActive = !isActive;
-            animator.SetBool("isActive", isActive);
-            if (true == isActive)
+            IsActive = !IsActive;
+            animator.SetBool("isActive", IsActive);
+            if (true == IsActive)
             {
-                SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
+                SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", IsActive);
             }
             else
             {
@@ -61,8 +61,8 @@ public class PowerBox : InterectiveObject
 
     private IEnumerator setAvailability()
     {
-        yield return new WaitForSeconds(activeTime);
-        isOpened = true;
+        yield return new WaitForSeconds(ActiveTime);
+        IsOpened = true;
         animator.SetBool("isOpened", true);
         animator.SetBool("isActive", false);
     }
@@ -78,6 +78,6 @@ public class PowerBox : InterectiveObject
     private IEnumerator delayPlaySound()
     {
         yield return new WaitForSeconds(0.7f);
-        SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);
+        SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", IsActive);
     }
 }

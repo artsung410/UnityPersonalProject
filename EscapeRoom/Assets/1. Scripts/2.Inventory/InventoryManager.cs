@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum ItemTag
+enum eItemTag
 {
     Lench,
     Note,
@@ -38,9 +38,41 @@ public class InventoryManager : MonoBehaviour
     private bool _isEnigmaAssembled;
     private bool _isGripItem;
 
-    public int EnigmaToolsCount{ get { return _enigmaToolsCount; } set { _enigmaToolsCount = value; }}
-    public bool IsEnigmaAssembled { get { return _isEnigmaAssembled; } set { _isEnigmaAssembled = value; } }
-    public bool IsGripItem { get { return _isGripItem; } set { _isGripItem = value; } }
+    public int EnigmaToolsCount
+    { 
+        get 
+        { 
+            return _enigmaToolsCount; 
+        } 
+        set 
+        { 
+            _enigmaToolsCount = value; 
+        }
+    }
+
+    public bool IsEnigmaAssembled
+    {
+        get
+        {
+            return _isEnigmaAssembled;
+        }
+        set
+        {
+            _isEnigmaAssembled = value;
+        }
+    }
+
+    public bool IsGripItem 
+    { 
+        get 
+        { 
+            return _isGripItem; 
+        } 
+        set 
+        { 
+            _isGripItem = value; 
+        } 
+    }
 
 
     private void Awake()

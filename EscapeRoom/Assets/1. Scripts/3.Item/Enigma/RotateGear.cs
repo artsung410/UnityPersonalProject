@@ -9,7 +9,7 @@ public class RotateGear : MonoBehaviour
     public static event Action<string, int> RotatedGear = delegate { };
     private Animator animator;
     private AudioSource audioSource;
-    private int numberShown;
+    private int _numberShown;
 
     private void Awake()
     {
@@ -32,18 +32,18 @@ public class RotateGear : MonoBehaviour
     }
     public void InitSetNumber(int number)
     {
-        numberShown = number;
+        _numberShown = number;
     }
     private void RotateWheel()
     {
-        numberShown += 1;
+        _numberShown += 1;
 
-        if (numberShown > 9)
+        if (_numberShown > 9)
         {
-            numberShown = 0;
+            _numberShown = 0;
         }
 
-        RotatedGear(name, numberShown);
+        RotatedGear(name, _numberShown);
         SoundManager.Instance.PlayObjectSound(audioSource, "RotateLock");
     }
 }

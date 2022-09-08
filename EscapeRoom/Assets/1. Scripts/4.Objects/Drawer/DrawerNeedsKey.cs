@@ -12,12 +12,12 @@ public class DrawerNeedsKey : InterectiveObject
 
     public override void Operate()
     {
-        if (isOpened)
+        if (IsOpened)
         {
             // <여러번 들어오는 조건문>
-            isActive = !isActive;
-            animator.SetBool("isActive", isActive);
-            SoundManager.Instance.PlayObjectSound(audioSource, "DrawerOpen", "DrawerClose", isActive);
+            IsActive = !IsActive;
+            animator.SetBool("isActive", IsActive);
+            SoundManager.Instance.PlayObjectSound(audioSource, "DrawerOpen", "DrawerClose", IsActive);
         }
 
         else
@@ -50,8 +50,8 @@ public class DrawerNeedsKey : InterectiveObject
 
     private IEnumerator SetAvailability()
     {
-        yield return new WaitForSeconds(activeTime);
-        isOpened = true;
+        yield return new WaitForSeconds(ActiveTime);
+        IsOpened = true;
         animator.SetBool("isOpened", true);
         animator.SetBool("isActive", false);
     }

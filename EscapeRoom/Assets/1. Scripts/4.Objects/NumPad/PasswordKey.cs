@@ -7,9 +7,7 @@ public class PasswordKey : MonoBehaviour
 {
     public static event Action<int> KeypadSignal = delegate { };
     private             AudioSource audioSource;
-    private int _Key;
-    public  int  Key { get { return _Key; } set { _Key = value; }}
-
+    public int Key;
 
     private void Awake()
     {
@@ -18,7 +16,7 @@ public class PasswordKey : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartCoroutine("Pushed");
+        StartCoroutine(pushed());
     }
 
     private IEnumerator pushed()

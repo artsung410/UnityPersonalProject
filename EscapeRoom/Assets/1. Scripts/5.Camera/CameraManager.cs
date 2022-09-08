@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum cam
+enum eCam
 {
     main,
     detail,
@@ -17,23 +17,27 @@ public class CameraManager : MonoBehaviour, IMouseController
     public Camera[] Cameras;
     private Animator EnigmaCameraAnimator;
 
+    private int _MainCam = (int)eCam.main;
+    private int _DetailCam = (int)eCam.detail;
+    private int _EnimgaCam = (int)eCam.enigma;
+
     private void Awake()
     {
-        prevDetailViewCameraPos = Cameras[1].gameObject.transform.position;
-        EnigmaCameraAnimator = Cameras[2].GetComponent<Animator>();
+        prevDetailViewCameraPos = Cameras[_DetailCam].gameObject.transform.position;
+        EnigmaCameraAnimator = Cameras[_EnimgaCam].GetComponent<Animator>();
         Instance = this;
     }
 
     public void InitMainCamera()
     {
         // 2번째 위치에서 메인으로 전환할때, 카메라 위치 초기화.
-        if (Cameras[1].enabled == true)
+        if (Cameras[_DetailCam].enabled == true)
         {
-            Cameras[1].gameObject.transform.position = prevDetailViewCameraPos;
+            Cameras[_DetailCam].gameObject.transform.position = prevDetailViewCameraPos;
         }
 
         // 3번째 카메라에서 메인으로 전환할때, 카메라 애니메이션 초기화
-        else if (Cameras[2].enabled == true)
+        else if (Cameras[_EnimgaCam].enabled == true)
         {
             EnigmaCameraAnimator.SetBool("onTop", false);
             EnigmaCameraAnimator.SetBool("onBottom", false);
@@ -42,18 +46,18 @@ public class CameraManager : MonoBehaviour, IMouseController
             PlayerHUD.Instance.DeActiveEnigmaInitButtonUI();
         }
 
-        Cameras[0].enabled = true;
-        Cameras[1].enabled = false;
-        Cameras[2].enabled = false;
+        Cameras[_MainCam].enabled = true;
+        Cameras[_DetailCam].enabled = false;
+        Cameras[_EnimgaCam].enabled = false;
         PlayerHUD.Instance.ActiveCenterDot();
         MouseCursorLock();
     }
 
     public void InitDetailViewCamera()
     {
-        Cameras[0].enabled = false;
-        Cameras[1].enabled = true;
-        Cameras[2].enabled = false;
+        Cameras[_MainCam].enabled = false;
+        Cameras[_DetailCam].enabled = true;
+        Cameras[_EnimgaCam].enabled = false;
         PlayerHUD.Instance.DeActiveCentorDot();
         PlayerHUD.Instance.ActiveReturnButtonUI();
         MouseCursorUnLock();
@@ -61,9 +65,9 @@ public class CameraManager : MonoBehaviour, IMouseController
 
     public void InitEnigmaViewCamera()
     {
-        Cameras[2].enabled = true;
-        Cameras[0].enabled = false;
-        Cameras[1].enabled = false;
+        Cameras[_EnimgaCam].enabled = true;
+        Cameras[_MainCam].enabled = false;
+        Cameras[_DetailCam].enabled = false;
         PlayerHUD.Instance.DeActiveCentorDot();
         PlayerHUD.Instance.ActiveReturnButtonUI();
         MouseCursorUnLock();

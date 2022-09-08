@@ -496,12 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f75bde0ff4447479a632dc2cb765c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTime: 3.5
   NeedItemName: Lench
-  isActive: 0
-  isOpened: 0
+  ActiveTime: 3.5
   Bolt: {fileID: 1630850351807297832}
-  activeTime_AfterCompletion: 3
 --- !u!1 &316453724365848212
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,11 +12,11 @@ public class Door : InterectiveObject
 
     public override void Operate()
     {
-        isActive = !isActive;
-        animator.SetBool("isActive", isActive);
-        if (true == isActive)
+        IsActive = !IsActive;
+        animator.SetBool("isActive", IsActive);
+        if (true == IsActive)
         {
-            SoundManager.Instance.PlayObjectSound(audioSource, "WoddenDoorOpen", "WoddenDoorClose", isActive);
+            SoundManager.Instance.PlayObjectSound(audioSource, "WoddenDoorOpen", "WoddenDoorClose", IsActive);
         }
         else
         {
@@ -27,6 +27,6 @@ public class Door : InterectiveObject
     IEnumerator DelayPlaySound()
     {
         yield return new WaitForSeconds(0.7f);
-        SoundManager.Instance.PlayObjectSound(audioSource, "WoddenDoorOpen", "WoddenDoorClose", isActive);
+        SoundManager.Instance.PlayObjectSound(audioSource, "WoddenDoorOpen", "WoddenDoorClose", IsActive);
     }
 }

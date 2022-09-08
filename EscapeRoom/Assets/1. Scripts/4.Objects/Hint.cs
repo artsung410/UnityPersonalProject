@@ -6,7 +6,17 @@ using UnityEngine.UI;
 public class Hint : InterectiveObject
 {
     private int _ID;
-    public int ID { get { return _ID; } set { _ID = value; }}
+    public int ID 
+    { 
+        get 
+        { 
+            return _ID; 
+        } 
+        set 
+        { 
+            _ID = value; 
+        }
+    }
 
     private void Awake()
     {

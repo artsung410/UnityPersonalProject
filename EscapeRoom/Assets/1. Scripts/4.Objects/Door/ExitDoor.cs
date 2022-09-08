@@ -17,7 +17,7 @@ public class ExitDoor : InterectiveObject
     {
         if (true == PasswordController.IsGameWin && false == _isExitDoorOpen)
         {
-            isActive = true;
+            IsActive = true;
             _isExitDoorOpen = true;
             SoundManager.Instance.PlayObjectSound(audioSource, "ExitDoorOpen");
             animator.SetBool("isActive", true);

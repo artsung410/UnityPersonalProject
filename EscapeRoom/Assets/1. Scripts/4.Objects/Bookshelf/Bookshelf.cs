@@ -21,7 +21,7 @@ public class Bookshelf : InterectiveObject
     {
         if (true == PasswordController.IsGameWin && false == isBookshelfMove)
         {
-            isActive = true;
+            IsActive = true;
             isBookshelfMove = true;
             SoundManager.Instance.PlayObjectSound(audioSource, "BoxMove");
             animator.SetBool("isActive", true);
@@ -30,6 +30,6 @@ public class Bookshelf : InterectiveObject
 
     public void SetAvailability()
     {
-        isOpened = true;
+        IsOpened = true;
     }
 }
