@@ -6,7 +6,6 @@ public class ToolBox : InterectiveObject
 {
     [Header("ToolBox")]
     [SerializeField] private float activeTime_AfterCompletion;
-    private bool isPickUpKey;
 
     private void Awake()
     {
@@ -31,7 +30,7 @@ public class ToolBox : InterectiveObject
             }
             else
             {
-                StartCoroutine(DelayPlaySound());
+                StartCoroutine(delayPlaySound());
             }
 
         }
@@ -47,7 +46,7 @@ public class ToolBox : InterectiveObject
         isOpened = true;
     }
 
-    IEnumerator DelayPlaySound()
+    private IEnumerator delayPlaySound()
     {
         yield return new WaitForSeconds(1.5f);
         SoundManager.Instance.PlayObjectSound(audioSource, "ToolBoxOpen", "ToolBoxClose", isActive);

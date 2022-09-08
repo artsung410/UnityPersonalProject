@@ -56,10 +56,10 @@ public class DrawerNeedsKey : InterectiveObject
         animator.SetBool("isActive", false);
     }
 
-    float delayTime = 1.3f;
+    float _delayTime = 1.3f;
     private IEnumerator PlayKeyUnlockSound()
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(_delayTime);
         SoundManager.Instance.PlayObjectSound(audioSource, "Unlock");
     }
 }

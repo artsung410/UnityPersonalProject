@@ -6,11 +6,9 @@ using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    public static PlayerHUD Instance;
     [Header("PaushedUI")]
     [SerializeField]  private GameObject      PushedUI;
-    bool isActivePushedUI = false;
-
+    
     [Header("SettingsUI")]
     [SerializeField]  private GameObject      SettingsUI;
 
@@ -54,6 +52,9 @@ public class PlayerHUD : MonoBehaviour
     [Header("HintImage")]
     public GameObject      HintImage;
     public Sprite[]        HintSprites;
+
+    public static PlayerHUD Instance;
+    bool isActivePushedUI = false;
 
     private void Awake()
     {
@@ -106,7 +107,6 @@ public class PlayerHUD : MonoBehaviour
     {
         ReturnButtonUI.SetActive(true);
     }
-
     public void DeActiveReturnButtonUI()
     {
         ReturnButtonUI.SetActive(false);
@@ -117,7 +117,6 @@ public class PlayerHUD : MonoBehaviour
     {
         return PushedUI.activeSelf;
     }
-
     public void SwitchingPushedUI()
     {
         isActivePushedUI = !isActivePushedUI;
@@ -139,7 +138,6 @@ public class PlayerHUD : MonoBehaviour
             }
         }
     }
-
     public void DeActivePushedUI()
     {
         isActivePushedUI = false;
@@ -155,7 +153,6 @@ public class PlayerHUD : MonoBehaviour
     {
         SettingsUI.SetActive(true);
     }
-
     public void DeActiveSettingsUI()
     {
         SettingsUI.SetActive(false);
@@ -197,7 +194,6 @@ public class PlayerHUD : MonoBehaviour
         EnigmaInitButtonUI.SetActive(false);
     }
 
-  
     // GetItemUI
     public bool IsActiveGetItemUI()
     {
@@ -276,7 +272,6 @@ public class PlayerHUD : MonoBehaviour
         MouseClickUI.SetActive(false);
     }
 
-
     // LockedUI
     public bool IsActiveLockedUI()
     {
@@ -332,13 +327,11 @@ public class PlayerHUD : MonoBehaviour
         Cursor.visible = false;
     }
 
-
     // MainScene_ButtonEvent
     public void RestartButtonEvent()
     {
         GameManager.Instance.LoadTitleScene();
     }
-
     public void QuitButtonEvent()
     {
         GameManager.Instance.GameQuit();

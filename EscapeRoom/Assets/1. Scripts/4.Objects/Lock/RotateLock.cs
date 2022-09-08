@@ -7,7 +7,7 @@ public class RotateLock : MonoBehaviour
 {
     public static event Action<string, int> Rotated = delegate { };
 
-    private int numberShown;
+    private int         numberShown;
     private AudioSource audioSource;
 
     private void Awake()
@@ -23,28 +23,28 @@ public class RotateLock : MonoBehaviour
     {
         if(false == LockController.isNumLockOpen)
         {
-            StartCoroutine(RotateWheel());
+            StartCoroutine(rotateWheel());
         }
         else
         {
-            StopCoroutine(RotateWheel());
+            StopCoroutine(rotateWheel());
         }
     }
 
-    float angle;
-    float rotorSpeed = 0.01f;
-    float degree = 1f;
+    private float _angle;
+    private float _rotorSpeed = 0.01f;
+    private float _degree = 1f;
 
-    private IEnumerator RotateWheel()
+    private IEnumerator rotateWheel()
     {
         SoundManager.Instance.PlayObjectSound(audioSource, "RotateLock");
 
-        angle = 36f;
+        _angle = 36f;
 
-        for (int i = 0; i < angle; i++)
+        for (int i = 0; i < _angle; i++)
         {
-            yield return new WaitForSeconds(rotorSpeed);
-            transform.Rotate(0f, 0f, degree);
+            yield return new WaitForSeconds(_rotorSpeed);
+            transform.Rotate(0f, 0f, _degree);
         }
 
         numberShown += 1;

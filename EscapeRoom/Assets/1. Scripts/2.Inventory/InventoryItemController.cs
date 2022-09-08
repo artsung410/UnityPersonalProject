@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class InventoryItemController : MonoBehaviour
 {
-    Item item;
+    [SerializeField] private Button RemoveButton;
+                     private Item   item;
 
-    public Button RemoveButton;
 
     public void RemoveItem()
     {

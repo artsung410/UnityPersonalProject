@@ -5,10 +5,12 @@ using System;
 
 public class PasswordKey : MonoBehaviour
 {
-    public int Key;
-
     public static event Action<int> KeypadSignal = delegate { };
-    private AudioSource audioSource;
+    private             AudioSource audioSource;
+    private int _Key;
+    public  int  Key { get { return _Key; } set { _Key = value; }}
+
+
     private void Awake()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -19,7 +21,7 @@ public class PasswordKey : MonoBehaviour
         StartCoroutine("Pushed");
     }
 
-    IEnumerator Pushed()
+    private IEnumerator pushed()
     {
         SoundManager.Instance.PlayObjectSound(audioSource, "PushKey");
         KeypadSignal(Key);

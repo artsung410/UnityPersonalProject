@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-enum PasswordKeys
+enum ePasswordKeys
 {
     clear = 10,
     delete
@@ -14,20 +14,19 @@ public class PasswordController : MonoBehaviour
 {
     public static event Action PasswordUnlock = delegate { };
 
-    [SerializeField] private TextMeshPro ScreenText;
-    [SerializeField] private GameObject GreenLight;
-    [SerializeField] private GameObject RedLight;
+    [SerializeField] private TextMeshPro    ScreenText;
+    [SerializeField] private GameObject     GreenLight;
+    [SerializeField] private GameObject     RedLight;
 
-
-    public static bool IsGameWin;
-    private string CorrectNum;
-    private AudioSource audioSource;
+    public static            bool           IsGameWin;
+    private                  string         CorrectNum;
+    private                  AudioSource    audioSource;
     
     private void Awake()
     {
         IsGameWin = false;
         CorrectNum = "4617460";
-        PasswordKey.KeypadSignal += ShowPasswordOnScreen;
+        PasswordKey.KeypadSignal += showPasswordOnScreen;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -36,17 +35,17 @@ public class PasswordController : MonoBehaviour
         ScreenText.text = "0";
     }
 
-    string keyStr = "";
-    private void ShowPasswordOnScreen(int key)
+    private string _keyStr = "";
+    private void showPasswordOnScreen(int key)
     {
         if (false == IsGameWin)
         {
-            if (key == (int)PasswordKeys.clear)
+            if (key == (int)ePasswordKeys.clear)
             {
                 ScreenText.text = "0";
             }
 
-            else if (key == (int)PasswordKeys.delete)
+            else if (key == (int)ePasswordKeys.delete)
             {
                 if (ScreenText.text.Length == 1)
                 {
@@ -54,7 +53,7 @@ public class PasswordController : MonoBehaviour
                     return;
                 }
 
-                if (keyStr == "0")
+                if (_keyStr == "0")
                 {
                     return;
                 }
@@ -66,16 +65,16 @@ public class PasswordController : MonoBehaviour
 
             else
             {
-                keyStr = key.ToString();
+                _keyStr = key.ToString();
 
                 if (ScreenText.text == "0")
                 {
                     ScreenText.text = "";
-                    ScreenText.text += keyStr;
+                    ScreenText.text += _keyStr;
                 }
                 else
                 {
-                    ScreenText.text += keyStr;
+                    ScreenText.text += _keyStr;
                 }
             }
 
@@ -91,7 +90,7 @@ public class PasswordController : MonoBehaviour
 
             if (ScreenText.text.Length == 8)
             {
-                StartCoroutine(GlowingErrorBulb());
+                StartCoroutine(glowingErrorBulb());
                 SoundManager.Instance.PlayObjectSound(audioSource, "keyPadError");
                 ScreenText.text = "0";
                 return;
@@ -99,11 +98,11 @@ public class PasswordController : MonoBehaviour
         }
     }
 
-    float lightingDuration = 1f;
-    IEnumerator GlowingErrorBulb()
+    private float _lightingDuration = 1f;
+    private IEnumerator glowingErrorBulb()
     {
         RedLight.SetActive(true);
-        yield return new WaitForSeconds(lightingDuration);
+        yield return new WaitForSeconds(_lightingDuration);
         RedLight.SetActive(false);
     }
 }

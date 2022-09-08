@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class Hint : InterectiveObject
 {
-    public int ID;
+    private int _ID;
+    public int ID { get { return _ID; } set { _ID = value; }}
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();

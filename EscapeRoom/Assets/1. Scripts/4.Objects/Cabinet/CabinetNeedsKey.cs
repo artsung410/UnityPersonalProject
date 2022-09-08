@@ -67,10 +67,10 @@ public class CabinetNeedsKey : InterectiveObject
     }
 
 
-    float delayTime = 2.2f;
+    private float _delayTime = 2.2f;
     private IEnumerator PlayKeyUnlockSound()
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(_delayTime);
         SoundManager.Instance.PlayObjectSound(audioSource, "Unlock");
     }
 

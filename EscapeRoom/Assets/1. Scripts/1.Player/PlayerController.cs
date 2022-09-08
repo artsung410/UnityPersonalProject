@@ -2,23 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour, IMouseController
 {
-    private RotateToMouse RotateToMouse; // 마우스 이동으로 카메라 회전
-    private PlayerMovement PlayerMovement;
-    private Investigation Investigating;
-
-    [SerializeField] private DetailCameraController CameraController;
-
-    KeyCode ESC = KeyCode.Escape;
+    KeyCode ESC       = KeyCode.Escape;
     KeyCode Inventory = KeyCode.I;
 
+    private RotateToMouse  RotateToMouse; 
+    private PlayerMovement PlayerMovement;
+    private Investigation  Investigating;
+
+    [SerializeField] private DetailCameraController CameraController;
     [Header("Audio Clips")]
     private AudioSource audioSource;
-    [SerializeField] private AudioClip audioClipWalk;                      // 걷기 사운드
-
-    public Item[] ItemList;
-    public Item EnigmaItem;
+    [SerializeField] private AudioClip audioClipWalk;                     
 
     void Awake()
     {
@@ -43,20 +40,9 @@ public class PlayerController : MonoBehaviour, IMouseController
             false == PlayerHUD.Instance.IsActiveHintUI() && 
             false == PlayerHUD.Instance.IsActiveSettingUI())
         {
-            UpdateRaycasting();
-            UpdateRotate();
-            UpdateMove();
-        }
-
-        // 치트키
-
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            for (int i = 0; i < ItemList.Length; i++)
-            {
-                InventoryManager.Instance.Add(ItemList[i]);
-            }
-            InventoryManager.Instance.Add(EnigmaItem);
+            updateRaycasting();
+            updateRotate();
+            updateMove();
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -101,10 +87,10 @@ public class PlayerController : MonoBehaviour, IMouseController
         }
 
         // <메인카메라일때는 기존 인벤토리만 유효>
-        if (CameraManager.Instance.Cameras[0].enabled == true && CameraManager.Instance.Cameras[2].enabled == false) UpdateInventory();
+        if (CameraManager.Instance.Cameras[0].enabled == true && CameraManager.Instance.Cameras[2].enabled == false) updateInventory();
 
         // <두번째 카메라일때는 서브 인벤토리만 유효>
-        else if (CameraManager.Instance.Cameras[1].enabled == true) UpdateSubInventory();
+        else if (CameraManager.Instance.Cameras[1].enabled == true) updateSubInventory();
 
         // [PlayerHUD.cs] 카메라 전환될때는 pickupUI를 끄도록 한다.
         if (CameraManager.Instance.Cameras[1].enabled == true || CameraManager.Instance.Cameras[2].enabled == true)
@@ -117,15 +103,15 @@ public class PlayerController : MonoBehaviour, IMouseController
         }
     }
 
-    // ###################### Section 1 ######################
-    void UpdateRotate()
+    // # Section 1
+    void updateRotate()
     {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
         RotateToMouse.CalculateRotation(mouseX, mouseY);
     }
 
-    void UpdateMove()
+    void updateMove()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -144,13 +130,13 @@ public class PlayerController : MonoBehaviour, IMouseController
 
     }
     // [Investigation.cs]
-    void UpdateRaycasting()
+    void updateRaycasting()
     {
         Investigating.RayFromCamera();
     }
 
     // [PlayerHUD.cs]
-    void UpdateInventory()
+    void updateInventory()
     {
         // 인벤토리 UI 활성화
         if (Input.GetKeyDown(Inventory))
@@ -169,9 +155,9 @@ public class PlayerController : MonoBehaviour, IMouseController
         }
     }
 
-    // ###################### Section 2 ######################
+    // # Section 2
 
-    void UpdateSubInventory()
+    void updateSubInventory()
     {
         float MouseX = Input.GetAxis("Mouse X");
         float MouseY = Input.GetAxis("Mouse Y");
@@ -182,20 +168,20 @@ public class PlayerController : MonoBehaviour, IMouseController
         // 왼쪽 마우스 클릭중 마우스를 움직일때 오브젝트 회전
         if (Input.GetMouseButton(0))
         {
-            RotateDetailsItem(MouseX, MouseY);
+            rotateDetailsItem(MouseX, MouseY);
         }
 
-        ZoomToDetailsItem();
+        zoomToDetailsItem();
     }
 
-    float speed = 3f;
-    void RotateDetailsItem(float x, float y)
+    float m_speed = 3f;
+    void rotateDetailsItem(float x, float y)
     {
         Transform ItemTransform = InventoryManager.Instance.CurrentDetailsViewItem.transform;
-        ItemTransform.Rotate(-y * speed, -x * speed, 0f, Space.World);
+        ItemTransform.Rotate(-y * m_speed, -x * m_speed, 0f, Space.World);
     }
 
-    void ZoomToDetailsItem()
+    void zoomToDetailsItem()
     {
         float t_zoomDirection = Input.GetAxis("Mouse ScrollWheel");
         Debug.Log($"[Zoom] : {t_zoomDirection}");
@@ -203,7 +189,7 @@ public class PlayerController : MonoBehaviour, IMouseController
         CameraController.ZoomInOut(t_zoomDirection);
     }
 
-    // ###################### [IMouseController] Mouse Control ######################
+    // # [IMouseController] Mouse Control 
 
     public void MouseCursorLock()
     {
@@ -217,6 +203,7 @@ public class PlayerController : MonoBehaviour, IMouseController
         Cursor.visible = true;
     }
 
+    // # etc
     public void ActiveMoveSound()
     {
         audioSource.clip = audioClipWalk;

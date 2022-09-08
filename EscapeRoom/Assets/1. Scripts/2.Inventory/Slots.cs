@@ -7,10 +7,10 @@ using System;
 
 public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public static event Action<Sprite> onCursorEnterEvent = delegate { };
-    public static event Action onCursorExitEvent = delegate { };
-    public static event Action onButtonClickEvent = delegate { };
-    public static event Action<Item> onTransmtItem = delegate { };
+    public static event Action<Sprite> onCursorEnterEvent   = delegate { };
+    public static event Action<Item>   onTransmtItem        = delegate { };
+    public static event Action         onCursorExitEvent    = delegate { };
+    public static event Action         onButtonClickEvent   = delegate { };
 
     private Image ItemIcon;
     private Camera mainCamera;

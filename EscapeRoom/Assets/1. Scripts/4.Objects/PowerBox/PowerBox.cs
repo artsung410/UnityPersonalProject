@@ -26,7 +26,7 @@ public class PowerBox : InterectiveObject
             }
             else
             {
-                StartCoroutine(DelayPlaySound());
+                StartCoroutine(delayPlaySound());
             }
         }
 
@@ -47,8 +47,8 @@ public class PowerBox : InterectiveObject
                 // 올바른 아이템 들고, 마우스 클릭시
                 animator.SetBool("isActive", true);
                 Destroy(Bolt, 3.5f);
-                StartCoroutine(DelayLenchSound());
-                StartCoroutine(SetAvailability());
+                StartCoroutine(delayLenchSound());
+                StartCoroutine(setAvailability());
             }
 
             else
@@ -59,7 +59,7 @@ public class PowerBox : InterectiveObject
         }
     }
 
-    private IEnumerator SetAvailability()
+    private IEnumerator setAvailability()
     {
         yield return new WaitForSeconds(activeTime);
         isOpened = true;
@@ -67,15 +67,15 @@ public class PowerBox : InterectiveObject
         animator.SetBool("isActive", false);
     }
 
-    float delayTime = 0.6f;
+    float _delayTime = 0.6f;
 
-    private IEnumerator DelayLenchSound()
+    private IEnumerator delayLenchSound()
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(_delayTime);
         SoundManager.Instance.PlayObjectSound(audioSource, "Lench");
     }
 
-    IEnumerator DelayPlaySound()
+    private IEnumerator delayPlaySound()
     {
         yield return new WaitForSeconds(0.7f);
         SoundManager.Instance.PlayObjectSound(audioSource, "IronDoorOpen", "IronDoorClose", isActive);

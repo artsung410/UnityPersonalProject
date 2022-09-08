@@ -19,27 +19,29 @@ enum ItemTag
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
+
     public List<Item> Items = new List<Item>();
 
-    public Transform ItemContent;
-    public GameObject InventoryItem;
+    public InventoryItemController[]   InventoryItems;
+    public Transform                   ItemContent;
+    public GameObject                  InventoryItem;
+    public Toggle                      EnableRemove;
+    public GameObject                  CurrentGripItemPrefab; 
+    public Item                        CurrentGripItem;
 
-    public Toggle EnableRemove;
-
-    public InventoryItemController[] InventoryItems;
-
-    public bool IsGripItem = false;
-    public GameObject CurrentGripItemPrefab; 
-    public Item CurrentGripItem;
-
-    [SerializeField] private Image SelectImage;
-    [Header("DetailViewInventoryMode")]
+    [SerializeField] private Image     SelectImage;
     [SerializeField] private Transform DetailsTransform;
-    public GameObject CurrentDetailsViewItem;
+    public GameObject                  CurrentDetailsViewItem;
 
     [Header("EnigmaInfo")]
-    public int EnigmaToolsCount;
-    public bool IsEnigmaAssembled;
+    private int  _enigmaToolsCount;
+    private bool _isEnigmaAssembled;
+    private bool _isGripItem;
+
+    public int EnigmaToolsCount{ get { return _enigmaToolsCount; } set { _enigmaToolsCount = value; }}
+    public bool IsEnigmaAssembled { get { return _isEnigmaAssembled; } set { _isEnigmaAssembled = value; } }
+    public bool IsGripItem { get { return _isGripItem; } set { _isGripItem = value; } }
+
 
     private void Awake()
     {
@@ -48,7 +50,25 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        CombinationSlot.CombinationComplete += GetEnigma;
+        CombinationSlot.CombinationComplete += getEnigma;
+    }
+
+    private void removeEnigmaToolsData()
+    {
+        for (int item = Items.Count - 1; item >= 0; item--)
+        {
+            if (Items[item].id == 5 || Items[item].id == 6 || Items[item].id == 7 || Items[item].id == 8)
+            {
+                Items.Remove(Items[item]);
+            }
+        }
+    }
+
+    private void getEnigma(Item Enigma)
+    {
+        removeEnigmaToolsData();
+        Add(Enigma);
+        ListItems();
     }
 
     public void Add(Item item)
@@ -108,21 +128,5 @@ public class InventoryManager : MonoBehaviour
         CameraManager.Instance.InitDetailViewCamera();
     }
 
-    private void EnigmaToolsDataRemove()
-    {
-        for (int item = Items.Count - 1; item >=0; item--)
-        {
-            if (Items[item].id == 5 || Items[item].id == 6 || Items[item].id == 7 || Items[item].id == 8)
-            {
-                Items.Remove(Items[item]);
-            }
-        }
-    }
 
-    private void GetEnigma(Item Enigma)
-    {
-        EnigmaToolsDataRemove();
-        Add(Enigma);
-        ListItems();
-    }
 }

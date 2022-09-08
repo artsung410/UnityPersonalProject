@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bookshelf : InterectiveObject
 {
-    bool isBookshelfMove;
+    private bool isBookshelfMove;
 
     private void Awake()
     {

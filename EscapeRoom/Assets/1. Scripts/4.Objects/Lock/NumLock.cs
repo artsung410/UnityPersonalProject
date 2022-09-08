@@ -18,14 +18,14 @@ public class NumLock : InterectiveObject
         {
             animator.SetBool("isActive", true);
             SoundManager.Instance.PlayObjectSound(audioSource, "RotateUnlock");
-            StartCoroutine(DelayUnlock());
+            StartCoroutine(delayUnlock());
         }
     }
 
-    float delayTime = 0.7f;
-    private IEnumerator DelayUnlock()
+    private float _delayTime = 0.7f;
+    private IEnumerator delayUnlock()
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(_delayTime);
         Unlock();
     }
 }

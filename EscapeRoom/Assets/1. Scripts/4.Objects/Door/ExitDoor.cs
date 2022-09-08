@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ExitDoor : InterectiveObject
 {
-    bool isExitDoorOpen;
+    private bool _isExitDoorOpen;
 
     private void Awake()
     {
@@ -15,10 +15,10 @@ public class ExitDoor : InterectiveObject
 
     public override void Operate()
     {
-        if (true == PasswordController.IsGameWin && false == isExitDoorOpen)
+        if (true == PasswordController.IsGameWin && false == _isExitDoorOpen)
         {
             isActive = true;
-            isExitDoorOpen = true;
+            _isExitDoorOpen = true;
             SoundManager.Instance.PlayObjectSound(audioSource, "ExitDoorOpen");
             animator.SetBool("isActive", true);
             PlayerHUD.Instance.EscapeSuccessUI.SetActive(true);

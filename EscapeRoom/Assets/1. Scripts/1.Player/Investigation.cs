@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Investigation : MonoBehaviour
 {
     private Camera mainCamera;
-    private float rayDistance = 5f;
+    private float mRayDistance = 5f;
 
     KeyCode Confirm = KeyCode.F;
 
@@ -23,11 +23,10 @@ public class Investigation : MonoBehaviour
         Ray ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f);
         RaycastHit hit;
 
-        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * mRayDistance, Color.red);
 
         // int layerMask = 1 << 6; // player layer
-
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        if (Physics.Raycast(ray, out hit, mRayDistance))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Object"))
             {

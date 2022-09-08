@@ -18,12 +18,12 @@ public class LockController : MonoBehaviour
     {
         result = new int[] { 3, 3, 3 };
         correctCombination = new int[] { 8, 4, 2 };
-        RotateLock.Rotated += CheckResults;
+        RotateLock.Rotated += checkResults;
         isNumLockOpen = false;
         //Debug.Log($"¿⁄π∞ºË Ω√¿€");
     }
 
-    private void CheckResults(string wheelName, int number)
+    private void checkResults(string wheelName, int number)
     {
         switch (wheelName)
         {
@@ -43,16 +43,16 @@ public class LockController : MonoBehaviour
             Debug.Log("Opened!");  
             isNumLockOpen = true;
             numLock.Operate();
-            StartCoroutine(DestroyNumLock());
+            StartCoroutine(destroyNumLock());
         }
     }
 
     private void OnDestroy()
     {
-        RotateLock.Rotated -= CheckResults;
+        RotateLock.Rotated -= checkResults;
     }
 
-    IEnumerator DestroyNumLock()
+    private IEnumerator destroyNumLock()
     {
         yield return new WaitForSeconds(1f);
         Destroy(numLock.gameObject);
